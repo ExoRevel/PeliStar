@@ -30,3 +30,4 @@ RewriteRule ^sessions$ controller/sessions.php [L] #Maneja peticiones de inicio 
 
 #Usuarios (Users)
 RewriteRule ^users$ controller/users.php [L] #Maneja peticiones de creacion de usuarios
+RewriteRule ^users/([0-9]+)$ controller/users.php?USE_ID=$1 [L] #Maneja peticiones USE_ID

@@ -91,9 +91,9 @@
             break;
         
         case 'GET':
-            if(isset($_GET['id'])) {
+            if(isset($_GET['USE_ID'])) {
                 try {
-                    $rowCount = $userDB->obtenerPorId($_GET['id']);
+                    $rowCount = $userDB->obtenerPorId($_GET['USE_ID']);
                     if($rowCount === 0){
                         $response->sendParams(false, 500, 'Hubo un error al intentar recuperar el usuario');
                     }
