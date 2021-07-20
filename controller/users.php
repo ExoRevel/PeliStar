@@ -102,7 +102,7 @@
                     }
                     $returnData = array();
                     $returnData['users'] = $data;
-                    $response->sendParams(true, 201, $returnData); //201->Recurso creado
+                    $response->sendParams(true, 201,null,$returnData); //201->Recurso creado
                 }
                 catch(UserException $ex){
                     $response->sendParams(false, 400, $ex->getMessage());
@@ -123,7 +123,7 @@
                     }
                     $returnData = array();
                     $returnData['users'] = $data;
-                    $response->sendParams(true, 201, $returnData); //201->Recurso creado
+                    $response->sendParams(true, 201,null, $returnData); //201->Recurso creado
                 }
                 catch(UserException $ex){
                     $response->sendParams(false, 400, $ex->getMessage());
