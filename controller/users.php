@@ -91,20 +91,27 @@
             break;
         
         case 'GET':
-            if(isset($_GET['USE_ID'])) {
+            if(isset($_GET['id'])) {
                 try {
-                    $rowCount = $userDB->obtenerPorId($_GET['USE_ID']);
+                    $lastUser = $userDB->obtenerPorId($_GET['id']);
+                    $rowCount = count($lastUser);
+        
                     if($rowCount === 0){
-                        $response->sendParams(false, 500, 'Hubo un error al intentar recuperar el usuario');
+                        $response->sendParams(false, 404, 'Hubo un error al recuperar el user');
                     }
-                    $response->sendParams(true, 201, $rowCount); //201->Recurso creado
+        
+                    $returnData = array();
+                    $returnData['rows_returned'] = $rowCount;
+                    $returnData['users'] = $lastUser;
+        
+                    $response->sendParams(true, 201, 'Usuario', $returnData); //201->Recurso creado
                 }
                 catch(UserException $ex){
                     $response->sendParams(false, 400, $ex->getMessage());
                 }
                 catch(PDOException $ex){
                     error_log("Database query error - {$ex}", 0);
-                    $response->sendParams(false, 500, 'Error al intentar crear la cuenta de usuario');
+                    $response->sendParams(false, 500);
                 }
             }
             break;
