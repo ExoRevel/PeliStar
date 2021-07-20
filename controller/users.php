@@ -94,13 +94,14 @@
             if(isset($_GET['USE_ID'])) {
                 try {
                     $userDB = new UserDB($database);
-                    $returndata = $userDB->obtenerPorId($_GET['USE_ID']);
-                    $rowCount = count($returndata);
+                    $data = $userDB->obtenerPorId($_GET['USE_ID']);
+                    $rowCount = count($data);
         
                     if($rowCount === 0){
                         $response->sendParams(false, 404, 'Hubo un error al recuperar el user');
                     }
-        
+                    $returnData = array();
+                    $returnData['users'] = $data;
                     $response->sendParams(true, 201, $returnData); //201->Recurso creado
                 }
                 catch(UserException $ex){
