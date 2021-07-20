@@ -112,6 +112,27 @@
                     $response->sendParams(false, 500);
                 }
             }
+            else{
+                try{
+                    $userDB = new UserDB($database);
+                    $data = $userDB->obtenerTodosUsuarios();
+                    $rowCount = count($data);
+        
+                    if($rowCount === 0){
+                        $response->sendParams(false, 404, 'Hubo un error al recuperar los usuarios');
+                    }
+                    $returnData = array();
+                    $returnData['users'] = $data;
+                    $response->sendParams(true, 201, $returnData); //201->Recurso creado
+                }
+                catch(UserException $ex){
+                    $response->sendParams(false, 400, $ex->getMessage());
+                }
+                catch(PDOException $ex){
+                    error_log("Database query error - {$ex}", 0);
+                    $response->sendParams(false, 500);
+                }
+            }
             break;
         default: 
             $response->sendParams(false, 405, 'Tipo de petición no permitida');

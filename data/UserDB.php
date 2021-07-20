@@ -22,7 +22,22 @@
             } 
             
             return $userArray;
-        }     
+        }    
+        
+        public function obtenerTodosUsuarios(){
+            $query = $this->database->prepare('SELECT * FROM USERS');
+            $query->execute();
+
+            $userArray = [];
+
+            while($row = $query->fetch(PDO::FETCH_ASSOC)){
+               $user = new User($row['USE_ID'], $row['USE_FULLNAME'], $row['USE_USERNAME'], $row['USE_PASSWORD'], $row['USE_ACTIVE'], $row['USE_LOGAT']);          
+               $userArray[] = $user->returnUserAsArray();
+            } 
+            
+            return $userArray;
+        }   
+
 
         public function obtenerPorUsername($USE_USERNAME){
             $query = $this->database->prepare('SELECT USE_ID, USE_FULLNAME, USE_USERNAME, USE_PASSWORD, USE_ACTIVE, USE_LOGAT FROM USERS WHERE USE_USERNAME = ?');
