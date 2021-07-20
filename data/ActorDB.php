@@ -10,10 +10,10 @@
 
         public function obtenerPorId($ACTOR_ID){
             $query = $this->database->prepare('SELECT ACTOR_ID, ACTOR_FULLNAME, ACTOR_BIRTHDAY FROM ACTORS WHERE ACTOR_ID = ?');
-            $query ->bindParam(1, $ACTOR_ID, PDO:: PARAM_INT);
+            $query ->bindParam(1, $ACTOR_ID, PDO:: PARAM_STR);
             $query ->execute();
 
-            $ActorsArray = array();
+            $actorArray = array();
 
             while ($row = $query->fetch(PDO::FETCH_ASSOC)) {
                 $actor= new Actors($row['ACTOR_ID'], $row['ACTOR_FULLNAME'], $row['ACTOR_BIRTHDAY']);
@@ -21,7 +21,7 @@
                 $actorArray[] = $actor->returnActorsAsArray();
             }
 
-            return $ActorsArray;
+            return $actorArray;
 
         }
         
@@ -49,7 +49,7 @@
             while($row = $query->fetch(PDO::FETCH_ASSOC)){
                $actor = new Actors($row['ACTOR_ID'], $row['ACTOR_FULLNAME'], $row['ACTOR_BIRTHDAY']);          
 
-               $actor[] = $actor->returnActorsAsArray();
+               $actorArray[] = $actor->returnActorsAsArray();
             } 
             
             return $actorArray;
