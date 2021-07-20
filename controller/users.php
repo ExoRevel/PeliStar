@@ -91,21 +91,17 @@
             break;
         
         case 'GET':
-            if(isset($_GET['id'])) {
+            if(isset($_GET['USE_ID'])) {
                 try {
                     $userDB = new UserDB($database);
-                    $lastUser = $userDB->obtenerPorId($_GET['id']);
-                    $rowCount = count($lastUser);
+                    $returndata = $userDB->obtenerPorId($_GET['USE_ID']);
+                    $rowCount = count($returndata);
         
                     if($rowCount === 0){
                         $response->sendParams(false, 404, 'Hubo un error al recuperar el user');
                     }
         
-                    $returnData = array();
-                    $returnData['rows_returned'] = $rowCount;
-                    $returnData['users'] = $lastUser;
-        
-                    $response->sendParams(true, 201, 'Usuario', $returnData); //201->Recurso creado
+                    $response->sendParams(true, 201, $returnData); //201->Recurso creado
                 }
                 catch(UserException $ex){
                     $response->sendParams(false, 400, $ex->getMessage());
