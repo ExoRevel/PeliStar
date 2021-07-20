@@ -35,7 +35,7 @@
         }
 
         public function setDirectorName($DIRECTOR_NAME){           
-            if(($DIRECTOR_NAME!==null) && (!is_numeric($DIRECTOR_NAME) || $DIRECTOR_NAME<=0 || $DIRECTOR_NAME > 9223372036854775807)){
+            if(($DIRECTOR_NAME===null)){
                 throw new DirectorsException('Error en DIRECTOR_NAME');
             }
 
@@ -43,7 +43,7 @@
         }
 
         public function setDirectorBirthday($DIRECTOR_BIRTHDAY){           
-            if($DIRECTOR_BIRTHDAY!== null && (strlen($DIRECTOR_BIRTHDAY) < 0 || strlen($DIRECTOR_BIRTHDAY) > 100)){
+            if($DIRECTOR_BIRTHDAY=== null){
                 throw new DirectorsException('Error en DIRECTOR_BIRTHDAY');
             }
 
