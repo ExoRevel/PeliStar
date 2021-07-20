@@ -36,7 +36,7 @@
         }
 
         public function setFullname($ACTOR_FULLNAME){           
-            if(($ACTOR_FULLNAME!==null) && (!is_numeric($ACTOR_FULLNAME) || $ACTOR_FULLNAME<=0 || $ACTOR_FULLNAME > 9223372036854775807)){
+            if(($ACTOR_FULLNAME===null)){
                 throw new ActorsException('Error en ACTOR_FULLNAME');
             }
 
@@ -44,7 +44,7 @@
         }
 
         public function setBirthday($ACTOR_BIRTHDAY){           
-            if($ACTOR_BIRTHDAY!== null && (strlen($ACTOR_BIRTHDAY) < 0 || strlen($ACTOR_BIRTHDAY) > 100)){
+            if($ACTOR_BIRTHDAY === null){
                 throw new ActorsException('Error en ACTOR_BIRTHDAY');
             }
 
