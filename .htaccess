@@ -37,3 +37,13 @@ RewriteRule ^users/$ controller/users.php [L] #Maneja peticiones de creacion de 
 RewriteRule ^actors$ controller/actors.php [L] #Maneja peticiones de creacion de Actores
 RewriteRule ^actors/([0-9]+)$ controller/actors.php?ACTOR_ID=$1 [L] #Maneja peticiones ACTOR_ID
 RewriteRule ^actors/$ controller/actors.php [L] 
+
+#Directors (Directors)
+RewriteRule ^directors$ controller/directors.php [L] #Maneja peticiones de creacion de Actores
+RewriteRule ^directors/([0-9]+)$ controller/directors.php?DIRECTOR_ID=$1 [L] #Maneja peticiones DIRECTOR_ID
+RewriteRule ^directors/$ controller/directors.php [L] 
+
+
+
+
+

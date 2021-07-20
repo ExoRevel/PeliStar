@@ -2,7 +2,7 @@
 
     class DirectorsException extends Exception{}
 
-    class Director{
+    class Directors{
         private $DIRECTOR_ID;
         private $DIRECTOR_NAME;
         private $DIRECTOR_BIRTHDAY;//access token
@@ -10,7 +10,7 @@
 
         public function __construct($DIRECTOR_ID, $DIRECTOR_NAME, $DIRECTOR_BIRTHDAY){
             $this->setDirectorid($DIRECTOR_ID);
-            $this->setDirectorname($DIRECTOR_NAME);
+            $this->setDirectorName($DIRECTOR_NAME);
             $this->setDirectorBirthday($DIRECTOR_BIRTHDAY);
         }
 
@@ -18,7 +18,7 @@
             return $this->DIRECTOR_ID;
         }
 
-        public function getDirectorname(){
+        public function getDirectorName(){
             return $this->DIRECTOR_NAME;
         }
 
@@ -34,7 +34,7 @@
             $this->DIRECTOR_ID = $DIRECTOR_ID;
         }
 
-        public function setDirectorname($DIRECTOR_NAME){           
+        public function setDirectorName($DIRECTOR_NAME){           
             if(($DIRECTOR_NAME!==null) && (!is_numeric($DIRECTOR_NAME) || $DIRECTOR_NAME<=0 || $DIRECTOR_NAME > 9223372036854775807)){
                 throw new DirectorsException('Error en DIRECTOR_NAME');
             }
@@ -55,7 +55,7 @@
         public function returnDirectorAsArray(){
             $Director = array();
             $Director['DIRECTOR_ID'] = $this->getDirectorid();
-            $Director['DIRECTOR_NAME'] = $this->getDirectorname();
+            $Director['DIRECTOR_NAME'] = $this->getDirectorName();
             $Director['DIRECTOR_BIRTHDAY'] = $this->getDirectorBirthday();          
 
             return $Director;
