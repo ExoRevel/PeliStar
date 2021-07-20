@@ -43,7 +43,7 @@
 
             return $user;
         }
-        catch(SesssionException $ex){
+        catch(SessionException $ex){
             $response->sendParams(false, 400, $ex->getMessage());
         }
         catch(UserException $ex){

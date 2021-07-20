@@ -1,0 +1,32 @@
+#CORS options
+
+Header Set Access-Control-Allow-Origin "*"
+
+RewriteEngine on
+SetEnvIf Authorization .+ HTTP_AUTHORIZATION=$0
+
+#Si no se usa HTTPS, se reescribe URL para forzarlo
+RewriteCond %{HTTPS} on
+RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI}
+
+#Si archivo o directorio no existen, se procede a usar las reglas que se encuentran por debajo
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f 
+
+#Autenticacion (Sessions)
+RewriteRule ^sessions/([0-9]+)$ controller/sessions.php?SES_ID=$1 [L] #Maneja peticiones SES_ID
+RewriteRule ^sessions$ controller/sessions.php [L] #Maneja peticiones de inicio de sesion
+
+#Imagenes (Images)
+#RewriteRule ^tasks/([0-9]+)/images/([0-9]+)/attributes$ controller/images.php?TASK_ID=$1&IMG_ID=$2&IMG_ATTR=true [L] #Maneja peticiones de images y muestra atributos de la imagen
+#RewriteRule ^tasks/([0-9]+)/images/([0-9]+)$ controller/images.php?TASK_ID=$1&IMG_ID=$2 [L] #Maneja peticiones de images propiamente dichas
+#RewriteRule ^tasks/([0-9]+)/images$ controller/images.php?TASK_ID=$1 [L] #Maneja peticiones de creacion de imagenes
+
+#Tareas (Tasks)
+#RewriteRule ^tasks/([0-9]+)$ controller/tasks.php?TASK_ID=$1 [L] #Maneja peticiones TASK_ID
+#RewriteRule ^tasks/complete$ controller/tasks.php?TASK_COMPLETED=Y [L] #Maneja petición de listado de tareas completadas
+#RewriteRule ^tasks/incomplete$ controller/tasks.php?TASK_COMPLETED=N [L] #Maneja petición de listado de tareas no completadas
+#RewriteRule ^tasks$ controller/tasks.php [L] #Maneja peticiones de listado y creacion de tareas
+
+#Usuarios (Users)
+RewriteRule ^users$ controller/users.php [L] #Maneja peticiones de creacion de usuarios
