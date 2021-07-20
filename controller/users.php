@@ -93,6 +93,7 @@
         case 'GET':
             if(isset($_GET['id'])) {
                 try {
+                    $userDB = new UserDB($database);
                     $lastUser = $userDB->obtenerPorId($_GET['id']);
                     $rowCount = count($lastUser);
         
