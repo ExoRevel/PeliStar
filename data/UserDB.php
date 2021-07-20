@@ -4,9 +4,6 @@
 
     class UserDB{
         private $database;//es la conexión de la base de datos
-        private $fullname;
-        private $username;
-        private $password;
         public function __construct($database){
             $this->database =  $database;
         }
@@ -65,12 +62,9 @@
 
         public function insertar($user){
             $query = $this->database->prepare('INSERT INTO USERS(USE_FULLNAME, USE_USERNAME, USE_PASSWORD) VALUES (?, ?, ?)');
-            $fullname = $user->getFullname();
-            $username = $user->getUsername();
-            $password = $user->getPassword();
-            $query->bindParam(1, $fullname, PDO::PARAM_STR);
-            $query->bindParam(2, $username, PDO::PARAM_STR);
-            $query->bindParam(3, $password, PDO::PARAM_STR);          
+            $query->bindParam(1, $user->getFullname(), PDO::PARAM_STR);
+            $query->bindParam(2, $user->getUsername(), PDO::PARAM_STR);
+            $query->bindParam(3, $user->getPassword(), PDO::PARAM_STR);          
             $query->execute();
 
             $rowCount = $query->rowCount();
