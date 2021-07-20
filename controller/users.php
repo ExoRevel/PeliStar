@@ -61,7 +61,7 @@
     
                 $USE_PASSWORD = password_hash($USE_PASSWORD, PASSWORD_DEFAULT);
     
-                $user = new User(3, $USE_FULLNAME, $USE_USERNAME, $USE_PASSWORD , null, null);
+                $user = new User(null, $USE_FULLNAME, $USE_USERNAME, $USE_PASSWORD , null, null);
                 $rowCount = $userDB->insertar($user);
     
                 if($rowCount === 0){
