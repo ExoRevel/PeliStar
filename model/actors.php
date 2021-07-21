@@ -28,7 +28,7 @@
         }
 
         public function setId($ACTOR_ID){
-            if(($ACTOR_ID!==null) && (!is_numeric($ACTOR_ID) || $ACTOR_ID<=0 || $ACTOR_ID > 9223372036854775807)){
+            if(($ACTOR_ID===null) || (!is_numeric($ACTOR_ID) || $ACTOR_ID<=0 || $ACTOR_ID > 9223372036854775807)){
                 throw new ActorsException('Error en ACTOR_ID');
             }
 
@@ -36,7 +36,7 @@
         }
 
         public function setFullname($ACTOR_FULLNAME){           
-            if(($ACTOR_FULLNAME===null)){
+            if(($ACTOR_FULLNAME===null) || !is_string($ACTOR_FULLNAME)){
                 throw new ActorsException('Error en ACTOR_FULLNAME');
             }
 
@@ -44,7 +44,7 @@
         }
 
         public function setBirthday($ACTOR_BIRTHDAY){           
-            if($ACTOR_BIRTHDAY === null){
+            if($ACTOR_BIRTHDAY === null ){
                 throw new ActorsException('Error en ACTOR_BIRTHDAY');
             }
 

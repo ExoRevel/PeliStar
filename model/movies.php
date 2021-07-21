@@ -76,15 +76,15 @@
         }          
 
         public function setSinopsis($MOVIE_SINOPSIS){           
-            if($MOVIE_SINOPSIS!== null && (strlen($MOVIE_SINOPSIS) < 0 || strlen($MOVIE_SINOPSIS) > 100)){
+            if($MOVIE_SINOPSIS=== null){
                 throw new MoviesException('Error en MOVIE_SINOPSIS');
             }
 
-            $this->SES_REFTOK = $MOVIE_SINOPSIS;
+            $this->MOVIE_SINOPSIS = $MOVIE_SINOPSIS;
         }  
 
         public function setCalification($MOVIE_CALIFICATION){           
-            if($MOVIE_CALIFICATION!== null && (strlen($MOVIE_CALIFICATION) < 0 || strlen($MOVIE_CALIFICATION) > 100)){
+            if($MOVIE_CALIFICATION=== null){
                 throw new MoviesException('Error en MOVIE_CALIFICATION');
             }
 

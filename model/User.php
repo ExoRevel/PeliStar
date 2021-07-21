@@ -44,7 +44,7 @@
         }
 
         public function setId($USE_ID){
-            if(($USE_ID!==null) && (!is_numeric($USE_ID) || $USE_ID<=0 || $USE_ID > 9223372036854775807)){
+            if(($USE_ID===null) || (!is_numeric($USE_ID) || $USE_ID<=0 || $USE_ID > 9223372036854775807)){
                 throw new UserException('Error en USE_ID');
             }
 
@@ -52,7 +52,7 @@
         }
 
         public function setFullname($USE_FULLNAME){           
-            if($USE_FULLNAME!== null && (strlen($USE_FULLNAME) < 0 || strlen($USE_FULLNAME) > 255)){
+            if($USE_FULLNAME=== null || (strlen($USE_FULLNAME) < 0 || strlen($USE_FULLNAME) > 255)){
                 throw new UserException('Error en USE_FULLNAME');
             }
 
@@ -60,7 +60,7 @@
         }
 
         public function setUsername($USE_USERNAME){           
-            if($USE_USERNAME!== null && (strlen($USE_USERNAME) < 0 || strlen($USE_USERNAME) > 255)){
+            if($USE_USERNAME=== null || (strlen($USE_USERNAME) < 0 || strlen($USE_USERNAME) > 255)){
                 throw new UserException('Error en USE_USERNAME'); //Mensaje debe cambiar
             }
 
@@ -68,7 +68,7 @@
         }
 
         public function setPassword($USE_PASSWORD){           
-            if($USE_PASSWORD!== null && (strlen($USE_PASSWORD) < 0 || strlen($USE_PASSWORD) > 255)){
+            if($USE_PASSWORD=== null || (strlen($USE_PASSWORD) < 0 || strlen($USE_PASSWORD) > 255)){
                 throw new UserException('Error en USE_PASSWORD'); //Mensaje debe cambiar
             }
 
@@ -76,7 +76,7 @@
         }
 
         public function setActive($USE_ACTIVE){           
-            if($USE_ACTIVE !== null && (!is_numeric($USE_ACTIVE) || ($USE_ACTIVE != 0 && $USE_ACTIVE != 1))){
+            if($USE_ACTIVE === null || (!is_numeric($USE_ACTIVE) || ($USE_ACTIVE != 0 && $USE_ACTIVE != 1))){
                 throw new UserException('Error en USE_ACTIVE');
             }
 
@@ -84,7 +84,7 @@
         }
 
         public function setLogat($USE_LOGAT){           
-            if($USE_LOGAT !== null && (!is_numeric($USE_LOGAT) || $USE_LOGAT<0 || $USE_LOGAT > 2147483647)){
+            if($USE_LOGAT === null || (!is_numeric($USE_LOGAT) || $USE_LOGAT<0 || $USE_LOGAT > 2147483647)){
                 throw new UserException('Error en USE_LOGAT');
             }
 

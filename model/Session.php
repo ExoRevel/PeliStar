@@ -44,7 +44,7 @@
         }
 
         public function setId($SES_ID){
-            if(($SES_ID!==null) && (!is_numeric($SES_ID) || $SES_ID<=0 || $SES_ID > 9223372036854775807)){
+            if(($SES_ID===null) || (!is_numeric($SES_ID) || $SES_ID<=0 || $SES_ID > 9223372036854775807)){
                 throw new SessionException('Error en SES_ID');
             }
 
@@ -52,7 +52,7 @@
         }
 
         public function setUseId($USE_ID){           
-            if(($USE_ID!==null) && (!is_numeric($USE_ID) || $USE_ID<=0 || $USE_ID > 9223372036854775807)){
+            if(($USE_ID===null) || (!is_numeric($USE_ID) || $USE_ID<=0 || $USE_ID > 9223372036854775807)){
                 throw new SessionException('Error en USE_ID');
             }
 
@@ -60,7 +60,7 @@
         }
 
         public function setAcctok($SES_ACCTOK){           
-            if($SES_ACCTOK!== null && (strlen($SES_ACCTOK) < 0 || strlen($SES_ACCTOK) > 100)){
+            if($SES_ACCTOK=== null || (strlen($SES_ACCTOK) < 0 || strlen($SES_ACCTOK) > 100)){
                 throw new SessionException('Error en SES_ACCTOK');
             }
 
@@ -68,7 +68,7 @@
         }
 
         public function setAcctokexp($SES_ACCTOKEXP){           
-            if($SES_ACCTOKEXP !== null &&  date_format(date_create_from_format('d/m/Y H:i', $SES_ACCTOKEXP), 'd/m/Y H:i') != $SES_ACCTOKEXP){
+            if($SES_ACCTOKEXP === null ||  date_format(date_create_from_format('d/m/Y H:i', $SES_ACCTOKEXP), 'd/m/Y H:i') != $SES_ACCTOKEXP){
                 throw new SessionException('Error en SES_ACCTOKEXP');
             }
 
@@ -76,7 +76,7 @@
         }          
 
         public function setReftok($SES_REFTOK){           
-            if($SES_REFTOK!== null && (strlen($SES_REFTOK) < 0 || strlen($SES_REFTOK) > 100)){
+            if($SES_REFTOK=== null || (strlen($SES_REFTOK) < 0 || strlen($SES_REFTOK) > 100)){
                 throw new SessionException('Error en SES_REFTOK');
             }
 
@@ -84,7 +84,7 @@
         }
 
         public function setReftokexp($SES_REFTOKEXP){           
-            if($SES_REFTOKEXP !== null &&  date_format(date_create_from_format('d/m/Y H:i', $SES_REFTOKEXP), 'd/m/Y H:i') != $SES_REFTOKEXP){
+            if($SES_REFTOKEXP === null ||  date_format(date_create_from_format('d/m/Y H:i', $SES_REFTOKEXP), 'd/m/Y H:i') != $SES_REFTOKEXP){
                 throw new SessionException('Error en SES_REFTOKEXP');
             }
 
