@@ -9,7 +9,7 @@
         }
 
         public function obtenerPorId($DIRECTOR_ID){
-            $query = $this->database->prepare('SELECT DIRECTOR_ID, DIRECTOR_NAME, DIRECTOR_BIRTHDAY FROM DIRECTOR WHERE DIRECTOR_ID = ?');
+            $query = $this->database->prepare('SELECT DIRECTOR_ID, DIRECTOR_NAME, DIRECTOR_BIRTHDAY FROM DIRECTORS WHERE DIRECTOR_ID = ?');
             $query ->bindParam(1, $DIRECTOR_ID, PDO:: PARAM_STR);
             $query ->execute();
 
@@ -33,7 +33,7 @@
 
             while($row = $query->fetch(PDO::FETCH_ASSOC)){
                 $director = new Directors($row['DIRECTOR_ID'], $row['DIRECTOR_NAME'], $row['DIRECTOR_BIRTHDAY']);          
-                $adirectorArray[] = $director->returnDirectorAsArray();
+                $directorArray[] = $director->returnDirectorAsArray();
              } 
             
             return $directorArray;

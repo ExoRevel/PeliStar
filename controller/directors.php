@@ -83,6 +83,57 @@
             break;
 
 
+            case 'GET':
+                if(isset($_GET['DIRECTOR_ID'])) {
+                    try {
+                        $directorDB = new DirectorDB($database);
+                        $data = $directorDB->obtenerPorId($_GET['DIRECTOR_ID']);
+                        $rowCount = count($data);
+            
+                        if($rowCount === 0){
+                            $response->sendParams(false, 404, 'Hubo un error al recuperar el Actor');
+                        }
+                        $returnData = array();
+                        $returnData['directors'] = $data;
+                        $response->sendParams(true, 201,null,$returnData); //201->Recurso creado
+                    }
+                    catch(DirectorsException $ex){
+                        $response->sendParams(false, 400, $ex->getMessage());
+                    }
+                    catch(PDOException $ex){
+                        error_log("Database query error - {$ex}", 0);
+                        $response->sendParams(false, 500);
+                    }
+                }
+
+                else{
+                    try{
+                        $directorDB = new DirectorDB($database);
+                        $data = $directorDB->obtenerTodosDirectores();
+                        $rowCount = count($data);
+            
+                        if($rowCount === 0){
+                            $response->sendParams(false, 404, 'Hubo un error al recuperar los Directores');
+                        }
+                        $returnData = array();
+                        $returnData['directors'] = $data;
+                        $response->sendParams(true, 201,null, $returnData); //201->Recurso creado
+                    }
+                    catch(DirectorsException $ex){
+                        $response->sendParams(false, 400, $ex->getMessage());
+                    }
+                    catch(PDOException $ex){
+                        error_log("Database query error - {$ex}", 0);
+                        $response->sendParams(false, 500);
+                    }
+                }
+                break;
+            default: 
+                $response->sendParams(false, 405, 'Tipo de petición no permitida');
+                break;
+
+
+
 
     }
 
