@@ -44,7 +44,7 @@
         }
 
         public function setId($SES_ID){
-            if(($SES_ID===null) || (!is_numeric($SES_ID) || $SES_ID<=0 || $SES_ID > 9223372036854775807)){
+            if(($SES_ID!==null) && (!is_numeric($SES_ID) || $SES_ID<=0 || $SES_ID > 9223372036854775807)){
                 throw new SessionException('Error en SES_ID');
             }
 

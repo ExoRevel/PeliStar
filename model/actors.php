@@ -28,7 +28,7 @@
         }
 
         public function setId($ACTOR_ID){
-            if(($ACTOR_ID===null) || (!is_numeric($ACTOR_ID) || $ACTOR_ID<=0 || $ACTOR_ID > 9223372036854775807)){
+            if(($ACTOR_ID!==null) || (!is_numeric($ACTOR_ID) || $ACTOR_ID<=0 || $ACTOR_ID > 9223372036854775807)){
                 throw new ActorsException('Error en ACTOR_ID');
             }
 
