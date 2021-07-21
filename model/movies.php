@@ -60,7 +60,7 @@
         }
 
         public function setDate($MOVIE_DATE){           
-            if($MOVIE_DATE!==null && is_string($MOVIE_DATE)){
+            if($MOVIE_DATE!==null && !is_string($MOVIE_DATE)){
                 throw new MoviesException('Error en MOVIE_DATE');
             }
 
@@ -84,7 +84,7 @@
         }  
 
         public function setCalification($MOVIE_CALIFICATION){           
-            if($MOVIE_CALIFICATION!== null && (!is_integer($MOVIE_CALIFICATION) || $MOVIE_CALIFICATION<=0 || $MOVIE_CALIFICATION > 10)){
+            if($MOVIE_CALIFICATION!== null && (!is_numeric($MOVIE_CALIFICATION) || $MOVIE_CALIFICATION<=0 || $MOVIE_CALIFICATION > 10)){
                 throw new MoviesException('Error en MOVIE_CALIFICATION');
             }
 
