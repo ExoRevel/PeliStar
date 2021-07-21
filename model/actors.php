@@ -36,7 +36,7 @@
         }
 
         public function setFullname($ACTOR_FULLNAME){           
-            if(($ACTOR_FULLNAME===null) || !is_string($ACTOR_FULLNAME)){
+            if(($ACTOR_FULLNAME!==null) && !is_string($ACTOR_FULLNAME)){
                 throw new ActorsException('Error en ACTOR_FULLNAME');
             }
 

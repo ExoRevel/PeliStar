@@ -35,7 +35,7 @@
         }
 
         public function setDirectorName($DIRECTOR_NAME){           
-            if(($DIRECTOR_NAME===null) || !is_string($DIRECTOR_NAME)){
+            if(($DIRECTOR_NAME!==null) && !is_string($DIRECTOR_NAME)){
                 throw new DirectorsException('Error en DIRECTOR_NAME');
             }
 

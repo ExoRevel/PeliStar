@@ -55,7 +55,7 @@
                 $rowCount = count($existingdirector);
 
                 if($rowCount !==0){
-                    $response->sendParams(false, 409, 'ACTOR ya existe en la base de data');
+                    $response->sendParams(false, 409, 'DIRECTOR ya existe en la base de data');
                 }
                 
                 $director = new Directors(null, $DIRECTOR_NAME, $DIRECTOR_BIRTHDAY);
@@ -69,7 +69,7 @@
                 $returnData['rows_returned'] = $rowCount;
                 $returnData['directors'] = $lastdirectors;
 
-                $response->sendParams(true, 201, 'User insertado correctamente', $returnData);
+                $response->sendParams(true, 201, 'DIRECTOR insertado correctamente', $returnData);
 
             }
 
