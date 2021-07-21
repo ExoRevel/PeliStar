@@ -58,7 +58,7 @@
                     $response->sendParams(false, 409, 'Generos ya existe en la base de data');
                 }
                 
-                $genero = new GeneroDB(null, $GENERO_NAME);
+                $genero = new Generos(null, $GENERO_NAME);
                 $rowCount = $generoDB->insertar($genero);
 
                 if($rowCount === 0){
@@ -87,7 +87,7 @@
                 if(isset($_GET['GENERO_ID'])) {
                     try {
                         $generoDB = new GeneroDB($database);
-                        $data = $directorDB->obtenerPorId($_GET['GENERO_ID']);
+                        $data = $generoDB->obtenerPorId($_GET['GENERO_ID']);
                         $rowCount = count($data);
             
                         if($rowCount === 0){
@@ -131,18 +131,6 @@
             default: 
                 $response->sendParams(false, 405, 'Tipo de petición no permitida');
                 break;
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     }
