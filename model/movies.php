@@ -60,7 +60,7 @@
         }
 
         public function setDate($MOVIE_DATE){           
-            if($MOVIE_DATE!==null && date_format(date_create_from_format('d/m/Y H:i', $MOVIE_DATE), 'd/m/Y H:i') != $MOVIE_DATE){
+            if($MOVIE_DATE!==null && is_string($MOVIE_DATE)){
                 throw new MoviesException('Error en MOVIE_DATE');
             }
 

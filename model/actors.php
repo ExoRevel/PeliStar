@@ -44,7 +44,7 @@
         }
 
         public function setBirthday($ACTOR_BIRTHDAY){           
-            if($ACTOR_BIRTHDAY !== null && date_format(date_create_from_format('d/m/Y H:i', $ACTOR_BIRTHDAY), 'd/m/Y H:i') != $ACTOR_BIRTHDAY){
+            if($ACTOR_BIRTHDAY !== null && !is_string($ACTOR_BIRTHDAY)){
                 throw new ActorsException('Error en ACTOR_BIRTHDAY');
             }
 
