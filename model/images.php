@@ -41,7 +41,7 @@
         
 
         public function setImageId($IMG_ID){
-            if(($IMG_ID===null) || (!is_numeric($IMG_ID) || $IMG_ID<=0 || $IMG_ID > 9223372036854775807)){
+            if(($IMG_ID!==null) && (!is_numeric($IMG_ID) || $IMG_ID<=0 || $IMG_ID > 9223372036854775807)){
                 throw new imagesException('Error en IMG_ID');
             }
 

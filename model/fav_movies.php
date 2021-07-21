@@ -21,7 +21,7 @@
 
 
         public function setMovieId($MOVIE_ID){
-            if(($MOVIE_ID!==null) && (!is_numeric($MOVIE_ID) || $MOVIE_ID<=0 || $MOVIE_ID > 9223372036854775807)){
+            if(($MOVIE_ID===null) || (!is_numeric($MOVIE_ID) || $MOVIE_ID<=0 || $MOVIE_ID > 9223372036854775807)){
                 throw new Fav_MoviesException('Error en MOVIE_ID');
             }
 
@@ -29,7 +29,7 @@
         }
 
         public function setUseId($USE_ID){           
-            if(($USE_ID!==null) || (!is_numeric($USE_ID) || $USE_ID<=0 || $USE_ID > 9223372036854775807)){
+            if(($USE_ID===null) || (!is_numeric($USE_ID) || $USE_ID<=0 || $USE_ID > 9223372036854775807)){
                 throw new Fav_MoviesException('Error en USE_ID');
             }
 
