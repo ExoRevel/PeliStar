@@ -49,4 +49,7 @@ RewriteRule ^generos/([0-9]+)$ controller/generos.php?GENERO_ID=$1 [L] #Maneja p
 RewriteRule ^generos/$ controller/generos.php [L] 
 
 
-
+#Generos (Generos)
+RewriteRule ^movies$ controller/movies.php [L] #Maneja peticiones de creacion de Actores
+RewriteRule ^movies/([0-9]+)$ controller/movies.php?MOVIE_ID=$1 [L] #Maneja peticiones GENERO_ID
+RewriteRule ^movies/$ controller/movies.php [L]
