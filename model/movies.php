@@ -52,7 +52,7 @@
         }
 
         public function setTitle($MOVIE_TITLE){           
-            if(($MOVIE_TITLE===null) && (!is_numeric($MOVIE_TITLE) || $MOVIE_TITLE<=0 || $MOVIE_TITLE > 9223372036854775807)){
+            if(($MOVIE_TITLE!==null) && (strlen($MOVIE_TITLE) < 0 || strlen($MOVIE_TITLE) > 255)){
                 throw new MoviesException('Error en MOVIE_TITLE');
             }
 
@@ -60,7 +60,7 @@
         }
 
         public function setDate($MOVIE_DATE){           
-            if($MOVIE_DATE=== null || (strlen($MOVIE_DATE) < 0 || strlen($MOVIE_DATE) > 100)){
+            if($MOVIE_DATE!==null && date_format(date_create_from_format('d/m/Y H:i', $MOVIE_DATE), 'd/m/Y H:i') != $MOVIE_DATE){
                 throw new MoviesException('Error en MOVIE_DATE');
             }
 
@@ -68,7 +68,7 @@
         }
 
         public function setTime($MOVIE_TIME){           
-            if($MOVIE_TIME === null ||  date_format(date_create_from_format('d/m/Y H:i', $MOVIE_TIME), 'd/m/Y H:i') != $MOVIE_TIME){
+            if($MOVIE_TIME !== null &&(strlen($MOVIE_TIME) < 0 || strlen($MOVIE_TIME) > 45)){
                 throw new MoviesException('Error en MOVIE_TIME');
             }
 
@@ -76,7 +76,7 @@
         }          
 
         public function setSinopsis($MOVIE_SINOPSIS){           
-            if($MOVIE_SINOPSIS=== null){
+            if($MOVIE_SINOPSIS!== null && !is_string($MOVIE_SINOPSIS)){
                 throw new MoviesException('Error en MOVIE_SINOPSIS');
             }
 
@@ -84,7 +84,7 @@
         }  
 
         public function setCalification($MOVIE_CALIFICATION){           
-            if($MOVIE_CALIFICATION=== null){
+            if($MOVIE_CALIFICATION!== null && (!is_integer($MOVIE_CALIFICATION) || $MOVIE_CALIFICATION<=0 || $MOVIE_CALIFICATION > 10)){
                 throw new MoviesException('Error en MOVIE_CALIFICATION');
             }
 

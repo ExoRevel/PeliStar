@@ -21,7 +21,7 @@
 
 
         public function setMoviedirectorId($MOVIEDIRECTOR_ID){
-            if(($MOVIEDIRECTOR_ID===null) || (!is_numeric($MOVIEDIRECTOR_ID) || $MOVIEDIRECTOR_ID<=0 || $MOVIEDIRECTOR_ID > 9223372036854775807)){
+            if(($MOVIEDIRECTOR_ID!==null) && (!is_numeric($MOVIEDIRECTOR_ID) || $MOVIEDIRECTOR_ID<=0 || $MOVIEDIRECTOR_ID > 9223372036854775807)){
                 throw new Movies_DirectorsException('Error en MOVIEDIRECTOR_ID');
             }
 
@@ -29,7 +29,7 @@
         }
 
         public function setMovieId($MOVIE_ID){           
-            if(($MOVIE_ID===null) || (!is_numeric($MOVIE_ID) || $MOVIE_ID<=0 || $MOVIE_ID > 9223372036854775807)){
+            if(($MOVIE_ID!==null) && (!is_numeric($MOVIE_ID) || $MOVIE_ID<=0 || $MOVIE_ID > 9223372036854775807)){
                 throw new Movies_DirectorsException('Error en MOVIE_ID');
             }
 

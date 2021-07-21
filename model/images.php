@@ -49,7 +49,7 @@
         }
 
         public function setTitle($IMG_TITLE){           
-            if(($IMG_TITLE===null) || !is_string($IMG_TITLE) ){
+            if(($IMG_TITLE!==null) && (strlen($IMG_TITLE) < 0 || strlen($IMG_TITLE) > 255) ){
                 throw new imagesException('Error en IMG_TITLE');
             }
 
@@ -57,7 +57,7 @@
         }
 
         public function setFilename($IMG_FILENAME){           
-            if($IMG_FILENAME=== null){
+            if($IMG_FILENAME!== null && (strlen($IMG_FILENAME) < 0 || strlen($IMG_FILENAME) > 30)){
                 throw new imagesException('Error en IMG_FILENAME');
             }
 
@@ -65,7 +65,7 @@
         }
 
         public function setMimetype($IMG_MIMETYPE){           
-            if($IMG_MIMETYPE === null){
+            if($IMG_MIMETYPE !== null && (strlen($IMG_MIMETYPE) < 0 || strlen($IMG_MIMETYPE) > 255) ){
                 throw new imagesException('Error en IMG_MIMETYPE');
             }
 
@@ -73,7 +73,7 @@
         }          
 
         public function setMovieid($MOVIE_ID){           
-            if($MOVIE_ID=== null || (!is_numeric($MOVIE_ID) || $MOVIE_ID<=0 || $MOVIE_ID > 9223372036854775807)){
+            if($MOVIE_ID!== null && (!is_numeric($MOVIE_ID) || $MOVIE_ID<=0 || $MOVIE_ID > 9223372036854775807)){
                 throw new imagesException('Error en MOVIE_ID');
             }
 

@@ -36,7 +36,7 @@
         }
 
         public function setFullname($ACTOR_FULLNAME){           
-            if(($ACTOR_FULLNAME!==null) && !is_string($ACTOR_FULLNAME)){
+            if(($ACTOR_FULLNAME!==null) && (strlen($ACTOR_FULLNAME) < 0 || strlen($ACTOR_FULLNAME) > 255)){
                 throw new ActorsException('Error en ACTOR_FULLNAME');
             }
 
@@ -44,7 +44,7 @@
         }
 
         public function setBirthday($ACTOR_BIRTHDAY){           
-            if($ACTOR_BIRTHDAY === null ){
+            if($ACTOR_BIRTHDAY !== null && date_format(date_create_from_format('d/m/Y H:i', $ACTOR_BIRTHDAY), 'd/m/Y H:i') != $ACTOR_BIRTHDAY){
                 throw new ActorsException('Error en ACTOR_BIRTHDAY');
             }
 

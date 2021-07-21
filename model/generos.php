@@ -29,7 +29,7 @@
         }
 
         public function setGeneroName($GENERO_NAME){           
-            if(($GENERO_NAME===null) || !is_string($GENERO_NAME)){
+            if(($GENERO_NAME!==null) && (strlen($GENERO_NAME) < 0 || strlen($GENERO_NAME) > 50)){
                 throw new GenerosException('Error en GENERO_NAME');
             }
 

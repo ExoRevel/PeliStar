@@ -21,7 +21,7 @@
 
 
         public function setGeneroId($GENERO_ID){
-            if(($GENERO_ID===null) || (!is_numeric($GENERO_ID) || $GENERO_ID<=0 || $GENERO_ID > 9223372036854775807)){
+            if(($GENERO_ID!==null) && (!is_numeric($GENERO_ID) || $GENERO_ID<=0 || $GENERO_ID > 9223372036854775807)){
                 throw new Movies_GenerosException('Error en GENERO_ID');
             }
 
@@ -29,7 +29,7 @@
         }
 
         public function setMovieId($MOVIE_ID){           
-            if(($MOVIE_ID===null) || (!is_numeric($MOVIE_ID) || $MOVIE_ID<=0 || $MOVIE_ID > 9223372036854775807)){
+            if(($MOVIE_ID!==null) && (!is_numeric($MOVIE_ID) || $MOVIE_ID<=0 || $MOVIE_ID > 9223372036854775807)){
                 throw new Movies_GenerosException('Error en MOVIE_ID');
             }
 
