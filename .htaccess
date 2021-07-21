@@ -43,7 +43,10 @@ RewriteRule ^directors$ controller/directors.php [L] #Maneja peticiones de creac
 RewriteRule ^directors/([0-9]+)$ controller/directors.php?DIRECTOR_ID=$1 [L] #Maneja peticiones DIRECTOR_ID
 RewriteRule ^directors/$ controller/directors.php [L] 
 
-
+#Generos (Generos)
+RewriteRule ^generos$ controller/generos.php [L] #Maneja peticiones de creacion de Actores
+RewriteRule ^generos/([0-9]+)$ controller/generos.php?GENERO_ID=$1 [L] #Maneja peticiones GENERO_ID
+RewriteRule ^generos/$ controller/generos.php [L] 
 
 
 
