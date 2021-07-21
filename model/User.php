@@ -76,7 +76,7 @@
         }
 
         public function setActive($USE_ACTIVE){           
-            if($USE_ACTIVE !== null || (!is_numeric($USE_ACTIVE) || ($USE_ACTIVE != 0 && $USE_ACTIVE != 1))){
+            if($USE_ACTIVE !== null && (!is_numeric($USE_ACTIVE) || ($USE_ACTIVE != 0 && $USE_ACTIVE != 1))){
                 throw new UserException('Error en USE_ACTIVE');
             }
 
@@ -84,7 +84,7 @@
         }
 
         public function setLogat($USE_LOGAT){           
-            if($USE_LOGAT !== null || (!is_numeric($USE_LOGAT) || $USE_LOGAT<0 || $USE_LOGAT > 2147483647)){
+            if($USE_LOGAT !== null && (!is_numeric($USE_LOGAT) || $USE_LOGAT<0 || $USE_LOGAT > 2147483647)){
                 throw new UserException('Error en USE_LOGAT');
             }
 

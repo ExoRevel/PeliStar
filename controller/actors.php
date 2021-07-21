@@ -69,7 +69,7 @@
                 $returnData['rows_returned'] = $rowCount;
                 $returnData['actors'] = $lastactors;
 
-                $response->sendParams(true, 201, 'User insertado correctamente', $returnData);
+                $response->sendParams(true, 201, 'ACTOR insertado correctamente', $returnData);
             }
 
             catch(ActorsException $ex){
@@ -111,7 +111,7 @@
                         $rowCount = count($data);
             
                         if($rowCount === 0){
-                            $response->sendParams(false, 404, 'Hubo un error al recuperar los usuarios');
+                            $response->sendParams(false, 404, 'Hubo un error al recuperar los ACTORES');
                         }
                         $returnData = array();
                         $returnData['actors'] = $data;
