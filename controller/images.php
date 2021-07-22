@@ -42,7 +42,7 @@
 
                 try{
                     $imageDB = new ImageDB($database);           
-                    $image = $imageDB->obtenerPorId($IMG_ID, $MOVIE_ID, $user['USE_ID']);
+                    $image = $imageDB->obtenerPorId($IMG_ID, $MOVIE_ID);
                     $rowCount = count($image);
     
                     if($rowCount === 0){
@@ -111,7 +111,7 @@
                         $response->sendParams(false, 500, 'Hubo un error al intentar actualizar los atributos de la imagen o no se identificó ningún cambio');
                     }               
                     
-                    $updatedImage = $imageDB->obtenerPorId($IMG_ID, $MOVIE_ID, $user['USE_ID']);
+                    $updatedImage = $imageDB->obtenerPorId($IMG_ID, $MOVIE_ID);
                     $rowCount = count($updatedImage);
 
                     if($rowCount === 0){
@@ -160,7 +160,7 @@
 
                 try{
                     $imageDB = new ImageDB($database);           
-                    $image = $imageDB->obtenerPorId($IMG_ID, $MOVIE_ID, $user['USE_ID']);
+                    $image = $imageDB->obtenerPorId($IMG_ID, $MOVIE_ID);
                     $rowCount = count($image);
     
                     if($rowCount === 0){
@@ -199,7 +199,7 @@
                     $database->beginTransaction();
 
                     $imageDB = new ImageDB($database);
-                    $originalImage = $imageDB->obtenerPorId($IMG_ID, $MOVIE_ID, $user['USE_ID']);
+                    $originalImage = $imageDB->obtenerPorId($IMG_ID, $MOVIE_ID);
                     $rowCount = count($originalImage);
 
                     if($rowCount === 0){
@@ -254,7 +254,7 @@
                 }
     
                 $MovieDB = new MovieDB($database);
-                $movie = $MovieDB->obtenerPorId($MOVIE_ID['MOVIE_ID']);
+                $movie = $MovieDB->obtenerPorId($_GET['MOVIE_ID']);
                 $rowCount = count($movie);
     
                 if($rowCount === 0){
@@ -329,7 +329,7 @@
                 //Transacción para guardar la imagen en directorio y en BD
                 $database->beginTransaction();
 
-                $image = new Images(null, $IMG_TITLE, $IMG_FILENAME, $IMG_MIMETYPE,$MOVIE_ID);
+                $image = new Images(null, $IMG_TITLE, $IMG_FILENAME, $IMG_MIMETYPE,$_GET['MOVIE_ID']);
                 $rowCount = $imageDB->insertar($image);
             
                 if($rowCount === 0){                   
@@ -338,7 +338,7 @@
 
                 $lastImageId = $database->lastInsertId();
 
-                $lastImage = $imageDB->obtenerPorId($lastImageId, $MOVIE_ID);
+                $lastImage = $imageDB->obtenerPorId($lastImageId, $_GET['MOVIE_ID']);
                 $rowCount = count($lastImage);
 
                 if($rowCount === 0){

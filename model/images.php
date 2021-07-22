@@ -54,7 +54,7 @@
             $httpOrHttps = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http');
             $host = $_SERVER['HTTP_HOST'];
 
-            $url = '/movies/'.$this->getMovieId().'/images/'.$this->getId();
+            $url = '/pelistar/movies/'.$this->getMovieId().'/images/'.$this->getId();
 
             return $httpOrHttps.'://'.$host.$url;
         }

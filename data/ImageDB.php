@@ -1,6 +1,6 @@
 <?php
 
-    require_once('../model/Image.php');
+    require_once('../model/Images.php');
 
     class ImageDB{
         private $database;
@@ -26,8 +26,7 @@
         }    
 
         public function obtenerPorId($IMG_ID, $MOVIE_ID){
-            $query = $this->database->prepare('SELECT I.IMG_ID, I.MOVIE_ID, I.IMG_TITLE, I.IMG_FILENAME, I.IMG_MIMETYPE FROM IMAGES I INNER JOIN MOVIE_ID M ON 
-            M.MOVIE_ID = I.MOVIE_ID WHERE I.IMG_ID = ? AND I.MOVIE_ID = ?');
+            $query = $this->database->prepare('SELECT I.IMG_ID, I.MOVIE_ID, I.IMG_TITLE, I.IMG_FILENAME, I.IMG_MIMETYPE FROM IMAGES I INNER JOIN MOVIES M ON M.MOVIE_ID = I.MOVIE_ID WHERE I.IMG_ID = ? AND I.MOVIE_ID = ?');
             $query->bindParam(1, $IMG_ID, PDO::PARAM_INT);
             $query->bindParam(2, $MOVIE_ID, PDO::PARAM_INT);           
             $query->execute();
@@ -63,11 +62,10 @@
         
         public function insertar($image){
             $query = $this->database->prepare('INSERT INTO IMAGES(IMG_TITLE, IMG_FILENAME, IMG_MIMETYPE, MOVIE_ID) VALUES (?, ?, ?, ?)');
-            $query->bindParam(1, $image->get(), PDO::PARAM_INT);
             $query->bindParam(1, $image->getTitle(), PDO::PARAM_STR);
             $query->bindParam(2, $image->getFileName(), PDO::PARAM_STR);
             $query->bindParam(3, $image->getMimeType(), PDO::PARAM_STR);
-            $query->bindParam(1, $image->getMovieId(), PDO::PARAM_INT);
+            $query->bindParam(4, $image->getMovieId(), PDO::PARAM_INT);
             $query->execute();
 
             $rowCount = $query->rowCount();
