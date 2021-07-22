@@ -77,11 +77,50 @@
             }
             break;
 
+        case 'GET':
+            if(isset($_GET['USE_ID'])) {
+                try {
+                    $fav_moviesDB = new Fav_MovieDB($database);
+                    $data = $fav_moviesDB->obtenerPorUserId($_GET['USE_ID']);
+                    $rowCount = count($data);
+            
+                    if($rowCount === 0){
+                        $response->sendParams(false, 404, 'Hubo un error al recuperar las peliculas favoritas');
+                    }
+                    $returnData = array();
+                    $returnData['Movies'] = $data;
+                    $response->sendParams(true, 201,null,$returnData); //201->Recurso creado
+                }
+                catch(Fav_MoviesException $ex){
+                    $response->sendParams(false, 400, $ex->getMessage());
+                }
+                catch(PDOException $ex){
+                    error_log("Database query error - {$ex}", 0);
+                    $response->sendParams(false, 500);
+                }
+            }
+            break;
+        case 'DELETE':
+            try{
+                $fav_moviesDB = new Fav_MovieDB($database);
+                $rowCount = $fav_moviesDB->eliminar($GET_['USE_ID'],$GET_['MOVIE_ID']);
+            
+                if($rowCount === 0){
+                    $response->sendParams(false, 400, 'No se pudo cerrar sesión usando el access token provisto');
+                }
+
+                $response->sendParams(true, 200, 'Sesión cerrada correctamente', null);
+            }
+            catch(PDOException $ex){
+                error_log("Database query error - {$ex}", 0);
+                $response->sendParams(false, 500, $ex->getMessage());
+            }            
+            break;
+
+        default: 
+            $response->sendParams(false, 405, 'Tipo de petición no permitida');
+            break;
     }
-
-
-
-
 
 
 
