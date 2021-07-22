@@ -80,7 +80,7 @@
         case 'GET':
             if(isset($_GET['USE_ID'])) {
                 try {
-                    $fav_moviesDB = new Fav_MovieDB($database);
+                    $fav_moviesDB = new Fav_movieDB($database);
                     $data = $fav_moviesDB->obtenerPorUserId($_GET['USE_ID']);
                     $rowCount = count($data);
             
@@ -102,7 +102,7 @@
             break;
         case 'DELETE':
             try{
-                $fav_moviesDB = new Fav_MovieDB($database);
+                $fav_moviesDB = new Fav_movieDB($database);
                 $rowCount = $fav_moviesDB->eliminar($GET_['USE_ID'],$GET_['MOVIE_ID']);
             
                 if($rowCount === 0){
