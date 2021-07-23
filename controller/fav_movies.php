@@ -79,10 +79,10 @@
             break;
 
         case 'GET':
-            if(isset($_GET['USE_ID'])) {
+            if(isset($_GET['USE_USERNAME'])) {
                 try {
                     $fav_moviesDB = new Fav_movieDB($database);
-                    $data = $fav_moviesDB->obtenerPorUserId($_GET['USE_ID']);
+                    $data = $fav_moviesDB->obtenerPorUSERNAME($_GET['USE_USERNAME']);
                     $rowCount = count($data);
             
                     if($rowCount === 0){

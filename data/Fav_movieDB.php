@@ -21,12 +21,13 @@
             return $rowCount;
         }
 
-        public function obtenerPorUserId($USE_ID){
-            $query = $this->database->prepare('SELECT FV.USE_ID, FV.MOVIE_ID, M.MOVIE_TITLE, M.MOVIE_DATE, M.MOVIE_TIME, M.MOVIE_SINOPSIS, M.MOVIE_CALIFICATION, G.GENERO_ID, G.GENERO_NAME
-            FROM FAV_MOVIES FV INNER JOIN MOVIES M ON M.MOVIE_ID = FV.MOVIE_ID INNER JOIN MOVIE_GENEROS MG ON MG.MOVIE_ID = M.MOVIE_ID
-            INNER JOIN GENEROS G ON G.GENERO_ID = MG.GENERO_ID WHERE FV.USE_ID = ?');
+        public function obtenerPorUSERNAME($USE_USERNAME){
+            $query = $this->database->prepare('SELECT U.USE_ID, FM.MOVIE_ID, M.MOVIE_TITLE, M.MOVIE_DATE, M.MOVIE_TIME, M.MOVIE_SINOPSIS, 
+            M.MOVIE_CALIFICATION, G.GENERO_ID, G.GENERO_NAME FROM USERS U INNER JOIN  FAV_MOVIES FM ON FM.USE_ID = U.USE_ID 
+            INNER JOIN MOVIES M ON M.MOVIE_ID = FM.MOVIE_ID INNER JOIN MOVIE_GENEROS MG ON MG.MOVIE_ID = M.MOVIE_ID 
+            INNER JOIN GENEROS G ON G.GENERO_ID = MG.GENERO_ID WHERE U.USE_USERNAME = ? ');
             
-            $query ->bindParam(1, $USE_ID, PDO:: PARAM_STR);
+            $query ->bindParam(1, $USE_USERNAME, PDO:: PARAM_STR);
             $query ->execute();
             $fav_moviesArray = array();
 
