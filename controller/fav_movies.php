@@ -106,10 +106,10 @@
                 $rowCount = $fav_moviesDB->eliminar($GET_['USE_ID'],$GET_['MOVIE_ID']);
             
                 if($rowCount === 0){
-                    $response->sendParams(false, 400, 'No se pudo cerrar sesión usando el access token provisto');
+                    $response->sendParams(false, 400, 'No se pudo eliminar la pelicula');
                 }
 
-                $response->sendParams(true, 200, 'Sesión cerrada correctamente', null);
+                $response->sendParams(true, 200, 'Pelicula eliminada de favoritos correctamente', null);
             }
             catch(PDOException $ex){
                 error_log("Database query error - {$ex}", 0);
