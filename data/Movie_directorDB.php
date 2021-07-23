@@ -1,7 +1,6 @@
 <?php
 
-    require_once('../model/Movies_Directors.php');
-
+    require_once('../model/Directors.php');
     class Movie_directorDB{
         private $database;
         public function __construct($database){
@@ -32,8 +31,8 @@
             $directorArray = array();
 
             while ($row = $query->fetch(PDO::FETCH_ASSOC)) {
-                $director = new Directors($row['DIRECTOR_ID'],$row['DIRECTOR_NAME'], $row['DIRECTOR_BIRTHDAY']);
-                $directorArray[] = $director->returnDirectorAsArray();
+                $directors = new Directors($row['DIRECTOR_ID'],$row['DIRECTOR_NAME'],$row['DIRECTOR_BIRTHDAY']);
+                $directorArray[] = $directors->returnDirectorAsArray();
             }
             return $directorArray;
         }

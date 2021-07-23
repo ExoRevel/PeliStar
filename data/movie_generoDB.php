@@ -1,6 +1,6 @@
 <?php
 
-    require_once('../model/Movie_Generos.php');
+    require_once('../model/Generos.php');
 
     class Movie_generoDB{
         private $database;
@@ -21,9 +21,9 @@
          /*OBTENER LOS DATOS DE GENERO DE UNA PELICULA EN ESPECIFICO TOMANDO COMO DATO DE REFERENCIA EL TITULO Y EL DATE ---> WHERE M.MOVIE_TITLE = ? AND M.MOVIE_DATE = ?*/
 
          public function obtenerPorTitleAndDate($MOVIE_TITLE, $MOVIE_DATE){
-            $query = $this->database->prepare('SELECT A.ACTOR_ID, A.ACTOR_FULLNAME, A.ACTOR_BIRTHDAY 
-            FROM MOVIES_ACTORS MA INNER JOIN MOVIES M ON M.MOVIE_ID = MA.MOVIE_ID INNER JOIN ACTORS A ON A.ACTOR_ID = MA.ACTOR_ID
-            WHERE M.MOVIE_TITLE = ? AND M.MOVIE_DATE = ?');
+            $query = $this->database->prepare('SELECT  G.GENERO_ID, G.GENERO_NAME 
+            FROM MOVIE_GENEROS MG INNER JOIN MOVIES M ON M.MOVIE_ID = MG.MOVIE_ID INNER JOIN GENEROS G ON G.GENERO_ID = MG.GENERO_ID 
+            WHERE M.MOVIE_TITLE = ?  AND M.MOVIE_DATE = ?');
             
             $query ->bindParam(1, $MOVIE_TITLE, PDO:: PARAM_STR);
             $query ->bindParam(2, $MOVIE_DATE, PDO:: PARAM_STR);

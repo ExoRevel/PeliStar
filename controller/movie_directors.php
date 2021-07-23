@@ -1,7 +1,7 @@
 <?php
 
     require_once('../config/database.php');   
-    require_once('../data/Movie_DirectorDB.php');
+    require_once('../data/Movie_directorDB.php');
     require_once('../util/response.php');
 
     //Respuesta que se enviará al cliente    

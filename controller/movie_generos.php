@@ -104,7 +104,7 @@
                 case 'DELETE':
                     try{
                         $movie_Generos = new Movie_generoDB($database);
-                        $rowCount = $movie_Generos->eliminar($_GET['GENERO_ID'],$_GET['GENERO_NAME']);
+                        $rowCount = $movie_Generos->eliminar($_GET['GENERO_ID'],$_GET['MOVIE_ID']);
                         
                         if($rowCount === 0){
                             $response->sendParams(false, 400, 'No se pudo eliminar');
