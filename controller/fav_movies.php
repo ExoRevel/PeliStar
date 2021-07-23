@@ -53,8 +53,9 @@
         
             try{
                 
-                $fav_movie = new Fav_movieDB($MOVIE_ID, $USE_ID);
-                $rowCount = $fav_movieDB->insertar($fav_movieDB);
+                $fav_movieDB = new Fav_movieDB($database);
+                $fav_Movie = new Fav_movies($MOVIE_ID, $USE_ID);
+                $rowCount = $fav_movieDB->insertar($fav_Movie);
 
                 if($rowCount === 0){
                     $response->sendParams(false, 404, 'Hubo un error al recuperar el FAV_MOVIE creado');
@@ -103,13 +104,13 @@
         case 'DELETE':
             try{
                 $fav_moviesDB = new Fav_movieDB($database);
-                $rowCount = $fav_moviesDB->eliminar($GET_['USE_ID'],$GET_['MOVIE_ID']);
+                $rowCount = $fav_moviesDB->eliminar($_GET['USE_ID'],$_GET['MOVIE_ID']);
             
                 if($rowCount === 0){
-                    $response->sendParams(false, 400, 'No se pudo eliminar la pelicula');
+                    $response->sendParams(false, 400, 'No se pudo eliminar');
                 }
 
-                $response->sendParams(true, 200, 'Pelicula eliminada de favoritos correctamente', null);
+                $response->sendParams(true, 200, 'Eliminado correctamente correctamente', null);
             }
             catch(PDOException $ex){
                 error_log("Database query error - {$ex}", 0);
