@@ -38,7 +38,7 @@
         }
 
         public function eliminar($GENERO_ID,$MOVIE_ID){
-            $query = $this->database->prepare('DELETE FROM MOVIES_GENEROS WHERE GENERO_ID = ? AND MOVIE_ID = ?');
+            $query = $this->database->prepare('DELETE FROM MOVIE_GENEROS WHERE GENERO_ID = ? AND MOVIE_ID = ?');
             $query->bindParam(1, $GENERO_ID, PDO::PARAM_INT);
             $query->bindParam(2, $MOVIE_ID, PDO::PARAM_INT);
             $query->execute();

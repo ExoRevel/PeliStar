@@ -39,7 +39,7 @@
         }
 
         public function eliminar($DIRECTOR_ID,$MOVIE_ID){
-            $query = $this->database->prepare('DELETE FROM MOVIE_DIRECTORS WHERE DIRECTOR_ID = ? AND MOVIE_ID = ?');
+            $query = $this->database->prepare('DELETE FROM MOVIES_DIRECTORS WHERE DIRECTOR_ID = ? AND MOVIE_ID = ?');
             $query->bindParam(1, $DIRECTOR_ID, PDO::PARAM_INT);
             $query->bindParam(2, $MOVIE_ID, PDO::PARAM_INT);
             $query->execute();
