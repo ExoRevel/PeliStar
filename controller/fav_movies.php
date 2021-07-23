@@ -1,7 +1,7 @@
 <?php
 
     require_once('../config/database.php');   
-    require_once('../data/Fav_moviesDB.php');
+    require_once('../data/Fav_movieDB.php');
     require_once('../util/response.php');
 
     //Respuesta que se enviará al cliente    
