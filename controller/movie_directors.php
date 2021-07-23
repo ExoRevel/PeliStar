@@ -53,8 +53,9 @@
         
             try{
                 
-                $movie_director = new Movie_directorDB($MOVIEDIRECTOR_ID, $MOVIE_ID);
-                $rowCount = $movie_directorDB->insertar($movie_directorDB);
+                $movie_directorDB = new Movie_directorDB($database);
+                $movie_director = new Movies_Directors($MOVIE_ID, $USE_ID);
+                $rowCount = $movie_directorDB->insertar($movie_director);
 
                 if($rowCount === 0){
                     $response->sendParams(false, 404, 'Hubo un error al recuperar el FAV_MOVIE creado');

@@ -52,8 +52,9 @@
         
             try{
                 
-                $movie_actor = new Movie_actorsDB($MOVIE_ID, $ACTOR_ID);
-                $rowCount = $movie_actorDB->insertar($movie_actorDB);
+                $movie_actorsDB = new Movie_actorsDB($database);
+                $movie_actor = new Movies_Actors($MOVIE_ID, $USE_ID);
+                $rowCount = $movie_actorsDB->insertar($movie_actor);
 
                 if($rowCount === 0){
                     $response->sendParams(false, 404, 'Hubo un error al recuperar el MOVIE_ACTOR creado');

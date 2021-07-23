@@ -51,9 +51,10 @@
             $MOVIE_ID = trim($jsonData->MOVIE_ID);
         
             try{
-                
-                $movie_genero = new Movie_generoDB($GENERO_ID, $MOVIE_ID);
-                $rowCount = $movie_generoDB->insertar($movie_generoDB);
+
+                $movie_generoDB = new Movie_generoDB($database);
+                $movie_genero = new Movies_Generos($MOVIE_ID, $USE_ID);
+                $rowCount = $movie_generoDB->insertar($movie_genero);
 
                 if($rowCount === 0){
                     $response->sendParams(false, 404, 'Hubo un error al recuperar el MOVIE_GENERO creado');

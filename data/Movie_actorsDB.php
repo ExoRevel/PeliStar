@@ -10,8 +10,8 @@
 
         public function insertar($movie_actors){
             $query = $this->database->prepare('INSERT INTO MOVIE_ACTORS(MOVIE_ID, ACTOR_ID) VALUES (?, ?)');
-            $query->bindParam(1, $movie_actors->MOVIE_ID(), PDO::PARAM_STR);  
-            $query->bindParam(2, $movie_actors->ACTOR_ID(), PDO::PARAM_STR);      
+            $query->bindParam(1, $movie_actors->getMovieId(), PDO::PARAM_STR);  
+            $query->bindParam(2, $movie_actors->getActorId(), PDO::PARAM_STR);      
             $query->execute();
 
             $rowCount = $query->rowCount();
