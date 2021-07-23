@@ -53,7 +53,7 @@
             try{
                 
                 $movie_actorsDB = new Movie_actorsDB($database);
-                $movie_actor = new Movies_Actors($MOVIE_ID, $USE_ID);
+                $movie_actor = new Movies_Actors($MOVIE_ID, $ACTOR_ID);
                 $rowCount = $movie_actorsDB->insertar($movie_actor);
 
                 if($rowCount === 0){
