@@ -3,16 +3,16 @@
     class Movies_DirectorsException extends Exception{}
 
     class Movies_Directors{
-        private $MOVIEDIRECTOR_ID;
+        private $DIRECTOR_ID;
         private $MOVIE_ID;
 
-        public function __construct($MOVIEDIRECTOR_ID, $MOVIE_ID){
-            $this->getMoviedirectorId($MOVIEDIRECTOR_ID);
-            $this->getMovieId($MOVIE_ID);   
+        public function __construct($DIRECTOR_ID, $MOVIE_ID){
+            $this->setDirectorId($DIRECTOR_ID);
+            $this->setMovieId($MOVIE_ID);   
         }
 
-        public function getMoviedirectorId(){
-            return $this->MOVIEDIRECTOR_ID;
+        public function getDirectorId(){
+            return $this->DIRECTOR_ID;
         }
 
         public function getMovieId(){
@@ -20,12 +20,12 @@
         }
 
 
-        public function setMoviedirectorId($MOVIEDIRECTOR_ID){
-            if(($MOVIEDIRECTOR_ID!==null) && (!is_numeric($MOVIEDIRECTOR_ID) || $MOVIEDIRECTOR_ID<=0 || $MOVIEDIRECTOR_ID > 9223372036854775807)){
-                throw new Movies_DirectorsException('Error en MOVIEDIRECTOR_ID');
+        public function setDirectorId($DIRECTOR_ID){
+            if(($DIRECTOR_ID!==null) && (!is_numeric($DIRECTOR_ID) || $DIRECTOR_ID<=0 || $DIRECTOR_ID > 9223372036854775807)){
+                throw new Movies_DirectorsException('Error en DIRECTOR_ID');
             }
 
-            $this->MOVIEDIRECTOR_ID = $MOVIEDIRECTOR_ID;
+            $this->DIRECTOR_ID = $DIRECTOR_ID;
         }
 
         public function setMovieId($MOVIE_ID){           
@@ -38,7 +38,7 @@
 
         public function returnMovies_DirectorsAsArray(){
             $Movies_Directors = array();
-            $Movies_Directors['MOVIEDIRECTOR_ID'] = $this->getMoviedirectorId();
+            $Movies_Directors['DIRECTOR_ID'] = $this->getDirectorId();
             $Movies_Directors['MOVIE_ID'] = $this->getMovieId();        
 
             return $Movies_Directors;

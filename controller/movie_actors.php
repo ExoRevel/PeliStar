@@ -1,7 +1,7 @@
 <?php
 
     require_once('../config/database.php');   
-    require_once('../data/Fav_moviesDB.php');
+    require_once('../data/Movie_actorsDB.php');
     require_once('../util/response.php');
 
     //Respuesta que se enviará al cliente    
@@ -53,7 +53,7 @@
             try{
                 
                 $movie_actorsDB = new Movie_actorsDB($database);
-                $movie_actor = new Movies_Actors($MOVIE_ID, $ACTOR_ID);
+                $movie_actor = new Movies_actors($MOVIE_ID, $ACTOR_ID);
                 $rowCount = $movie_actorsDB->insertar($movie_actor);
 
                 if($rowCount === 0){

@@ -1,7 +1,7 @@
 <?php
 
     require_once('../config/database.php');   
-    require_once('../data/Movies_Directors.php');
+    require_once('../data/Movie_DirectorDB.php');
     require_once('../util/response.php');
 
     //Respuesta que se enviará al cliente    
@@ -38,27 +38,27 @@
                 $response->sendParams(false, 400, 'Body no es Válido (JSON)');
             }
 
-            if( !isset($jsonData->MOVIEDIRECTOR_ID) || !isset($jsonData->MOVIE_ID)){
+            if( !isset($jsonData->DIRECTOR_ID) || !isset($jsonData->MOVIE_ID)){
                 $messages = array();
 
-                (!isset($jsonData->MOVIEDIRECTOR_ID) ? $messages[] = 'MOVIEDIRECTOR_ID no ingresado': false);
+                (!isset($jsonData->DIRECTOR_ID) ? $messages[] = 'DIRECTOR_ID no ingresado': false);
                 (!isset($jsonData->MOVIE_ID) ? $messages[] = 'Campo MOVIE_ID no ingresado': false);
 
                 $response->sendParams(false,400, $messages);
 
             }
 
-            $MOVIEDIRECTOR_ID = trim($jsonData->MOVIEDIRECTOR_ID);
+            $DIRECTOR_ID = trim($jsonData->DIRECTOR_ID);
             $MOVIE_ID = trim($jsonData->MOVIE_ID);
         
             try{
                 
                 $movie_directorDB = new Movie_directorDB($database);
-                $movie_director = new Movies_Directors($MOVIEDIRECTOR_ID, $MOVIE_ID);
+                $movie_director = new Movies_Directors($DIRECTOR_ID, $MOVIE_ID);
                 $rowCount = $movie_directorDB->insertar($movie_director);
 
                 if($rowCount === 0){
-                    $response->sendParams(false, 404, 'Hubo un error al recuperar el FAV_MOVIE creado');
+                    $response->sendParams(false, 404, 'Hubo un error al recuperar el MOVIE_DIRECTOR creado');
                 }
 
                 $returnData = array();
@@ -66,7 +66,6 @@
                 $returnData['movie_director'] = $lastmovie_directors;
 
                 $response->sendParams(true, 201, 'movie_director insertado correctamente', $returnData);
-
             }
 
             catch(Movies_DirectorsException $ex){
