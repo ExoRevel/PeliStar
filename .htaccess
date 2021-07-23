@@ -55,10 +55,11 @@ RewriteRule ^movies/([0-9]+)$ controller/movies.php?MOVIE_ID=$1 [L] #Maneja peti
 RewriteRule ^movies/$ controller/movies.php [L]
 
 #Fav_Movies (Peliculas favoritas por usuario)
-RewriteRule ^fav_movies$ controller/fav_movies.php [L] #Maneja peticiones de creacion de Actores
-RewriteRule ^fav_movies/([0-9]+)$ controller/fav_movies.php?USE_USERNAME=$1 [L] #Maneja peticiones MOVIE_ID
+RewriteRule ^fav_movies$ controller/fav_movies.php [L] 
+RewriteRule ^fav_movies/([A-Z]+[0-9]+)$ controller/fav_movies.php?USE_USERNAME=$1 [L] 
+RewriteRule ^fav_movies/([0-9]+[A-Z]+)$ controller/fav_movies.php?USE_USERNAME=$1 [L] 
 RewriteRule ^fav_movies/$ controller/fav_movies.php [L]
-RewriteRule ^fav_movies/([0-9]+)/([0-9]+)$ controller/fav_movies.php?USE_ID=$1&MOVIE_ID=$2 [L] #Maneja peticiones SES_ID
+RewriteRule ^fav_movies/([0-9]+)/([0-9]+)$ controller/fav_movies.php?USE_ID=$1&MOVIE_ID=$2 [L] 
 
 #Movies_Generos (Peliculas favoritas por usuario)
 RewriteRule ^movie_generos$ controller/movie_generos.php [L] #Maneja peticiones de creacion de Actores
