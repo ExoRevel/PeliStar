@@ -54,7 +54,7 @@
             try{
                 
                 $movie_directorDB = new Movie_directorDB($database);
-                $movie_director = new Movies_Directors($MOVIE_ID, $USE_ID);
+                $movie_director = new Movies_Directors($MOVIEDIRECTOR_ID, $MOVIE_ID);
                 $rowCount = $movie_directorDB->insertar($movie_director);
 
                 if($rowCount === 0){
