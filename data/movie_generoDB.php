@@ -1,6 +1,6 @@
 <?php
 
-    require_once('../model/Movies_Generos.php');
+    require_once('../model/Movie_Generos.php');
 
     class Movie_generoDB{
         private $database;

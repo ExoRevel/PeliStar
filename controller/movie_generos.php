@@ -1,7 +1,7 @@
 <?php
 
     require_once('../config/database.php');   
-    require_once('../data/Movie_generoDB.php');
+    require_once('../data/movie_generoDB.php');
     require_once('../util/response.php');
 
     //Respuesta que se enviará al cliente    
@@ -53,7 +53,7 @@
             try{
 
                 $movie_generoDB = new Movie_generoDB($database);
-                $movie_genero = new Movies_Generos($MOVIE_ID, $USE_ID);
+                $movie_genero = new Movies_Generos($GENERO_ID,$MOVIE_ID);
                 $rowCount = $movie_generoDB->insertar($movie_genero);
 
                 if($rowCount === 0){
