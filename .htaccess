@@ -68,7 +68,7 @@ RewriteRule ^movie_generos/([0-9]+)/([0-9]+)$ controller/movie_generos.php?GENER
 
 #Movies_Actors (Peliculas favoritas por usuario)
 RewriteRule ^movie_actors$ controller/movie_actors.php [L] #Maneja peticiones de creacion de Actores
-RewriteRule ^movie_actors/([0-9,-]+)$ controller/movie_actors.php?MOVIE_TITLE=$1&MOVIE_DATE=$2 [L] #Maneja peticiones MOVIE_ID
+RewriteRule ^movie_actors/([A-Z,0-9,a-z]+)/([0-9,-]+)$ controller/movie_actors.php?MOVIE_TITLE=$1&MOVIE_DATE=$2 [L] #Maneja peticiones MOVIE_ID
 RewriteRule ^movie_actors/$ controller/movie_actors.php [L]
 RewriteRule ^movie_actors/([0-9]+)/([0-9]+)$ controller/movie_actors.php?MOVIE_ID=$1&ACTOR_ID=$2 [L] #Maneja peticiones ACTOR_ID
 
