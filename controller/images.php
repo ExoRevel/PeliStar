@@ -3,7 +3,7 @@
     require_once('../config/database.php');   
     require_once('../data/ImageDB.php');   
     require_once('../data/MovieDB.php'); 
-    require_once('../util/auth.php'); //Auth trae response
+    require_once('../util/response.php'); //Auth trae response
 
     //Respuesta que se enviará al cliente    
     $response = new Response();
@@ -18,7 +18,7 @@
     }
 
     //Authorization
-    $user = checkAuthStatusAndReturnUser($database);   
+    //$user = checkAuthStatusAndReturnUser($database);   
 
     if(array_key_exists('MOVIE_ID', $_GET) && array_key_exists('IMG_ID', $_GET)){       
         $IMG_ID = $_GET['IMG_ID'];
