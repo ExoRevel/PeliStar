@@ -19,6 +19,20 @@
             return $rowCount;
         }
 
+        public function obtenerMovieActors($movie_actors){
+            $query = $this->database->prepare('SELECT * FROM movies_actors WHERE MOVIE_ID = ? AND ACTOR_ID = ? ');
+            $query->bindParam(1, $movie_actors->getMovieId(), PDO::PARAM_STR);  
+            $query->bindParam(2, $movie_actors->getActorId(), PDO::PARAM_STR);     
+            $query ->execute();
+            $actorsArray = array();
+
+            while ($row = $query->fetch(PDO::FETCH_ASSOC)) {
+                $actor = new Movies_Actors($row['MOVIE_ID'], $row['ACTOR_ID']);
+                $actorsArray[] = $actor->returnMovies_ActorsAsArray();
+            }
+            return $actorsArray;
+        }
+
         public function obtenerPorTitleAndDate($MOVIE_TITLE, $MOVIE_DATE){
             $query = $this->database->prepare('SELECT A.ACTOR_ID, A.ACTOR_FULLNAME, A.ACTOR_BIRTHDAY 
             FROM MOVIES_ACTORS MA INNER JOIN MOVIES M ON M.MOVIE_ID = MA.MOVIE_ID INNER JOIN ACTORS A ON A.ACTOR_ID = MA.ACTOR_ID

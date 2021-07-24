@@ -55,17 +55,24 @@
                 
                 $movie_directorDB = new Movie_directorDB($database);
                 $movie_director = new Movies_Directors($DIRECTOR_ID, $MOVIE_ID);
+
+                $rowCount = $movie_directorDB->obtenerMovieDirectors($movie_director);
+
+                if($rowCount !==0){
+                    $response->sendParams(false, 409, 'ESTE DIRECTOR YA SE ENCUENTRA REGISTRADO');
+                }
+
                 $rowCount = $movie_directorDB->insertar($movie_director);
 
                 if($rowCount === 0){
-                    $response->sendParams(false, 404, 'Hubo un error al recuperar el MOVIE_DIRECTOR creado');
+                    $response->sendParams(false, 404, 'HUBO UN PROBLEMA AL AGREGAR ESTE DIRECTROR A LA PELICULA SELECCIONADA');
                 }
 
                 $returnData = array();
                 $returnData['rows_returned'] = $rowCount;
                 $returnData['movie_director'] = $lastmovie_directors;
 
-                $response->sendParams(true, 201, 'movie_director insertado correctamente', $returnData);
+                $response->sendParams(true, 201, 'DIRECTOR AGREGADO CORRECTAMENTE', $returnData);
             }
 
             catch(Movies_DirectorsException $ex){

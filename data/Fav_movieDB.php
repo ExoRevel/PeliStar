@@ -40,6 +40,20 @@
             return $fav_moviesArray;
         }
 
+        public function obtenerFav_movie($fav_movies){
+            $query = $this->database->prepare('SELECT * FROM fav_movies WHERE USE_ID = ? AND MOVIE_ID = ?');
+            $query->bindParam(1, $fav_movies->getMovieId(), PDO::PARAM_STR);  
+            $query->bindParam(2, $fav_movies->getUseID(), PDO::PARAM_STR);     
+            $query ->execute();
+            $fav_moviesArray = array();
+
+            while ($row = $query->fetch(PDO::FETCH_ASSOC)) {
+                $fav_movies = new Fav_Movies($row['MOVIE_ID'], $row['USE_ID']);
+                $fav_moviesArray[] = $fav_movies->returnFav_MoviesAsArray();
+            }
+            return $fav_moviesArray;
+        }
+
         public function eliminar($USE_ID,$MOVIE_ID){
             $query = $this->database->prepare('DELETE FROM FAV_MOVIES WHERE USE_ID = ? AND MOVIE_ID = ?');
             $query->bindParam(1, $USE_ID, PDO::PARAM_INT);

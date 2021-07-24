@@ -55,17 +55,22 @@
                 
                 $fav_movieDB = new Fav_movieDB($database);
                 $fav_Movie = new Fav_movies($MOVIE_ID, $USE_ID);
+                $rowCount = $fav_movieDB->obtenerFav_movie($fav_Movie);
+                if($rowCount !==0){
+                    $response->sendParams(false, 409, 'ESTA PELICULA YA SE ENCUENTRA EN SU LISTA DE FAVORITOS');
+                }
+                
                 $rowCount = $fav_movieDB->insertar($fav_Movie);
 
                 if($rowCount === 0){
-                    $response->sendParams(false, 404, 'Hubo un error al recuperar el FAV_MOVIE creado');
+                    $response->sendParams(false, 404, 'Hubo un error al agregar la pelicula favorita');
                 }
 
                 $returnData = array();
                 $returnData['rows_returned'] = $rowCount;
                 $returnData['fav_movies'] = $lastfav_movies;
 
-                $response->sendParams(true, 201, 'FAV_MOVIE insertado correctamente', $returnData);
+                $response->sendParams(true, 201, 'Pelicula agregada correctamente', $returnData);
 
             }
 

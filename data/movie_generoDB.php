@@ -1,6 +1,7 @@
 <?php
 
     require_once('../model/Generos.php');
+    require_once('../model/Movie_generos.php');
 
     class Movie_generoDB{
         private $database;
@@ -18,7 +19,21 @@
 
             return $rowCount;
         }
-         /*OBTENER LOS DATOS DE GENERO DE UNA PELICULA EN ESPECIFICO TOMANDO COMO DATO DE REFERENCIA EL TITULO Y EL DATE ---> WHERE M.MOVIE_TITLE = ? AND M.MOVIE_DATE = ?*/
+
+        public function obtenerMovieGenero($movies_generos){
+            $query = $this->database->prepare('SELECT * FROM movie_generos WHERE GENERO_ID = ? AND MOVIE_ID = ?');
+            $query->bindParam(1, $movies_generos->getGeneroId(), PDO::PARAM_STR);  
+            $query->bindParam(2, $movies_generos->getMovieId(), PDO::PARAM_STR);      
+            $query->execute();
+
+            $MovieGeneroArray = array();
+
+            while ($row = $query->fetch(PDO::FETCH_ASSOC)) {
+                $movieG = new Movies_Generos($row['GENERO_ID'],$row['MOVIE_ID']);
+                $MovieGeneroArray[] = $movieG->returnMovies_GenerosAsArray();
+            }
+            return $MovieGeneroArray;
+        }
 
          public function obtenerPorTitleAndDate($MOVIE_TITLE, $MOVIE_DATE){
             $query = $this->database->prepare('SELECT  G.GENERO_ID, G.GENERO_NAME 

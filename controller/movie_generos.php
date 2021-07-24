@@ -54,17 +54,21 @@
 
                 $movie_generoDB = new Movie_generoDB($database);
                 $movie_genero = new Movies_Generos($GENERO_ID,$MOVIE_ID);
+
+                if($rowCount !==0){
+                    $response->sendParams(false, 409, 'ESTE GENERO YA FUE AGREGADO A LA PELICULA SELECCIONADA');
+                }
                 $rowCount = $movie_generoDB->insertar($movie_genero);
 
                 if($rowCount === 0){
-                    $response->sendParams(false, 404, 'Hubo un error al recuperar el MOVIE_GENERO creado');
+                    $response->sendParams(false, 404, 'ERROR AL INGRESAR EL GENERO A LA PELICULA SELECCIONADA');
                 }
 
                 $returnData = array();
                 $returnData['rows_returned'] = $rowCount;
                 $returnData['movie_genero'] = $lastfav_movies;
 
-                $response->sendParams(true, 201, 'MOVIE_GENERO insertado correctamente', $returnData);
+                $response->sendParams(true, 201, 'GENERO AGREGADO EXITOSAMENTE A LA PELICULA', $returnData);
 
             }
 

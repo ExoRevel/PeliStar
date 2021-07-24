@@ -55,14 +55,14 @@
                 $rowCount = count($existinggenero);
 
                 if($rowCount !==0){
-                    $response->sendParams(false, 409, 'Generos ya existe en la base de data');
+                    $response->sendParams(false, 409, 'Genero ya existe en la base de data');
                 }
                 
                 $genero = new Generos(null, $GENERO_NAME);
                 $rowCount = $generoDB->insertar($genero);
 
                 if($rowCount === 0){
-                    $response->sendParams(false, 404, 'Hubo un error al recuperar el genero creado');
+                    $response->sendParams(false, 404, 'Hubo un error al recuperar crear el genero');
                 }
 
                 $returnData = array();

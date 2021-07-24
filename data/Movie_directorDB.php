@@ -1,6 +1,7 @@
 <?php
 
     require_once('../model/Directors.php');
+    require_once('../model/Movies_Directors.php');
     class Movie_directorDB{
         private $database;
         public function __construct($database){
@@ -18,8 +19,20 @@
             return $rowCount;
         }
 
-         /*OBTENER LOS DATOS DE LOS DIRECTORS QUE PARTICIPAN EN UNA PELICULA EN ESPECIFICO TOMANDO COMO DATO DE REFERENCIA EL TITULO Y EL DATE ---> WHERE M.MOVIE_TITLE = ? AND M.MOVIE_DATE = ?*/
+        public function obtenerMovieDirectors($movies_directors){
+            $query = $this->database->prepare('SELECT * FROM movies_directors WHERE DIRECTOR_ID = ? AND MOVIE_ID = ?');
+            $query->bindParam(1, $movies_directors->getDirectorId(), PDO::PARAM_STR);  
+            $query->bindParam(2, $movies_directors->getMovieId(), PDO::PARAM_STR);      
+            $query->execute();
+            $MovieDirectorArray = array();
 
+            while ($row = $query->fetch(PDO::FETCH_ASSOC)) {
+                $movieD = new Movies_Directors($row['DIRECTOR_ID'],$row['MOVIE_ID']);
+                $MovieDirectorArray[] = $movieD->returnMovies_DirectorsAsArray();
+            }
+            return $MovieDirectorArray;
+        }
+        
          public function obtenerPorTitleAndDate($MOVIE_TITLE, $MOVIE_DATE){
             $query = $this->database->prepare('SELECT D.DIRECTOR_ID, D.DIRECTOR_NAME, D.DIRECTOR_BIRTHDAY
             FROM MOVIES_DIRECTORS MD INNER JOIN MOVIES M ON M.MOVIE_ID = MD.DIRECTOR_ID INNER JOIN DIRECTORS D ON D.DIRECTOR_ID = MD.DIRECTOR_ID

@@ -54,6 +54,12 @@
                 
                 $movie_actorsDB = new Movie_actorsDB($database);
                 $movie_actor = new Movies_actors($MOVIE_ID, $ACTOR_ID);
+
+                $rowCount = $movie_actorsDB->obtenerMovieActors($movie_actor);
+                if($rowCount !==0){
+                    $response->sendParams(false, 409, 'ESTE ACTOR YA SE ENCUENTRA REGISTRADO EN LA PELICULA SELECCIONADA PELICULA');
+                }
+                
                 $rowCount = $movie_actorsDB->insertar($movie_actor);
 
                 if($rowCount === 0){
