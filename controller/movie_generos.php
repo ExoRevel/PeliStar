@@ -55,6 +55,7 @@
                 $movie_generoDB = new Movie_generoDB($database);
                 $movie_genero = new Movies_Generos($GENERO_ID,$MOVIE_ID);
 
+                $rowCount = $movie_generoDB->obtenerMovieGenero($movie_genero);
                 if($rowCount !==0){
                     $response->sendParams(false, 409, 'ESTE GENERO YA FUE AGREGADO A LA PELICULA SELECCIONADA');
                 }
