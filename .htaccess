@@ -1,6 +1,6 @@
 #CORS options
 
-#Header Set Access-Control-Allow-Origin "*"
+Header Set Access-Control-Allow-Origin:  *
 
 RewriteEngine on
 SetEnvIf Authorization .+ HTTP_AUTHORIZATION=$0

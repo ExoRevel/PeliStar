@@ -27,7 +27,7 @@
         error_log("Connection error - {$ex}", 0);       
         $response->sendParams(false, 500, 'Error de conexión a la base de datos');
     }
-
+    header('Access-Control-Allow-Origin: *');
     //Opciones de preflight (CORS)
     if($_SERVER['REQUEST_METHOD'] === 'OPTIONS'){
         header('Access-Control-Allow-Methods: POST, GET, PATCH, DELETE, OPTIONS');
