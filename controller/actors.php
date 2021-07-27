@@ -68,7 +68,7 @@
 
                 $returnData = array();
                 $returnData['rows_returned'] = $rowCount;
-                $returnData['actors'] = $lastactors;
+                //$returnData['actors'] = $lastactors;
 
                 $response->sendParams(true, 201, 'ACTOR insertado correctamente', $returnData);
             }

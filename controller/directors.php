@@ -67,7 +67,7 @@
 
                 $returnData = array();
                 $returnData['rows_returned'] = $rowCount;
-                $returnData['directors'] = $lastdirectors;
+                //$returnData['directors'] = $lastdirectors;
 
                 $response->sendParams(true, 201, 'DIRECTOR insertado correctamente', $returnData);
 
