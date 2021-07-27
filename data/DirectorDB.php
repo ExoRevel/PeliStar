@@ -56,9 +56,11 @@
         }
 
         public function insertar($director){
+            $BIRTHDAY = $director->getDirectorBirthday();
+            $NAME = $director->getDirectorName();
             $query = $this->database->prepare('INSERT INTO DIRECTORS(DIRECTOR_NAME,DIRECTOR_BIRTHDAY) VALUES (?, ?)');
-            $query->bindParam(1, $director->getDirectorName(), PDO::PARAM_STR);
-            $query->bindParam(2, $director->getDirectorBirthday(), PDO::PARAM_STR);          
+            $query->bindParam(1, $NAME, PDO::PARAM_STR);
+            $query->bindParam(2, $BIRTHDAY, PDO::PARAM_STR);          
             $query->execute();
 
             $rowCount = $query->rowCount();
