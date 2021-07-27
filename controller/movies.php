@@ -27,9 +27,9 @@
     switch($_SERVER['REQUEST_METHOD']){
         
         case 'POST':
-            if($_SERVER['CONTENT_TYPE']!== 'application/json'){
+            /*if($_SERVER['CONTENT_TYPE']!== 'application/json'){
                 $response->sendParams(false, 400, 'Content Type header no Válido');
-            }
+            }*/
 
             $rawPostData = file_get_contents('php://input');
 
