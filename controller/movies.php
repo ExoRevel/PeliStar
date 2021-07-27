@@ -58,7 +58,7 @@
     
             try{
                 $movieDB = new MovieDB($database);
-                $existingmovie = $movieDB->obtenerPorFullName($MOVIE_TITLE);
+                $existingmovie = $movieDB->obtenerPorTitleAndDate($MOVIE_TITLE, $MOVIE_DATE);
                 $rowCount = count($existingmovie);
 
                 if($rowCount !==0){

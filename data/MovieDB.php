@@ -38,9 +38,10 @@
             return $movieArray;
         } 
 
-        public function obtenerPorFullName($MOVIE_TITLE){
-            $query = $this->database->prepare('SELECT MOVIE_ID, MOVIE_TITLE,MOVIE_DATE, MOVIE_TIME, MOVIE_SINOPSIS, MOVIE_CALIFICATION FROM MOVIES WHERE MOVIE_TITLE = ?');
+        public function obtenerPorTitleAndDate($MOVIE_TITLE, $MOVIE_DATE){
+            $query = $this->database->prepare('SELECT MOVIE_ID, MOVIE_TITLE, DATE_FORMAT(MOVIE_DATE,"%d/%m/%Y") AS MOVIE_DATE , MOVIE_TIME, MOVIE_SINOPSIS, MOVIE_CALIFICATION FROM MOVIES WHERE MOVIE_TITLE = ? AND MOVIE_DATE = ? ');
             $query->bindParam(1, $MOVIE_TITLE, PDO::PARAM_STR);
+            $query->bindParam(2, $MOVIE_DATE, PDO::PARAM_STR);
             $query->execute();
 
             $movieArray = array();

@@ -39,9 +39,10 @@
             return $directorArray;
         }
 
-        public function obtenerPorName($DIRECTOR_NAME){
-            $query = $this->database->prepare('SELECT DIRECTOR_ID, DIRECTOR_NAME, DIRECTOR_BIRTHDAY FROM DIRECTORS WHERE DIRECTOR_NAME = ?');
+        public function obtenerPorName($DIRECTOR_NAME,$DIRECTOR_BIRTHDAY){
+            $query = $this->database->prepare('SELECT DIRECTOR_ID, DIRECTOR_NAME, DATE_FORMAT(DIRECTOR_BIRTHDAY, "%d/%m/%Y") AS DIRECTOR_BIRTHDAY FROM DIRECTORS WHERE DIRECTOR_NAME = ? AND DIRECTOR_BIRTHDAY = ?');
             $query->bindParam(1, $DIRECTOR_NAME, PDO::PARAM_STR);
+            $query->bindParam(2, $DIRECTOR_BIRTHDAY, PDO::PARAM_STR);
             $query->execute();
 
             $directorArray = array();

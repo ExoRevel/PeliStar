@@ -51,7 +51,7 @@
 
             try{
                 $directorDB = new DirectorDB($database);
-                $existingdirector = $directorDB ->obtenerPorName($DIRECTOR_NAME);
+                $existingdirector = $directorDB ->obtenerPorName($DIRECTOR_NAME,$DIRECTOR_BIRTHDAY);
                 $rowCount = count($existingdirector);
 
                 if($rowCount !==0){

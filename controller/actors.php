@@ -52,7 +52,7 @@
 
             try{
                 $actorDB = new ActorDB($database);
-                $existingactor = $actorDB ->obtenerPorFullName($ACTOR_FULLNAME);
+                $existingactor = $actorDB ->obtenerPorFullName($ACTOR_FULLNAME,$ACTOR_BIRTHDAY);
                 $rowCount = count($existingactor);
 
                 if($rowCount !==0){
