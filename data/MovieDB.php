@@ -55,12 +55,17 @@
         }
 
         public function insertar($movie){
+            $title = $movie->getTitle();
+            $date = $movie->getDate();
+            $time = $movie->getTime();
+            $sinopsis = $movie->getSinopsis();
+            $calification = $movie->getCalification();
             $query = $this->database->prepare('INSERT INTO MOVIES( MOVIE_TITLE,MOVIE_DATE, MOVIE_TIME, MOVIE_SINOPSIS, MOVIE_CALIFICATION) VALUES (?, ?, ?, ?, ?)');
-            $query->bindParam(1, $movie->getTitle(), PDO::PARAM_STR);
-            $query->bindParam(2, $movie->getDate(), PDO::PARAM_STR);   
-            $query->bindParam(3, $movie->getTime(), PDO::PARAM_STR);
-            $query->bindParam(4, $movie->getSinopsis(), PDO::PARAM_STR);
-            $query->bindParam(5, $movie->getCalification(), PDO::PARAM_STR);       
+            $query->bindParam(1, $title, PDO::PARAM_STR);
+            $query->bindParam(2, $date, PDO::PARAM_STR);   
+            $query->bindParam(3, $time, PDO::PARAM_STR);
+            $query->bindParam(4, $sinopsis, PDO::PARAM_STR);
+            $query->bindParam(5, $calification, PDO::PARAM_STR);       
             $query->execute();
 
             $rowCount = $query->rowCount();

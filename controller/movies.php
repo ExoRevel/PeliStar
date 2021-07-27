@@ -15,11 +15,11 @@
         error_log("Connection error - {$ex}", 0);       
         $response->sendParams(false, 500, 'Error de conexión a la base de data');
     }
-    header('Access-Control-Allow-Origin: *');
+
     //Opciones de preflight (CORS)
     if($_SERVER['REQUEST_METHOD'] === 'OPTIONS'){
         header('Access-Control-Allow-Methods: POST, OPTIONS, GET');
-        header('Access-Control-Allow-Origin: *');
+        header('Access-Control-Allow-Headers: Content-Type, Authorization');
         header('Access-Control-Max-Age: 86400');
         $response->sendParams(true, 200);
     }
@@ -74,7 +74,7 @@
 
                 $returnData = array();
                 $returnData['rows_returned'] = $rowCount;
-                $returnData['movie'] = $lastmovies;
+                //$returnData['movie'] = $lastmovies;
 
                 $response->sendParams(true, 201, 'Movie insertado correctamente', $returnData);
             }
