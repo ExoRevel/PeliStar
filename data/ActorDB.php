@@ -56,9 +56,11 @@
         }
 
         public function insertar($actor){
+            $FULLNAME = $actor->getFullname();
+            $BIRTHDAY = $actor->getBirthday();
             $query = $this->database->prepare('INSERT INTO ACTORS(ACTOR_FULLNAME,ACTOR_BIRTHDAY) VALUES (?, ?)');
-            $query->bindParam(1, $actor->getFullname(), PDO::PARAM_STR);
-            $query->bindParam(2, $actor->getBirthday(), PDO::PARAM_STR);          
+            $query->bindParam(1, $FULLNAME, PDO::PARAM_STR);
+            $query->bindParam(2, $BIRTHDAY, PDO::PARAM_STR);          
             $query->execute();
 
             $rowCount = $query->rowCount();
