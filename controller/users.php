@@ -26,9 +26,10 @@
 
     switch($_SERVER['REQUEST_METHOD']) {
         case 'POST':
+            /*
             if($_SERVER['CONTENT_TYPE'] !== 'application/json'){
                 $response->sendParams(false, 400, 'Content type header no válido');
-            }
+            }*/
     
             $rawPostData = file_get_contents('php://input');
     
@@ -77,7 +78,7 @@
     
                 $returnData = array();
                 $returnData['rows_returned'] = $rowCount;
-                $returnData['users'] = $lastUser;
+                //$returnData['users'] = $lastUser;
     
                 $response->sendParams(true, 201, 'User insertado correctamente', $returnData); //201->Recurso creado
             }

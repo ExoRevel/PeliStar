@@ -76,10 +76,13 @@
         } 
 
         public function insertar($user){
+            $FULLNAME = $user->getFullname();
+            $USERNAME = $user->getUsername();
+            $PASSWORD = $user->getPassword();
             $query = $this->database->prepare('INSERT INTO USERS(USE_FULLNAME, USE_USERNAME, USE_PASSWORD) VALUES (?, ?, ?)');
-            $query->bindParam(1, $user->getFullname(), PDO::PARAM_STR);
-            $query->bindParam(2, $user->getUsername(), PDO::PARAM_STR);
-            $query->bindParam(3, $user->getPassword(), PDO::PARAM_STR);          
+            $query->bindParam(1, $FULLNAME, PDO::PARAM_STR);
+            $query->bindParam(2, $USERNAME, PDO::PARAM_STR);
+            $query->bindParam(3, $PASSWORD, PDO::PARAM_STR);          
             $query->execute();
 
             $rowCount = $query->rowCount();
