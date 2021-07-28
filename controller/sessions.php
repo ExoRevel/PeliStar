@@ -72,9 +72,9 @@
         }
         else if($_SERVER['REQUEST_METHOD'] === 'PATCH'){
 
-            if($_SERVER['CONTENT_TYPE'] !== 'application/json'){
+            /*if($_SERVER['CONTENT_TYPE'] !== 'application/json'){
                 $response->sendParams(false, 400, 'Content type header no válido');
-            }
+            }*/
     
             $rawPatchData = file_get_contents('php://input');
     
