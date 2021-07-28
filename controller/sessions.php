@@ -165,9 +165,9 @@
 
         sleep(1); //Se retrasa la ejecución del programa 1 segundo cada vez que el usuario intenta iniciar sesión
 
-        if($_SERVER['CONTENT_TYPE'] !== 'application/json'){
+        /*if($_SERVER['CONTENT_TYPE'] !== 'application/json'){
             $response->sendParams(false, 400, 'Content type header no válido');
-        }
+        }*/
 
         $rawPOSTData = file_get_contents('php://input');
 
