@@ -21,15 +21,16 @@
         header('Access-Control-Allow-Methods: POST, OPTIONS, GET');
         header('Access-Control-Allow-Origin: *');
         header('Access-Control-Max-Age: 86400');
+        header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers,  X-Requested-With");
         $response->sendParams(true, 200);
     }
 
     switch($_SERVER['REQUEST_METHOD']) {
         case 'POST':
-            /*
+            
             if($_SERVER['CONTENT_TYPE'] !== 'application/json'){
                 $response->sendParams(false, 400, 'Content type header no válido');
-            }*/
+            }
     
             $rawPostData = file_get_contents('php://input');
     

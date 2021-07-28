@@ -33,6 +33,7 @@
         header('Access-Control-Allow-Methods: POST, GET, PATCH, DELETE, OPTIONS');
         header('Access-Control-Allow-Origin: *');
         header('Access-Control-Max-Age: 86400');
+        header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers,  X-Requested-With");
         $response->sendParams(true, 200);
     }
 
@@ -72,9 +73,9 @@
         }
         else if($_SERVER['REQUEST_METHOD'] === 'PATCH'){
 
-            /*if($_SERVER['CONTENT_TYPE'] !== 'application/json'){
+            if($_SERVER['CONTENT_TYPE'] !== 'application/json'){
                 $response->sendParams(false, 400, 'Content type header no válido');
-            }*/
+            }
     
             $rawPatchData = file_get_contents('php://input');
     
@@ -165,9 +166,9 @@
 
         sleep(1); //Se retrasa la ejecución del programa 1 segundo cada vez que el usuario intenta iniciar sesión
 
-        /*if($_SERVER['CONTENT_TYPE'] !== 'application/json'){
+        if($_SERVER['CONTENT_TYPE'] !== 'application/json'){
             $response->sendParams(false, 400, 'Content type header no válido');
-        }*/
+        }
 
         $rawPOSTData = file_get_contents('php://input');
 
