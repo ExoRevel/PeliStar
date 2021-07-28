@@ -25,7 +25,7 @@
         }
 
         public function obtenerTodosMovies(){
-            $query = $this->database->prepare('SELECT * FROM MOVIES');
+            $query = $this->database->prepare('SELECT MOVIE_ID, MOVIE_TITLE, DATE_FORMAT(MOVIE_DATE,"%d/%m/%Y") AS MOVIE_DATE , MOVIE_TIME, MOVIE_SINOPSIS, MOVIE_CALIFICATION FROM MOVIES');
             $query->execute();
 
             $movieArray = [];
