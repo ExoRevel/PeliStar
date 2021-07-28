@@ -11,12 +11,17 @@
         }
 
         public function insertar($session){     
+            $USE_ID = $session->getUseId();
+            $Acctok = $session->getAcctok();
+            $Acctokexp = $session->getAcctokexp();
+            $Reftok = $session->getReftok();
+            $Reftokexp = $session->getReftokexp();
             $query = $this->database->prepare('INSERT INTO SESSIONS(USE_ID, SES_ACCTOK, SES_ACCTOKEXP, SES_REFTOK, SES_REFTOKEXP) VALUES (?, ?, STR_TO_DATE(?, "%d/%m/%Y %H:%i"), ?, STR_TO_DATE(?, "%d/%m/%Y %H:%i"))');
-            $query->bindParam(1, $session->getUseId(), PDO::PARAM_INT);
-            $query->bindParam(2, $session->getAcctok(), PDO::PARAM_STR);
-            $query->bindParam(3, $session->getAcctokexp(), PDO::PARAM_STR);    
-            $query->bindParam(4, $session->getReftok(), PDO::PARAM_STR);
-            $query->bindParam(5, $session->getReftokexp(), PDO::PARAM_STR);           
+            $query->bindParam(1, $USE_ID, PDO::PARAM_INT);
+            $query->bindParam(2, $Acctok, PDO::PARAM_STR);
+            $query->bindParam(3, $Acctokexp, PDO::PARAM_STR);    
+            $query->bindParam(4, $Reftok, PDO::PARAM_STR);
+            $query->bindParam(5, $Reftokexp, PDO::PARAM_STR);           
             $query->execute();
             
             $rowCount = $query->rowCount();
