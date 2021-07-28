@@ -92,10 +92,10 @@
             break;
         
         case 'GET':
-            if(isset($_GET['USE_ID'])) {
+            if(isset($_GET['USE_USERNAME'])) {
                 try {
                     $userDB = new UserDB($database);
-                    $data = $userDB->obtenerPorId($_GET['USE_ID']);
+                    $data = $userDB->obtenerPorUsername($_GET['USE_USERNAME']);
                     $rowCount = count($data);
         
                     if($rowCount === 0){

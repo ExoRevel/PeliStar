@@ -24,7 +24,7 @@ RewriteRule ^movies/([0-9]+)/images$ controller/images.php?MOVIE_ID=$1 [L] #Mane
 
 #Usuarios (Users)
 RewriteRule ^users$ controller/users.php [L] #Maneja peticiones de creacion de usuarios
-RewriteRule ^users/([0-9]+)$ controller/users.php?USE_ID=$1 [L] #Maneja peticiones USE_ID
+RewriteRule ^users/([A-Z,0-9,a-z]+)$ controller/users.php?USE_USERNAME=$1 [L] 
 #RewriteRule ^users/$ controller/users.php [L] #Maneja peticiones de creacion de usuarios
 
 #Actores (Actors)
