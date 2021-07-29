@@ -25,7 +25,7 @@
         }
 
         public function obtenerTodosGeneros(){
-            $query = $this->database->prepare('SELECT * FROM GENEROS');
+            $query = $this->database->prepare('SELECT * FROM GENEROS order by GENERO_ID asc');
             $query->execute();
 
             $generoArray = [];
