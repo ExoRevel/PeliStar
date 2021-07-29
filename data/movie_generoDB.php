@@ -11,8 +11,10 @@
 
         public function insertar($movies_generos){
             $query = $this->database->prepare('INSERT INTO MOVIE_GENEROS(GENERO_ID, MOVIE_ID) VALUES (?, ?)');
-            $query->bindParam(1, $movies_generos->getGeneroId(), PDO::PARAM_STR);  
-            $query->bindParam(2, $movies_generos->getMovieId(), PDO::PARAM_STR);      
+            $genero_id = $movies_generos->getGeneroId();
+            $movie_id = $movies_generos->getMovieId();
+            $query->bindParam(1, $genero_id, PDO::PARAM_STR);  
+            $query->bindParam(2, $movie_id, PDO::PARAM_STR);      
             $query->execute();
 
             $rowCount = $query->rowCount();
@@ -22,8 +24,10 @@
 
         public function obtenerMovieGenero($movies_generos){
             $query = $this->database->prepare('SELECT * FROM movie_generos WHERE GENERO_ID = ? AND MOVIE_ID = ?');
-            $query->bindParam(1, $movies_generos->getGeneroId(), PDO::PARAM_STR);  
-            $query->bindParam(2, $movies_generos->getMovieId(), PDO::PARAM_STR);      
+            $genero_id = $movies_generos->getGeneroId();
+            $movie_id = $movies_generos->getMovieId();
+            $query->bindParam(1, $genero_id, PDO::PARAM_STR);  
+            $query->bindParam(2, $movie_id, PDO::PARAM_STR);     
             $query->execute();
 
             $MovieGeneroArray = array();

@@ -56,6 +56,7 @@
                 $movie_actor = new Movies_actors($MOVIE_ID, $ACTOR_ID);
 
                 $rowCount = $movie_actorsDB->obtenerMovieActors($movie_actor);
+                $rowCount = count($rowCount);
                 if($rowCount !==0){
                     $response->sendParams(false, 409, 'ESTE ACTOR YA SE ENCUENTRA REGISTRADO EN LA PELICULA SELECCIONADA PELICULA');
                 }
@@ -68,7 +69,7 @@
 
                 $returnData = array();
                 $returnData['rows_returned'] = $rowCount;
-                $returnData['movie_actors'] = $lastmovie_actors;
+                //$returnData['movie_actors'] = $lastmovie_actors;
 
                 $response->sendParams(true, 201, 'MOVIE_ACTOR insertado correctamente', $returnData);
 
