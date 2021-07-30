@@ -9,7 +9,7 @@
         }
 
         public function obtenerPorId($MOVIE_ID){
-            $query = $this->database->prepare('SELECT MOVIE_ID, MOVIE_TITLE, MOVIE_DATE, MOVIE_TIME, MOVIE_SINOPSIS, MOVIE_CALIFICATION FROM MOVIES WHERE MOVIE_ID = ?');
+            $query = $this->database->prepare('SELECT MOVIE_ID, MOVIE_TITLE, DATE_FORMAT(MOVIE_DATE,"%d/%m/%Y") AS MOVIE_DATE, MOVIE_TIME, MOVIE_SINOPSIS, MOVIE_CALIFICATION FROM MOVIES WHERE MOVIE_ID = ?');
             $query ->bindParam(1, $MOVIE_ID, PDO:: PARAM_STR);
             $query ->execute();
 

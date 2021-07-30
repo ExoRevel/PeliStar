@@ -9,7 +9,7 @@
         }
 
         public function obtenerPorId($DIRECTOR_ID){
-            $query = $this->database->prepare('SELECT DIRECTOR_ID, DIRECTOR_NAME, DIRECTOR_BIRTHDAY FROM DIRECTORS WHERE DIRECTOR_ID = ?');
+            $query = $this->database->prepare('SELECT DIRECTOR_ID, DIRECTOR_NAME, DATE_FORMAT(DIRECTOR_BIRTHDAY, "%d/%m/%Y") AS DIRECTOR_BIRTHDAY  FROM DIRECTORS WHERE DIRECTOR_ID = ?');
             $query ->bindParam(1, $DIRECTOR_ID, PDO:: PARAM_STR);
             $query ->execute();
 
@@ -26,7 +26,8 @@
         }
 
         public function obtenerTodosDirectores(){
-            $query = $this->database->prepare('SELECT * FROM DIRECTORS');
+            $query = $this->database->prepare('SELECT DIRECTOR_ID, DIRECTOR_NAME, DATE_FORMAT(DIRECTOR_BIRTHDAY, "%d/%m/%Y") AS DIRECTOR_BIRTHDAY 
+            FROM DIRECTORS order by DIRECTOR_ID asc');
             $query->execute();
 
             $directorArray = [];
