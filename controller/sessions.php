@@ -33,7 +33,7 @@
         header('Access-Control-Allow-Methods: POST, GET, PATCH, DELETE, OPTIONS');
         header('Access-Control-Allow-Origin: *');
         header('Access-Control-Max-Age: 86400');
-        header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers,  X-Requested-With");
+        header('Access-Control-Allow-Headers: Content-Type, Authorization');
         $response->sendParams(true, 200);
     }
 
