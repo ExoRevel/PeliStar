@@ -61,15 +61,19 @@
         }*/
         
         public function insertar($image){
+            $titulo = $image->getTitle();
+            $filename = $image->getFileName();
+            $mimetype = $image->getMimeType();
+            $movieId = $image->getMovieId();
             $query = $this->database->prepare('INSERT INTO IMAGES(IMG_TITLE, IMG_FILENAME, IMG_MIMETYPE, MOVIE_ID) VALUES (?, ?, ?, ?)');
-            $query->bindParam(1, $image->getTitle(), PDO::PARAM_STR);
-            $query->bindParam(2, $image->getFileName(), PDO::PARAM_STR);
-            $query->bindParam(3, $image->getMimeType(), PDO::PARAM_STR);
-            $query->bindParam(4, $image->getMovieId(), PDO::PARAM_INT);
+            $query->bindParam(1, $titulo, PDO::PARAM_STR);
+            $query->bindParam(2, $filename, PDO::PARAM_STR);
+            $query->bindParam(3, $mimetype, PDO::PARAM_STR);
+            $query->bindParam(4, $movieId, PDO::PARAM_INT);
             $query->execute();
 
             $rowCount = $query->rowCount();
-
+            
             return $rowCount;
         }
 
