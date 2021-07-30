@@ -38,12 +38,12 @@
                 $response->sendParams(false, 400, 'Body no es válido (JSON)');
             }
     
-            if(!isset($jsonData->USE_FULLNAME) || !isset($jsonData->USE_USERNAME) || !isset($jsonData->USE_PASSWORD)){
+            if(!($jsonData->USE_FULLNAME) || !($jsonData->USE_USERNAME) || !($jsonData->USE_PASSWORD)){
                 $messages = array();
     
-                (!isset($jsonData->USE_FULLNAME) ? $messages[] = 'Campo USE_FULLNAME no ingresado': false);
-                (!isset($jsonData->USE_USERNAME) ? $messages[] = 'Campo USE_USERNAME no ingresado': false);
-                (!isset($jsonData->USE_PASSWORD) ? $messages[] = 'Campo USE_PASSWORD no ingresado': false);
+                (!($jsonData->USE_FULLNAME) ? $messages[] = 'Campo USE_FULLNAME no ingresado': false);
+                (!($jsonData->USE_USERNAME) ? $messages[] = 'Campo USE_USERNAME no ingresado': false);
+                (!($jsonData->USE_PASSWORD) ? $messages[] = 'Campo USE_PASSWORD no ingresado': false);
     
                 $response->sendParams(false, 400, $messages);
             }

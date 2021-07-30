@@ -52,7 +52,7 @@
         }
 
         public function setFullname($USE_FULLNAME){           
-            if($USE_FULLNAME!== null && (strlen($USE_FULLNAME) < 0 || strlen($USE_FULLNAME) > 255)){
+            if($USE_FULLNAME!== null && (strlen($USE_FULLNAME) <= 0 || strlen($USE_FULLNAME) > 255)){
                 throw new UserException('Error en el nombre del usuario');
             }
 
@@ -60,7 +60,7 @@
         }
 
         public function setUsername($USE_USERNAME){           
-            if($USE_USERNAME!== null && (strlen($USE_USERNAME) < 0 || strlen($USE_USERNAME) > 255)){
+            if($USE_USERNAME!== null && (strlen($USE_USERNAME) <= 0 || strlen($USE_USERNAME) > 255)){
                 throw new UserException('Error en el username del usuario'); //Mensaje debe cambiar
             }
 
@@ -68,7 +68,7 @@
         }
 
         public function setPassword($USE_PASSWORD){           
-            if($USE_PASSWORD!== null && (strlen($USE_PASSWORD) < 0 || strlen($USE_PASSWORD) > 255)){
+            if($USE_PASSWORD!== null && (strlen($USE_PASSWORD) <= 0 || strlen($USE_PASSWORD) > 255)){
                 throw new UserException('Error en la contraseña'); //Mensaje debe cambiar
             }
 
