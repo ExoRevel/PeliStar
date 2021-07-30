@@ -43,8 +43,8 @@
         }
 
         public function setDirectorBirthday($DIRECTOR_BIRTHDAY){           
-            if($DIRECTOR_BIRTHDAY!== null && date_format(date_create_from_format('d/m/Y H:i', $DIRECTOR_BIRTHDAY), 'd/m/Y H:i') != $DIRECTOR_BIRTHDAY){
-            //if($DIRECTOR_BIRTHDAY!== null && !is_string($DIRECTOR_BIRTHDAY)){
+            //if($DIRECTOR_BIRTHDAY!== null && date_format(date_create_from_format('d/m/Y H:i', $DIRECTOR_BIRTHDAY), 'd/m/Y H:i') != $DIRECTOR_BIRTHDAY){
+            if($DIRECTOR_BIRTHDAY!== null && !is_string($DIRECTOR_BIRTHDAY)){
                 throw new DirectorsException('Error en la fecha de nacimiento del actor');
             }
 
