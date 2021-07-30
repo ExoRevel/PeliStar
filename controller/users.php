@@ -41,9 +41,9 @@
             if(!($jsonData->USE_FULLNAME) || !($jsonData->USE_USERNAME) || !($jsonData->USE_PASSWORD)){
                 $messages = array();
     
-                (!($jsonData->USE_FULLNAME) ? $messages[] = 'Campo USE_FULLNAME no ingresado': false);
-                (!($jsonData->USE_USERNAME) ? $messages[] = 'Campo USE_USERNAME no ingresado': false);
-                (!($jsonData->USE_PASSWORD) ? $messages[] = 'Campo USE_PASSWORD no ingresado': false);
+                (!($jsonData->USE_FULLNAME) ? $messages[] = 'Nombre no ingresado ': false);
+                (!($jsonData->USE_USERNAME) ? $messages[] = 'Username no ingresado ': false);
+                (!($jsonData->USE_PASSWORD) ? $messages[] = 'Contraseña no ingresada ': false);
     
                 $response->sendParams(false, 400, $messages);
             }
