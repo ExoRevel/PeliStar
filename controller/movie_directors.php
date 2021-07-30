@@ -71,7 +71,7 @@
 
                 $returnData = array();
                 $returnData['rows_returned'] = $rowCount;
-                $returnData['movie_director'] = $lastmovie_directors;
+                //$returnData['movie_director'] = $lastmovie_directors;
 
                 $response->sendParams(true, 201, 'DIRECTOR AGREGADO CORRECTAMENTE', $returnData);
             }

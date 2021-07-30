@@ -9,9 +9,11 @@
         }
 
         public function insertar($movies_directors){
+            $DIRECTOR_ID = $movies_directors->getDirectorId();
+            $MOVIE_ID = $movies_directors->getMovieId();
             $query = $this->database->prepare('INSERT INTO MOVIES_DIRECTORS(DIRECTOR_ID, MOVIE_ID) VALUES (?, ?)');
-            $query->bindParam(1, $movies_directors->getDirectorId(), PDO::PARAM_STR);  
-            $query->bindParam(2, $movies_directors->getMovieId(), PDO::PARAM_STR);      
+            $query->bindParam(1, $DIRECTOR_ID, PDO::PARAM_STR);  
+            $query->bindParam(2, $MOVIE_ID, PDO::PARAM_STR);      
             $query->execute();
 
             $rowCount = $query->rowCount();
@@ -20,9 +22,11 @@
         }
 
         public function obtenerMovieDirectors($movies_directors){
+            $DIRECTOR_ID = $movies_directors->getDirectorId();
+            $MOVIE_ID = $movies_directors->getMovieId();
             $query = $this->database->prepare('SELECT * FROM movies_directors WHERE DIRECTOR_ID = ? AND MOVIE_ID = ?');
-            $query->bindParam(1, $movies_directors->getDirectorId(), PDO::PARAM_STR);  
-            $query->bindParam(2, $movies_directors->getMovieId(), PDO::PARAM_STR);      
+            $query->bindParam(1, $DIRECTOR_ID, PDO::PARAM_STR);  
+            $query->bindParam(2, $MOVIE_ID, PDO::PARAM_STR);      
             $query->execute();
             $MovieDirectorArray = array();
 
