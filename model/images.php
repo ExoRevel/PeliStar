@@ -101,7 +101,7 @@
         }
 
         public function setFileName($IMG_FILENAME){       
-            if($IMG_FILENAME!== null && (strlen($IMG_FILENAME) < 0 || strlen($IMG_FILENAME) > 30 || preg_match("/^[Aa-zA-Z0-9_-]+(.jpg|.gif|.png)$/", $IMG_FILENAME)!=1)){
+            if($IMG_FILENAME!== null && (strlen($IMG_FILENAME) < 0 || strlen($IMG_FILENAME) > 100 || preg_match("/^[Aa-zA-Z0-9_-]+(.jpg|.gif|.png)$/", $IMG_FILENAME)!=1)){
                 throw new ImageException('Error en IMG_FILENAME');
             }
 
