@@ -58,7 +58,7 @@
                 $rowCount = count($existingUser);
     
                 if($rowCount !== 0){
-                    $response->sendParams(false, 409, 'Usuario ya existe en la base de data'); //409: Conflicto
+                    $response->sendParams(false, 409, 'Usuario ya se encuentra registrado, use otro username'); //409: Conflicto
                 }
     
                 $USE_PASSWORD = password_hash($USE_PASSWORD, PASSWORD_DEFAULT);
