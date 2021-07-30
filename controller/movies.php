@@ -40,11 +40,11 @@
             if( !isset($jsonData->MOVIE_TITLE) || !isset($jsonData->MOVIE_DATE) || !isset($jsonData->MOVIE_TIME) || !isset($jsonData->MOVIE_SINOPSIS) || !isset($jsonData->MOVIE_CALIFICATION)){
                 $messages = array();
 
-                (!isset($jsonData->MOVIE_TITLE) ? $messages[] = 'MOVIE_TITLE NO INGRESADO': false);
-                (!isset($jsonData->MOVIE_DATE) ? $messages[] = 'Campo MOVIE_DATE no ingresado': false);
-                (!isset($jsonData->MOVIE_TIME) ? $messages[] = 'Campo MOVIE_TIME no ingresado': false);
-                (!isset($jsonData->MOVIE_SINOPSIS) ? $messages[] = 'Campo MOVIE_SINOPSIS no ingresado': false);
-                (!isset($jsonData->MOVIE_CALIFICATION) ? $messages[] = 'Campo MOVIE_CALIFICATION no ingresado': false);
+                (!isset($jsonData->MOVIE_TITLE) ? $messages[] = 'EL TITULO NO FUE INGRESADO': false);
+                (!isset($jsonData->MOVIE_DATE) ? $messages[] = 'LA FECHA DE ESTRENO NO FUE INGRESADA': false);
+                (!isset($jsonData->MOVIE_TIME) ? $messages[] = 'LA DURACION DE LA PELICULA NO FUE INGRESADA': false);
+                (!isset($jsonData->MOVIE_SINOPSIS) ? $messages[] = 'LA SINOPSIS DE LA PELICULA NO FUE INGRESADA': false);
+                (!isset($jsonData->MOVIE_CALIFICATION) ? $messages[] = 'LA CALIFICACIÓN DE LA PELICULA NO FUE INGRESADA': false);
 
                 $response->sendParams(false,400, $messages);
 
@@ -62,21 +62,21 @@
                 $rowCount = count($existingmovie);
 
                 if($rowCount !==0){
-                    $response->sendParams(false, 409, 'MOVIE ya existe en la base de data');
+                    $response->sendParams(false, 409, 'Esta pelicula ya se encuentra registrada');
                 }
                 
                 $movie = new Movies(null, $MOVIE_TITLE, $MOVIE_DATE, $MOVIE_TIME , $MOVIE_SINOPSIS , $MOVIE_CALIFICATION);
                 $rowCount = $movieDB->insertar($movie);
 
                 if($rowCount === 0){
-                    $response->sendParams(false, 404, 'Hubo un error al recuperar The Movie creado');
+                    $response->sendParams(false, 404, 'Hubo un error al recuperar la pelicula creada');
                 }
 
                 $returnData = array();
                 $returnData['rows_returned'] = $rowCount;
                 //$returnData['movie'] = $lastmovies;
 
-                $response->sendParams(true, 201, 'Movie insertado correctamente', $returnData);
+                $response->sendParams(true, 201, 'La pelicula fue insertada correctamente', $returnData);
             }
 
             catch(MoviesException $ex){
@@ -84,7 +84,7 @@
             }
             catch(PDOException $ex){
                 error_log("Database query error - {$ex}", 0);
-                $response->sendParams(false, 500, 'Error al insertar o craer new Movie');
+                $response->sendParams(false, 500, 'Error al insertar la pelicula');
             }
             break;
 
@@ -97,7 +97,7 @@
                     $rowCount = count($data);
         
                     if($rowCount === 0){
-                        $response->sendParams(false, 404, 'Hubo un error al recuperar The Movie ');
+                        $response->sendParams(false, 404, 'Hubo un error al recuperar la pelicula ');
                     }
                     $returnData = array();
                     $returnData['movies'] = $data;
@@ -119,7 +119,7 @@
                     $rowCount = count($data);
         
                     if($rowCount === 0){
-                        $response->sendParams(false, 404, 'Hubo un error al recuperar The Movies');
+                        $response->sendParams(false, 404, 'Hubo un error al recuperar la pelicula');
                     }
                     $returnData = array();
                     $returnData['movies'] = $data;

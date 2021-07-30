@@ -81,7 +81,7 @@
             }
             catch(PDOException $ex){
                 error_log("Database query error - {$ex}", 0);
-                $response->sendParams(false, 500, 'Error al insertar MOVIE_DIrectors');
+                $response->sendParams(false, 500, 'Error al registrar este director a la pelicula seleccionada');
             }
             break;
 
@@ -93,7 +93,7 @@
                         $rowCount = count($data);
                     
                         if($rowCount === 0){
-                            $response->sendParams(false, 404, 'Hubo un error al recuperar los Directores que participan en una pelicula');
+                            $response->sendParams(false, 404, 'Hubo un error al recuperar los Directores que participan en la pelicula');
                         }
                         $returnData = array();
                         $returnData['Directors'] = $data;
@@ -115,7 +115,7 @@
                         $rowCount = $movie_directors->eliminar($_GET['DIRECTOR_ID'],$_GET['MOVIE_ID']);
                         
                         if($rowCount === 0){
-                            $response->sendParams(false, 400, 'No se pudo eliminar');
+                            $response->sendParams(false, 400, 'No se pudo eliminar el director');
                         }
             
                         $response->sendParams(true, 200, 'Eliminado correctamente correctamente', null);

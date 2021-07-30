@@ -56,7 +56,7 @@
                 $rowCount = count($existingdirector);
 
                 if($rowCount !==0){
-                    $response->sendParams(false, 409, 'DIRECTOR ya existe en la base de data');
+                    $response->sendParams(false, 409, 'Este Director ya se encuentra registrado');
                 }
                 
                 $director = new Directors(null, $DIRECTOR_NAME, $DIRECTOR_BIRTHDAY);
@@ -70,7 +70,7 @@
                 $returnData['rows_returned'] = $rowCount;
                 //$returnData['directors'] = $lastdirectors;
 
-                $response->sendParams(true, 201, 'DIRECTOR insertado correctamente', $returnData);
+                $response->sendParams(true, 201, 'Director insertado correctamente', $returnData);
 
             }
 
@@ -92,7 +92,7 @@
                         $rowCount = count($data);
             
                         if($rowCount === 0){
-                            $response->sendParams(false, 404, 'Hubo un error al recuperar el Actor');
+                            $response->sendParams(false, 404, 'Hubo un error al recuperar el Director');
                         }
                         $returnData = array();
                         $returnData['directors'] = $data;

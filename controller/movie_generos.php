@@ -80,7 +80,7 @@
             }
             catch(PDOException $ex){
                 error_log("Database query error - {$ex}", 0);
-                $response->sendParams(false, 500, 'Error al insertar MOVIE_GENERO');
+                $response->sendParams(false, 500, 'Error al registrar el este genero en la pelicula seleccionada');
             }
             break;
 
@@ -92,7 +92,7 @@
                         $rowCount = count($data);
                     
                         if($rowCount === 0){
-                            $response->sendParams(false, 404, 'Hubo un error al recuperar los Movie_Generos que participan en una pelicula');
+                            $response->sendParams(false, 404, 'Hubo un error al recuperar los Generos que participan en una pelicula');
                         }
                         $returnData = array();
                         $returnData['Generos'] = $data;
@@ -114,10 +114,10 @@
                         $rowCount = $movie_Generos->eliminar($_GET['GENERO_ID'],$_GET['MOVIE_ID']);
                         
                         if($rowCount === 0){
-                            $response->sendParams(false, 400, 'No se pudo eliminar');
+                            $response->sendParams(false, 400, 'No se pudo eliminar el genero en la pelicula seleccionada');
                         }
             
-                        $response->sendParams(true, 200, 'Eliminado correctamente correctamente', null);
+                        $response->sendParams(true, 200, 'Genero Eliminado correctamente de la pelicula seleccionada', null);
                     }
                     catch(PDOException $ex){
                         error_log("Database query error - {$ex}", 0);

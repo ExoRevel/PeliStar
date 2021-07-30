@@ -22,7 +22,7 @@
 
         public function setDirectorId($DIRECTOR_ID){
             if(($DIRECTOR_ID!==null) && (!is_numeric($DIRECTOR_ID) || $DIRECTOR_ID<=0 || $DIRECTOR_ID > 9223372036854775807)){
-                throw new Movies_DirectorsException('Error en DIRECTOR_ID');
+                throw new Movies_DirectorsException('Error en los datos del Director');
             }
 
             $this->DIRECTOR_ID = $DIRECTOR_ID;
@@ -30,7 +30,7 @@
 
         public function setMovieId($MOVIE_ID){           
             if(($MOVIE_ID!==null) && (!is_numeric($MOVIE_ID) || $MOVIE_ID<=0 || $MOVIE_ID > 9223372036854775807)){
-                throw new Movies_DirectorsException('Error en MOVIE_ID');
+                throw new Movies_DirectorsException('Error en los datos de la pelicula');
             }
 
             $this->MOVIE_ID = $MOVIE_ID;

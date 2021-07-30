@@ -53,7 +53,7 @@
 
         public function setFullname($USE_FULLNAME){           
             if($USE_FULLNAME!== null && (strlen($USE_FULLNAME) < 0 || strlen($USE_FULLNAME) > 255)){
-                throw new UserException('Error en USE_FULLNAME');
+                throw new UserException('Error en el nombre del usuario');
             }
 
             $this->USE_FULLNAME = $USE_FULLNAME;
@@ -61,7 +61,7 @@
 
         public function setUsername($USE_USERNAME){           
             if($USE_USERNAME!== null && (strlen($USE_USERNAME) < 0 || strlen($USE_USERNAME) > 255)){
-                throw new UserException('Error en USE_USERNAME'); //Mensaje debe cambiar
+                throw new UserException('Error en el username del usuario'); //Mensaje debe cambiar
             }
 
             $this->USE_USERNAME = $USE_USERNAME;
@@ -69,7 +69,7 @@
 
         public function setPassword($USE_PASSWORD){           
             if($USE_PASSWORD!== null && (strlen($USE_PASSWORD) < 0 || strlen($USE_PASSWORD) > 255)){
-                throw new UserException('Error en USE_PASSWORD'); //Mensaje debe cambiar
+                throw new UserException('Error en la contraseña'); //Mensaje debe cambiar
             }
 
             $this->USE_PASSWORD = $USE_PASSWORD;

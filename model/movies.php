@@ -53,7 +53,7 @@
 
         public function setTitle($MOVIE_TITLE){           
             if(($MOVIE_TITLE!==null) && (strlen($MOVIE_TITLE) < 0 || strlen($MOVIE_TITLE) > 255)){
-                throw new MoviesException('Error en MOVIE_TITLE');
+                throw new MoviesException('Error en el titulo');
             }
 
             $this->MOVIE_TITLE = $MOVIE_TITLE;
@@ -61,7 +61,7 @@
 
         public function setDate($MOVIE_DATE){           
             if($MOVIE_DATE!==null && !is_string($MOVIE_DATE)){
-                throw new MoviesException('Error en MOVIE_DATE');
+                throw new MoviesException('Error en la fecha de estreno ');
             }
 
             $this->MOVIE_DATE = $MOVIE_DATE;
@@ -69,7 +69,7 @@
 
         public function setTime($MOVIE_TIME){           
             if($MOVIE_TIME !== null &&(strlen($MOVIE_TIME) < 0 || strlen($MOVIE_TIME) > 45)){
-                throw new MoviesException('Error en MOVIE_TIME');
+                throw new MoviesException('Error en la duración');
             }
 
             $this->MOVIE_TIME = $MOVIE_TIME;
@@ -77,7 +77,7 @@
 
         public function setSinopsis($MOVIE_SINOPSIS){           
             if($MOVIE_SINOPSIS!== null && !is_string($MOVIE_SINOPSIS)){
-                throw new MoviesException('Error en MOVIE_SINOPSIS');
+                throw new MoviesException('Error en la sinopsis');
             }
 
             $this->MOVIE_SINOPSIS = $MOVIE_SINOPSIS;
@@ -85,7 +85,7 @@
 
         public function setCalification($MOVIE_CALIFICATION){           
             if($MOVIE_CALIFICATION!== null && (!is_numeric($MOVIE_CALIFICATION) || $MOVIE_CALIFICATION<=0 || $MOVIE_CALIFICATION > 10)){
-                throw new MoviesException('Error en MOVIE_CALIFICATION');
+                throw new MoviesException('Error en la calificación');
             }
 
             $this->MOVIE_CALIFICATION = $MOVIE_CALIFICATION;

@@ -30,7 +30,7 @@
 
         public function setGeneroName($GENERO_NAME){           
             if(($GENERO_NAME!==null) && (strlen($GENERO_NAME) < 0 || strlen($GENERO_NAME) > 50)){
-                throw new GenerosException('Error en GENERO_NAME');
+                throw new GenerosException('Error en el nombre del Genero');
             }
 
             $this->GENERO_NAME = $GENERO_NAME;

@@ -40,8 +40,8 @@
             if( !isset($jsonData->ACTOR_FULLNAME) || !isset($jsonData->ACTOR_BIRTHDAY)){
                 $messages = array();
 
-                (!isset($jsonData->ACTOR_FULLNAME) ? $messages[] = 'ACTOR FULLNAME NO INGRESADO': false);
-                (!isset($jsonData->ACTOR_BIRTHDAY) ? $messages[] = 'Campo ACTOR_BIRTHDAY no ingresado': false);
+                (!isset($jsonData->ACTOR_FULLNAME) ? $messages[] = 'EL NOMBRE DEL ACTOR NO FUE INGRESADO': false);
+                (!isset($jsonData->ACTOR_BIRTHDAY) ? $messages[] = 'LA FECHA DE NACIMIENTO DEL ACTOR NO FUE INGRESADA': false);
 
                 $response->sendParams(false,400, $messages);
 
@@ -70,7 +70,7 @@
                 $returnData['rows_returned'] = $rowCount;
                 //$returnData['actors'] = $lastactors;
 
-                $response->sendParams(true, 201, 'ACTOR insertado correctamente', $returnData);
+                $response->sendParams(true, 201, 'El actor fue insertado correctamente', $returnData);
             }
 
             catch(ActorsException $ex){
@@ -78,7 +78,7 @@
             }
             catch(PDOException $ex){
                 error_log("Database query error - {$ex}", 0);
-                $response->sendParams(false, 500, 'Error al insertar crear la cuenta de Actor');
+                $response->sendParams(false, 500, 'Error al crear el Actor');
             }
             break;
 
@@ -112,7 +112,7 @@
                         $rowCount = count($data);
             
                         if($rowCount === 0){
-                            $response->sendParams(false, 404, 'Hubo un error al recuperar los ACTORES');
+                            $response->sendParams(false, 404, 'Hubo un error al recuperar los Actores');
                         }
                         $returnData = array();
                         $returnData['actors'] = $data;

@@ -53,7 +53,7 @@
 
         public function setUseId($USE_ID){           
             if(($USE_ID!==null) && (!is_numeric($USE_ID) || $USE_ID<=0 || $USE_ID > 9223372036854775807)){
-                throw new SessionException('Error en USE_ID');
+                throw new SessionException('Error en los datos del usuario');
             }
 
             $this->USE_ID = $USE_ID;

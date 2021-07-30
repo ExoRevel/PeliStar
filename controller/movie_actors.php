@@ -59,7 +59,7 @@
                 $rowCount = $movie_actorsDB->obtenerMovieActors($movie_actor);
                 $rowCount = count($rowCount);
                 if($rowCount !==0){
-                    $response->sendParams(false, 409, 'ESTE ACTOR YA SE ENCUENTRA REGISTRADO EN LA PELICULA SELECCIONADA PELICULA');
+                    $response->sendParams(false, 409, 'ESTE ACTOR YA SE ENCUENTRA REGISTRADO EN LA PELICULA SELECCIONADA');
                 }
                 
                 $rowCount = $movie_actorsDB->insertar($movie_actor);
@@ -72,7 +72,7 @@
                 $returnData['rows_returned'] = $rowCount;
                 //$returnData['movie_actors'] = $lastmovie_actors;
 
-                $response->sendParams(true, 201, 'MOVIE_ACTOR insertado correctamente', $returnData);
+                $response->sendParams(true, 201, 'El actor fue registrado correctamente en la pelicula', $returnData);
 
             }
 
@@ -81,7 +81,7 @@
             }
             catch(PDOException $ex){
                 error_log("Database query error - {$ex}", 0);
-                $response->sendParams(false, 500, 'Error al insertar MOVIE_ACTOR');
+                $response->sendParams(false, 500, 'Error al registrar el actor a la pelicula seleccionada');
             }
             break;
         case 'GET':
@@ -113,10 +113,10 @@
                 $rowCount = $movie_Actors->eliminar($_GET['ACTOR_ID'],$_GET['MOVIE_ID']);
                 
                 if($rowCount === 0){
-                    $response->sendParams(false, 400, 'No se pudo eliminar');
+                    $response->sendParams(false, 400, 'No se pudo eliminar el actor de la pelicula seleccionada');
                 }
     
-                $response->sendParams(true, 200, 'Eliminado correctamente correctamente', null);
+                $response->sendParams(true, 200, 'Actor fue Eliminado correctamente de la pelicula seleccionada', null);
             }
             catch(PDOException $ex){
                 error_log("Database query error - {$ex}", 0);

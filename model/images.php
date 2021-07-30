@@ -94,7 +94,7 @@
 
         public function setTitle($IMG_TITLE){           
             if($IMG_TITLE!== null && (strlen($IMG_TITLE) < 0 || strlen($IMG_TITLE) > 255)){
-                throw new ImageException('Error en IMG_TITLE');
+                throw new ImageException('Error en el titulo de la imagen');
             }
 
             $this->IMG_TITLE = $IMG_TITLE;
@@ -102,7 +102,7 @@
 
         public function setFileName($IMG_FILENAME){       
             if($IMG_FILENAME!== null && (strlen($IMG_FILENAME) < 0 || strlen($IMG_FILENAME) > 255 || preg_match("/^[Aa-zA-Z0-9_-]+(.jpg|.gif|.png)$/", $IMG_FILENAME)!=1)){
-                throw new ImageException('Error en IMG_FILENAME');
+                throw new ImageException('Error en el nombre del archivo');
             }
 
             $this->IMG_FILENAME = $IMG_FILENAME;
@@ -110,7 +110,7 @@
 
         public function setMimeType($IMG_MIMETYPE){           
             if($IMG_MIMETYPE!== null && (strlen($IMG_MIMETYPE) < 0 || strlen($IMG_MIMETYPE) > 255)){
-                throw new ImageException('Error en IMG_MIMETYPE');
+                throw new ImageException('Error en el tipo del archivo');
             }
 
             $this->IMG_MIMETYPE = $IMG_MIMETYPE;

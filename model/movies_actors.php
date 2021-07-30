@@ -22,7 +22,7 @@
 
         public function setMovieId($MOVIE_ID){
             if(($MOVIE_ID!==null) && (!is_numeric($MOVIE_ID) || $MOVIE_ID<=0 || $MOVIE_ID > 9223372036854775807)){
-                throw new Movies_ActorsException('Error en MOVIE_ID');
+                throw new Movies_ActorsException('Error en los datos de la pelicula');
             }
 
             $this->MOVIE_ID = $MOVIE_ID;
@@ -30,7 +30,7 @@
 
         public function setActorId($ACTOR_ID){           
             if(($ACTOR_ID!==null) && (!is_numeric($ACTOR_ID) || $ACTOR_ID<=0 || $ACTOR_ID > 9223372036854775807)){
-                throw new Movies_ActorsException('Error en ACTOR_ID');
+                throw new Movies_ActorsException('Error en los datos del actor');
             }
 
             $this->ACTOR_ID = $ACTOR_ID;
