@@ -58,7 +58,7 @@
                 $movie_director = new Movies_Directors($DIRECTOR_ID, $MOVIE_ID);
 
                 $rowCount = $movie_directorDB->obtenerMovieDirectors($movie_director);
-
+                $rowCount = count($rowCount);
                 if($rowCount !==0){
                     $response->sendParams(false, 409, 'ESTE DIRECTOR YA SE ENCUENTRA REGISTRADO');
                 }
