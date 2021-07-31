@@ -69,9 +69,14 @@
         }
 
 
-
-
-
-
+        public function actualizarNamePorId($NAME,$GENERO_ID)
+        {
+            $query = $this->database->prepare('UPDATE Generos SET  GENERO_NAME = ? WHERE GENERO_ID = ?');
+            $query->bindParam(1, $NAME, PDO::PARAM_STR);
+            $query->bindParam(2, $GENERO_ID, PDO::PARAM_STR);
+            $query ->execute();
+            $rowCount = $query->rowCount();
+            return $rowCount;
+        }
 
     }

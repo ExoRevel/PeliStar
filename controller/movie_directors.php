@@ -39,11 +39,11 @@
                 $response->sendParams(false, 400, 'Body no es Válido (JSON)');
             }
 
-            if( !isset($jsonData->DIRECTOR_ID) || !isset($jsonData->MOVIE_ID)){
+            if( !($jsonData->DIRECTOR_ID) || !($jsonData->MOVIE_ID)){
                 $messages = array();
 
-                (!isset($jsonData->DIRECTOR_ID) ? $messages[] = 'DIRECTOR_ID no ingresado': false);
-                (!isset($jsonData->MOVIE_ID) ? $messages[] = 'Campo MOVIE_ID no ingresado': false);
+                (!($jsonData->DIRECTOR_ID) ? $messages[] = 'DIRECTOR_ID no ingresado': false);
+                (!($jsonData->MOVIE_ID) ? $messages[] = 'Campo MOVIE_ID no ingresado': false);
 
                 $response->sendParams(false,400, $messages);
 

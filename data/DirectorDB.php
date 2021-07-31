@@ -70,9 +70,26 @@
             return $rowCount;
         }
 
+        public function actualizarFullnamePorId($DIRECTOR_NAME,$DIRECTOR_ID)
+        {
+            $query = $this->database->prepare('UPDATE Directors SET  DIRECTOR_NAME = ? WHERE DIRECTOR_ID = ?');
+            $query->bindParam(1, $DIRECTOR_NAME, PDO::PARAM_STR);
+            $query->bindParam(2, $DIRECTOR_ID, PDO::PARAM_STR);
+            $query ->execute();
+            $rowCount = $query->rowCount();
+            return $rowCount;
+        }
 
-
-
+        public function actualizarBirthdayPorId($director){
+            $BIRTHDAY = $director->getDirectorBirthday();
+            $DIRECTOR_ID = $director->getDirectorid();
+            $query = $this->database->prepare('UPDATE Directors SET  DIRECTOR_BIRTHDAY = ? WHERE DIRECTOR_ID = ?');
+            $query->bindParam(1, $BIRTHDAY, PDO::PARAM_STR);
+            $query->bindParam(2, $DIRECTOR_ID, PDO::PARAM_STR);
+            $query ->execute();
+            $rowCount = $query->rowCount();
+            return $rowCount;
+        }
 
     }
 

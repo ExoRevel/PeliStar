@@ -37,11 +37,13 @@ RewriteRule ^actors/update$ controller/actors.php [L]
 RewriteRule ^directors$ controller/directors.php [L] 
 RewriteRule ^directors/([0-9]+)$ controller/directors.php?DIRECTOR_ID=$1 [L] 
 #RewriteRule ^directors/$ controller/directors.php [L] 
+RewriteRule ^directors/update$ controller/directors.php [L]
 
 #Generos (Generos)
 RewriteRule ^generos$ controller/generos.php [L] #Maneja peticiones de creacion de Actores
 RewriteRule ^generos/([0-9]+)$ controller/generos.php?GENERO_ID=$1 [L] #Maneja peticiones GENERO_ID
 #RewriteRule ^generos/$ controller/generos.php [L] 
+RewriteRule ^generos/update$ controller/generos.php [L] 
 
 #Movies (Peliculas)
 RewriteRule ^movies$ controller/movies.php [L] #Maneja peticiones de creacion de Actores

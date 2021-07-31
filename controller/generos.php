@@ -18,7 +18,7 @@
     header('Access-Control-Allow-Origin: *');
     //Opciones de preflight (CORS)
     if($_SERVER['REQUEST_METHOD'] === 'OPTIONS'){
-        header('Access-Control-Allow-Methods: POST, OPTIONS, GET');
+        header('Access-Control-Allow-Methods: POST, OPTIONS, GET, PATCH');
         header('Access-Control-Allow-Origin: *');
         header('Access-Control-Max-Age: 86400');
         header('Access-Control-Allow-Headers: Content-Type, Authorization');
@@ -39,10 +39,10 @@
                 $response->sendParams(false, 400, 'Body no es Válido (JSON)');
             }
 
-            if( !isset($jsonData->GENERO_NAME)){
+            if( !($jsonData->GENERO_NAME)){
                 $messages = array();
 
-                (!isset($jsonData->GENERO_NAME) ? $messages[] = 'Genero_Name no ingresado': false);
+                (!($jsonData->GENERO_NAME) ? $messages[] = 'Genero_Name no ingresado': false);
 
                 $response->sendParams(false,400, $messages);
 
@@ -127,6 +127,55 @@
                         error_log("Database query error - {$ex}", 0);
                         $response->sendParams(false, 500);
                     }
+                }
+                break;
+            case 'PATCH':
+                if($_SERVER['CONTENT_TYPE']!== 'application/json'){
+                    $response->sendParams(false, 400, 'Content Type header no Válido');
+                }
+                
+                $rawPostData = file_get_contents('php://input');
+    
+                if(!$jsonData = json_decode($rawPostData)){
+                    $response->sendParams(false, 400, 'Body no es Válido (JSON)');
+                }
+    
+                $GENERO_NAME = trim($jsonData->GENERO_NAME);
+                $GENERO_ID = $jsonData->GENERO_ID;
+                try{
+                    $generoDB = new GeneroDB($database);
+                    $existinggenero = $generoDB ->obtenerPorId($GENERO_ID);
+                    $rowCount = count($existinggenero);
+    
+                    if($rowCount === 0){
+                        $response->sendParams(false, 409, 'Este Genero no existe en la base de data');
+                    }
+
+                    if($GENERO_NAME!=null)
+                    {
+                        $rowCount = $generoDB->actualizarNamePorId($GENERO_NAME, $GENERO_ID);
+                    }
+    
+                    if($rowCount === 0){
+                        $response->sendParams(false, 404, 'ERROR! Ingrese un nombre diferente al registrado, o deje la casilla en blanco');
+                    }
+
+                    if( !($jsonData->GENERO_NAME)){
+                        $messages = array();
+                        (!($jsonData->GENERO_NAME) ? $messages[] = 'Genero_Name no ingresado': false);
+                        $response->sendParams(false,400, $messages);
+                    }
+                    $returnData = array();
+                    $response->sendParams(true, 201, 'Los datos fueron modificados correctamente', $returnData);
+    
+                }
+    
+                catch(GenerosException $ex){
+                    $response->sendParams(false, 400, $ex->getMessage());
+                }
+                catch(PDOException $ex){
+                    error_log("Database query error - {$ex}", 0);
+                    $response->sendParams(false, 500, 'Error al insertar GENERO ');
                 }
                 break;
             default: 
