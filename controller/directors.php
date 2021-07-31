@@ -172,7 +172,7 @@
                         $response->sendParams(false, 404, 'ERROR! Ingrese un fecha diferente a la registrada, o deje la casilla en blanco');
                     }
 
-                    if( !($jsonData->DIRECTOR_NAME) || !($jsonData->DIRECTOR_BIRTHDAY)){
+                    if( !($jsonData->DIRECTOR_NAME) && !($jsonData->DIRECTOR_BIRTHDAY)){
                         $messages = array();
         
                         (!($jsonData->DIRECTOR_NAME) ? $messages[] = 'EL nombre no fue ingresado': false);

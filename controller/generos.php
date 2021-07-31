@@ -157,12 +157,12 @@
                     }
     
                     if($rowCount === 0){
-                        $response->sendParams(false, 404, 'ERROR! Ingrese un nombre diferente al registrado, o deje la casilla en blanco');
+                        $response->sendParams(false, 404, 'ERROR! Ingrese un nombre diferente al registrado');
                     }
 
                     if( !($jsonData->GENERO_NAME)){
                         $messages = array();
-                        (!($jsonData->GENERO_NAME) ? $messages[] = 'Genero_Name no ingresado': false);
+                        (!($jsonData->GENERO_NAME) ? $messages[] = 'El nuevo nombre no fue ingresado': false);
                         $response->sendParams(false,400, $messages);
                     }
                     $returnData = array();
@@ -175,7 +175,7 @@
                 }
                 catch(PDOException $ex){
                     error_log("Database query error - {$ex}", 0);
-                    $response->sendParams(false, 500, 'Error al insertar GENERO ');
+                    $response->sendParams(false, 500, 'Este nombre de Genero ya se encuentra registrado ');
                 }
                 break;
             default: 
