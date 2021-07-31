@@ -74,7 +74,54 @@
             return $rowCount;
         }
 
+        public function actualizarTituloPorId($MOVIE_TITLE,$MOVIE_ID)
+        {
+            $query = $this->database->prepare('UPDATE MOVIES SET  MOVIE_TITLE = ? WHERE MOVIE_ID = ?');
+            $query->bindParam(1, $MOVIE_TITLE, PDO::PARAM_STR);
+            $query->bindParam(2, $MOVIE_ID, PDO::PARAM_STR);
+            $query ->execute();
+            $rowCount = $query->rowCount();
+            return $rowCount;
+        }
 
-    
+        public function actualizarFechaEstrenoPorId($MOVIE_DATE,$MOVIE_ID)
+        {
+            $query = $this->database->prepare('UPDATE MOVIES SET  MOVIE_DATE = ? WHERE MOVIE_ID = ?');
+            $query->bindParam(1, $MOVIE_DATE, PDO::PARAM_STR);
+            $query->bindParam(2, $MOVIE_ID, PDO::PARAM_STR);
+            $query ->execute();
+            $rowCount = $query->rowCount();
+            return $rowCount;
+        }
+
+        public function actualizarDuracionPorId($MOVIE_TIME,$MOVIE_ID)
+        {
+            $query = $this->database->prepare('UPDATE MOVIES SET  MOVIE_TIME = ? WHERE MOVIE_ID = ?');
+            $query->bindParam(1, $MOVIE_TIME, PDO::PARAM_STR);
+            $query->bindParam(2, $MOVIE_ID, PDO::PARAM_STR);
+            $query ->execute();
+            $rowCount = $query->rowCount();
+            return $rowCount;
+        }
+
+        public function actualizarSinopsisPorId($MOVIE_SINOPSIS,$MOVIE_ID)
+        {
+            $query = $this->database->prepare('UPDATE MOVIES SET  MOVIE_SINOPSIS = ? WHERE MOVIE_ID = ?');
+            $query->bindParam(1, $MOVIE_SINOPSIS, PDO::PARAM_STR);
+            $query->bindParam(2, $MOVIE_ID, PDO::PARAM_STR);
+            $query ->execute();
+            $rowCount = $query->rowCount();
+            return $rowCount;
+        }
+        
+        public function actualizarCalifacionPorId($MOVIE_CALIFICATION,$MOVIE_ID)
+        {
+            $query = $this->database->prepare('UPDATE MOVIES SET  MOVIE_CALIFICATION = ? WHERE MOVIE_ID = ?');
+            $query->bindParam(1, $MOVIE_CALIFICATION, PDO::PARAM_STR);
+            $query->bindParam(2, $MOVIE_ID, PDO::PARAM_STR);
+            $query ->execute();
+            $rowCount = $query->rowCount();
+            return $rowCount;
+        }
     
     }

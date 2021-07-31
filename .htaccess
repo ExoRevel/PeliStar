@@ -49,6 +49,7 @@ RewriteRule ^generos/update$ controller/generos.php [L]
 RewriteRule ^movies$ controller/movies.php [L] #Maneja peticiones de creacion de Actores
 RewriteRule ^movies/([0-9]+)$ controller/movies.php?MOVIE_ID=$1 [L] #Maneja peticiones MOVIE_ID
 #RewriteRule ^movies/$ controller/movies.php [L]
+RewriteRule ^movies/update$ controller/movies.php [L]
 
 #Fav_Movies (Peliculas favoritas por usuario)
 RewriteRule ^fav_movies$ controller/fav_movies.php [L] 
