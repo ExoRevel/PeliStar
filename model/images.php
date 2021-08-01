@@ -170,4 +170,15 @@
 
             return $image;
         }
+
+        public function returnImageAsArray2(){
+            $image = array();
+            $image['IMG_ID'] = $this->getId();
+            $image['IMG_TITLE'] = $this->getTitle();
+            $image['IMG_FILENAME'] = $this->getFileName();
+            $image['IMG_MIMETYPE'] = $this->getMimeType();
+            $image['MOVIE_ID'] = $this->getMovieId();
+
+            return $image;
+        }
     }

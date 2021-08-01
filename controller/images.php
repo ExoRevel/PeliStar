@@ -26,32 +26,35 @@
 
     //Authorization
     //$user = checkAuthStatusAndReturnUser($database);  
-    if($_GET['MOVIE_ID'])
-    {
-        $MOVIE_ID = $_GET['MOVIE_ID'];
-        try{
-            $imageDB = new ImageDB($database);           
-            $image = $imageDB->listarPorMovieId($MOVIE_ID);
-            $rowCount = count($image);
+    if(array_key_exists('M_ID', $_GET))
+    {    
+        if($_GET['M_ID'])
+        {
+            $MOVIE_ID = $_GET['M_ID'];
+            try{
+                $imageDB = new ImageDB($database);           
+                $image = $imageDB->listarPorMovieId($MOVIE_ID);
+                $rowCount = count($image);
 
-            if($rowCount === 0){
-                $response->sendParams(false, 404, 'Imagenes no encontradas');
+                if($rowCount === 0){
+                    $response->sendParams(false, 404, 'Imagenes no encontradas');
+                }
+
+                $returnData = array();
+                $returnData['rows_returned'] = $rowCount;
+                $returnData['images'] = $image;
+
+                $response->sendParams(true, 200, 'Imagenes recuperados correctamente', $returnData, true);
             }
-
-            $returnData = array();
-            $returnData['rows_returned'] = $rowCount;
-            $returnData['images'] = $image;
-
-            $response->sendParams(true, 200, 'Imagenes recuperados correctamente', $returnData, true);
+            catch(ImageException $ex){
+                $response->sendParams(false, 400, $ex->getMessage());
+            }
+            catch(PDOException $ex){
+                error_log("Database query error - {$ex}", 0);
+                $response->sendParams(false, 500, 'Error al intentar obtener las imagenes');
+            }
         }
-        catch(ImageException $ex){
-            $response->sendParams(false, 400, $ex->getMessage());
-        }
-        catch(PDOException $ex){
-            error_log("Database query error - {$ex}", 0);
-            $response->sendParams(false, 500, 'Error al intentar obtener las imagenes');
-        }
-    } 
+    }
 
     if(array_key_exists('MOVIE_ID', $_GET) && array_key_exists('IMG_ID', $_GET)){       
         $IMG_ID = $_GET['IMG_ID'];

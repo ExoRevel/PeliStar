@@ -50,9 +50,9 @@
             $imageArray = array();
 
             while($row = $query->fetch(PDO::FETCH_ASSOC)){
-               $image = new Images($row['IMG_ID'], $row['MOVIE_ID'], $row['IMG_TITLE'], $row['IMG_FILENAME'], $row['IMG_MIMETYPE']);          
+               $image = new Images($row['IMG_ID'], $row['IMG_TITLE'], $row['IMG_FILENAME'], $row['IMG_MIMETYPE'],$row['MOVIE_ID']);          
 
-               $imageArray[] = $image->returnImageAsArray();
+               $imageArray[] = $image->returnImageAsArray2();
             } 
             
             return $imageArray;
