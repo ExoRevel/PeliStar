@@ -26,7 +26,7 @@
 
     //Authorization
     //$user = checkAuthStatusAndReturnUser($database);  
-    if(array_key_exists('MOVIE_ID', $_GET))
+    if($_GET['MOVIE_ID'])
     {
         $MOVIE_ID = $_GET['MOVIE_ID'];
         try{
@@ -35,21 +35,21 @@
             $rowCount = count($image);
 
             if($rowCount === 0){
-                $response->sendParams(false, 404, 'Imagen no encontrada');
+                $response->sendParams(false, 404, 'Imagenes no encontradas');
             }
 
             $returnData = array();
             $returnData['rows_returned'] = $rowCount;
             $returnData['images'] = $image;
 
-            $response->sendParams(true, 200, 'Imagen recuperados correctamente', $returnData, true);
+            $response->sendParams(true, 200, 'Imagenes recuperados correctamente', $returnData, true);
         }
         catch(ImageException $ex){
             $response->sendParams(false, 400, $ex->getMessage());
         }
         catch(PDOException $ex){
             error_log("Database query error - {$ex}", 0);
-            $response->sendParams(false, 500, 'Error al intentar obtener las peliculas');
+            $response->sendParams(false, 500, 'Error al intentar obtener las imagenes');
         }
     } 
 
