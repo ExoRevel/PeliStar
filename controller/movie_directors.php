@@ -115,7 +115,7 @@
                         $rowCount = $movie_directors->eliminar($_GET['DIRECTOR_ID'],$_GET['MOVIE_ID']);
                         
                         if($rowCount === 0){
-                            $response->sendParams(false, 400, 'No se pudo eliminar el director');
+                            $response->sendParams(false, 400, 'ESTE DIRECTOR NO SE ENCUENTRA REGISTRADO EN LA PELICULA');
                         }
             
                         $response->sendParams(true, 200, 'Eliminado correctamente correctamente', null);

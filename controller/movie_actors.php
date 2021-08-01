@@ -111,9 +111,9 @@
             try{
                 $movie_Actors = new Movie_actorsDB($database);
                 $rowCount = $movie_Actors->eliminar($_GET['ACTOR_ID'],$_GET['MOVIE_ID']);
-                
+
                 if($rowCount === 0){
-                    $response->sendParams(false, 400, 'No se pudo eliminar el actor de la pelicula seleccionada');
+                    $response->sendParams(false, 400, 'ESTE ACTOR NO SE ENCUENTRA REGISTRADO EN LA PELICULA');
                 }
     
                 $response->sendParams(true, 200, 'Actor fue Eliminado correctamente de la pelicula seleccionada', null);

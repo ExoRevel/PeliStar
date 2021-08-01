@@ -114,7 +114,7 @@
                         $rowCount = $movie_Generos->eliminar($_GET['GENERO_ID'],$_GET['MOVIE_ID']);
                         
                         if($rowCount === 0){
-                            $response->sendParams(false, 400, 'No se pudo eliminar el genero en la pelicula seleccionada');
+                            $response->sendParams(false, 400, 'ESTE GENERO NO SE ENCUENTRA REGISTRADO EN LA PELICULA');
                         }
             
                         $response->sendParams(true, 200, 'Genero Eliminado correctamente de la pelicula seleccionada', null);
