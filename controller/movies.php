@@ -3,7 +3,7 @@
     require_once('../config/database.php');   
     require_once('../data/MovieDB.php');
     require_once('../util/response.php');
-
+    require_once('../util/auth.php'); 
     //Respuesta que se enviará al cliente    
     $response = new Response();
 
@@ -23,7 +23,8 @@
         header('Access-Control-Max-Age: 86400');
         $response->sendParams(true, 200);
     }
-
+    //Authorization
+    $user = checkAuthStatusAndReturnUser($database);  
     switch($_SERVER['REQUEST_METHOD']){
         
         case 'PATCH':
@@ -53,6 +54,7 @@
                 }
                 
                 $movie = new Movies($MOVIE_ID, $MOVIE_TITLE, $MOVIE_DATE, $MOVIE_TIME , $MOVIE_SINOPSIS , $MOVIE_CALIFICATION);
+
                 
                 if($MOVIE_TITLE!=null)
                 {

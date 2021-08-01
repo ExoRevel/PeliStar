@@ -3,7 +3,7 @@
     require_once('../config/database.php');   
     require_once('../data/GeneroDB.php');
     require_once('../util/response.php');
-
+    require_once('../util/auth.php'); 
     //Respuesta que se enviará al cliente    
     $response = new Response();
 
@@ -24,8 +24,9 @@
         header('Access-Control-Allow-Headers: Content-Type, Authorization');
         $response->sendParams(true, 200);
     }
-
-
+    
+    //Authorization
+    $user = checkAuthStatusAndReturnUser($database);  
     switch($_SERVER['REQUEST_METHOD']){
         
         case 'POST':

@@ -4,7 +4,7 @@
     require_once('../data/ImageDB.php');   
     require_once('../data/MovieDB.php'); 
     require_once('../util/response.php'); //Auth trae response
-
+    require_once('../util/auth.php'); 
     //Respuesta que se enviará al cliente    
     $response = new Response();
 
@@ -24,12 +24,13 @@
         $response->sendParams(true, 200);
     }
 
-    //Authorization
-    //$user = checkAuthStatusAndReturnUser($database);  
+    
     if(array_key_exists('M_ID', $_GET))
     {    
         if($_GET['M_ID'])
         {
+            //Authorization
+            $user = checkAuthStatusAndReturnUser($database);  
             $MOVIE_ID = $_GET['M_ID'];
             try{
                 $imageDB = new ImageDB($database);           
@@ -71,6 +72,8 @@
         }
 
         if(array_key_exists('IMG_ATTR', $_GET)){
+            //Authorization
+            $user = checkAuthStatusAndReturnUser($database);  
            
             $IMG_ATTR = $_GET['IMG_ATTR'];
         
@@ -193,7 +196,7 @@
         }
         else{
             if($_SERVER['REQUEST_METHOD'] === 'GET'){
-
+                
                 try{
                     $imageDB = new ImageDB($database);           
                     $image = $imageDB->obtenerPorId($IMG_ID, $MOVIE_ID);
@@ -229,7 +232,8 @@
                 }
             }
             else if($_SERVER['REQUEST_METHOD'] === 'DELETE'){
-
+                //Authorization
+                $user = checkAuthStatusAndReturnUser($database);  
                 try{
 
                     $database->beginTransaction();
@@ -276,6 +280,8 @@
         }      
     }
     else if(array_key_exists('MOVIE_ID', $_GET) && !array_key_exists('IMG_ID', $_GET)){
+        //Authorization
+        $user = checkAuthStatusAndReturnUser($database);  
         $MOVIE_ID = $_GET['MOVIE_ID'];
 
         //Validaciones de los parámetros de la consulta

@@ -27,7 +27,7 @@
         error_log("Connection error - {$ex}", 0);       
         $response->sendParams(false, 500, 'Error de conexión a la base de datos');
     }
-    header('Access-Control-Allow-Origin: *');
+    //header('Access-Control-Allow-Origin: *');
     //Opciones de preflight (CORS)
     if($_SERVER['REQUEST_METHOD'] === 'OPTIONS'){
         header('Access-Control-Allow-Methods: POST, GET, PATCH, DELETE, OPTIONS');
@@ -218,7 +218,7 @@
             $SES_ACCTOK = base64_encode(bin2hex(openssl_random_pseudo_bytes(24)).time()); //Genera bytes aleatorios - Se convierte a hexadecimal - Se pasa a caracteres -Time para garantizar unicidad
             $SES_REFTOK = base64_encode(bin2hex(openssl_random_pseudo_bytes(24)).time()); //Genera bytes aleatorios - Se convierte a hexadecimal - Se pasa a caracteres -Time para garantizar unicidad
 
-            $SES_ACCTOKEXP = date('d/m/Y H:i', time() + 1200); //20 mins
+            $SES_ACCTOKEXP = date('d/m/Y H:i', time() + 3600); //20 mins
             $SES_REFTOKEXP = date('d/m/Y H:i', time() + 1209600); //14 dias
         }
         catch(UserException $ex){

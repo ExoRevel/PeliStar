@@ -3,7 +3,7 @@
     require_once('../config/database.php');   
     require_once('../data/DirectorDB.php');
     require_once('../util/response.php');
-
+    require_once('../util/auth.php'); 
     //Respuesta que se enviará al cliente    
     $response = new Response();
 
@@ -15,7 +15,7 @@
         error_log("Connection error - {$ex}", 0);       
         $response->sendParams(false, 500, 'Error de conexión a la base de data');
     }
-    header('Access-Control-Allow-Origin: *');
+    //header('Access-Control-Allow-Origin: *');
     //Opciones de preflight (CORS)
     if($_SERVER['REQUEST_METHOD'] === 'OPTIONS'){
         header('Access-Control-Allow-Methods: POST, OPTIONS, GET, PATCH');
@@ -24,7 +24,8 @@
         header('Access-Control-Allow-Headers: Content-Type, Authorization');
         $response->sendParams(true, 200);
     }
-
+    //Authorization
+    $user = checkAuthStatusAndReturnUser($database);  
     switch($_SERVER['REQUEST_METHOD']){
         case 'POST':
             if($_SERVER['CONTENT_TYPE']!== 'application/json'){
