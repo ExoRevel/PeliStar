@@ -84,7 +84,7 @@
         }  
 
         public function setCalification($MOVIE_CALIFICATION){           
-            if($MOVIE_CALIFICATION!== null && (!is_numeric($MOVIE_CALIFICATION) || $MOVIE_CALIFICATION<=0 || $MOVIE_CALIFICATION > 10)){
+            if($MOVIE_CALIFICATION=== null && (!is_numeric($MOVIE_CALIFICATION) || $MOVIE_CALIFICATION<=0 || $MOVIE_CALIFICATION > 10)){
                 throw new MoviesException('Error en la calificación');
             }
 
@@ -102,35 +102,4 @@
             return $Movies;
         }
     }
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

@@ -45,10 +45,10 @@
             $MOVIE_ID = $jsonData->MOVIE_ID;
             try{
                 $movieDB = new MovieDB($database);
-                $existingmovie = $movieDB->obtenerPorTitleAndDate($MOVIE_TITLE, $MOVIE_DATE);
+                $existingmovie = $movieDB->obtenerPorId($MOVIE_ID);
                 $rowCount = count($existingmovie);
 
-                if($rowCount ===0){
+                if($rowCount === 0){
                     $response->sendParams(false, 409, 'Esta pelicula no se encuentra registrada');
                 }
                 
@@ -174,14 +174,14 @@
                 $response->sendParams(false, 400, 'Body no es Válido (JSON)');
             }
 
-            if( !($jsonData->MOVIE_TITLE) || !($jsonData->MOVIE_DATE) || !($jsonData->MOVIE_TIME) || !($jsonData->MOVIE_SINOPSIS) || !isset($jsonData->MOVIE_CALIFICATION)){
+            if( !($jsonData->MOVIE_TITLE) || !($jsonData->MOVIE_DATE) || !($jsonData->MOVIE_TIME) || !($jsonData->MOVIE_SINOPSIS) || !($jsonData->MOVIE_CALIFICATION)){
                 $messages = array();
 
-                (!isset($jsonData->MOVIE_TITLE) ? $messages[] = 'EL TITULO NO FUE INGRESADO': false);
-                (!isset($jsonData->MOVIE_DATE) ? $messages[] = 'LA FECHA DE ESTRENO NO FUE INGRESADA': false);
-                (!isset($jsonData->MOVIE_TIME) ? $messages[] = 'LA DURACION DE LA PELICULA NO FUE INGRESADA': false);
-                (!isset($jsonData->MOVIE_SINOPSIS) ? $messages[] = 'LA SINOPSIS DE LA PELICULA NO FUE INGRESADA': false);
-                (!isset($jsonData->MOVIE_CALIFICATION) ? $messages[] = 'LA CALIFICACIÓN DE LA PELICULA NO FUE INGRESADA': false);
+                (!($jsonData->MOVIE_TITLE) ? $messages[] = 'EL TITULO NO FUE INGRESADO': false);
+                (!($jsonData->MOVIE_DATE) ? $messages[] = 'LA FECHA DE ESTRENO NO FUE INGRESADA': false);
+                (!($jsonData->MOVIE_TIME) ? $messages[] = 'LA DURACION DE LA PELICULA NO FUE INGRESADA': false);
+                (!($jsonData->MOVIE_SINOPSIS) ? $messages[] = 'LA SINOPSIS DE LA PELICULA NO FUE INGRESADA': false);
+                (!($jsonData->MOVIE_CALIFICATION) ? $messages[] = 'LA CALIFICACIÓN DE LA PELICULA NO FUE INGRESADA': false);
 
                 $response->sendParams(false,400, $messages);
 
@@ -195,7 +195,7 @@
     
             try{
                 $movieDB = new MovieDB($database);
-                $existingmovie = $movieDB->obtenerPorId($MOVIE_TITLE, $MOVIE_DATE);
+                $existingmovie = $movieDB->obtenerPorTitleAndDate($MOVIE_TITLE, $MOVIE_DATE);
                 $rowCount = count($existingmovie);
 
                 if($rowCount !==0){
@@ -211,7 +211,6 @@
 
                 $returnData = array();
                 $returnData['rows_returned'] = $rowCount;
-                //$returnData['movie'] = $lastmovies;
 
                 $response->sendParams(true, 201, 'La pelicula fue insertada correctamente', $returnData);
             }

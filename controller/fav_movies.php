@@ -39,11 +39,11 @@
                 $response->sendParams(false, 400, 'Body no es Válido (JSON)');
             }
 
-            if( !isset($jsonData->MOVIE_ID) || !isset($jsonData->USE_ID)){
+            if( !($jsonData->MOVIE_ID) || !($jsonData->USE_ID)){
                 $messages = array();
 
-                (!isset($jsonData->MOVIE_ID) ? $messages[] = 'MOVIE_ID no ingresado': false);
-                (!isset($jsonData->USE_ID) ? $messages[] = 'Campo USE_ID no ingresado': false);
+                (!($jsonData->MOVIE_ID) ? $messages[] = 'MOVIE_ID no ingresado': false);
+                (!($jsonData->USE_ID) ? $messages[] = 'Campo USE_ID no ingresado': false);
 
                 $response->sendParams(false,400, $messages);
 
@@ -128,14 +128,3 @@
             $response->sendParams(false, 405, 'Tipo de petición no permitida');
             break;
     }
-
-
-
-
-
-
-
-
-
-
-
