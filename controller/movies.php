@@ -241,6 +241,11 @@
                     unlink($archivo);
                 }
 
+                $rowCount = $movieDB->eliminarMovieYrelaciones($MOVIE_ID);
+                if($rowCount === 0){
+                    $response->sendParams(false, 404, 'Hubo un error al eliminar la pelicula seleccionada');
+                }
+
                 $returnData = array();
                 $returnData['rows_returned'] = $rowCount;
 
