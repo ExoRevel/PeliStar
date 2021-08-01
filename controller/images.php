@@ -25,7 +25,33 @@
     }
 
     //Authorization
-    //$user = checkAuthStatusAndReturnUser($database);   
+    //$user = checkAuthStatusAndReturnUser($database);  
+    if(array_key_exists('MOVIE_ID', $_GET))
+    {
+        $MOVIE_ID = $_GET['MOVIE_ID'];
+        try{
+            $imageDB = new ImageDB($database);           
+            $image = $imageDB->listarPorMovieId($MOVIE_ID);
+            $rowCount = count($image);
+
+            if($rowCount === 0){
+                $response->sendParams(false, 404, 'Imagen no encontrada');
+            }
+
+            $returnData = array();
+            $returnData['rows_returned'] = $rowCount;
+            $returnData['images'] = $image;
+
+            $response->sendParams(true, 200, 'Imagen recuperados correctamente', $returnData, true);
+        }
+        catch(ImageException $ex){
+            $response->sendParams(false, 400, $ex->getMessage());
+        }
+        catch(PDOException $ex){
+            error_log("Database query error - {$ex}", 0);
+            $response->sendParams(false, 500, 'Error al intentar obtener las peliculas');
+        }
+    } 
 
     if(array_key_exists('MOVIE_ID', $_GET) && array_key_exists('IMG_ID', $_GET)){       
         $IMG_ID = $_GET['IMG_ID'];

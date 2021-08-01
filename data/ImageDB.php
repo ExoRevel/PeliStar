@@ -42,23 +42,21 @@
             return $imageArray;
         } 
         
-        /*public function listarPorTaskId($TASK_ID, $USE_ID){
-            $query = $this->database->prepare('SELECT I.IMG_ID, I.MOVIE_ID, I.IMG_TITLE, I.IMG_FILENAME, I.IMG_MIMETYPE FROM IMAGES I 
-            INNER JOIN MOVIES T ON M.MOVIE_ID = I.MOVIE_ID WHERE I.MOVIE_ID = ? AND M.MOVIE_ID = ?');
-            $query->bindParam(1, $TASK_ID, PDO::PARAM_INT);           
-            $query->bindParam(2, $USE_ID, PDO::PARAM_INT);   
+        public function listarPorMovieId($MOVIE_ID){
+            $query = $this->database->prepare('SELECT * FROM images where MOVIE_ID = ?');
+            $query->bindParam(1, $MOVIE_ID, PDO::PARAM_INT);           
             $query->execute();
 
             $imageArray = array();
 
             while($row = $query->fetch(PDO::FETCH_ASSOC)){
-               $image = new Image($row['IMG_ID'], $row['TASK_ID'], $row['IMG_TITLE'], $row['IMG_FILENAME'], $row['IMG_MIMETYPE']);          
+               $image = new Images($row['IMG_ID'], $row['TASK_ID'], $row['IMG_TITLE'], $row['IMG_FILENAME'], $row['IMG_MIMETYPE']);          
 
                $imageArray[] = $image->returnImageAsArray();
             } 
             
             return $imageArray;
-        }*/
+        }
         
         public function insertar($image){
             $titulo = $image->getTitle();

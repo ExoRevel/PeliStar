@@ -21,6 +21,7 @@ RewriteRule ^sessions$ controller/sessions.php [L] #Maneja peticiones de inicio 
 RewriteRule ^movies/([0-9]+)/images/([0-9]+)/attributes$ controller/images.php?MOVIE_ID=$1&IMG_ID=$2&IMG_ATTR=true [L] #Maneja peticiones de images y muestra atributos de la imagen
 RewriteRule ^movies/([0-9]+)/images/([0-9]+)$ controller/images.php?MOVIE_ID=$1&IMG_ID=$2 [L] #Maneja peticiones de images propiamente dichas
 RewriteRule ^movies/([0-9]+)/images$ controller/images.php?MOVIE_ID=$1 [L] #Maneja peticiones de creacion de imagenes
+RewriteRule ^movies/([0-9]+)/images/listar$ controller/images.php?MOVIE_ID=$1
 
 #Usuarios (Users)
 RewriteRule ^users$ controller/users.php [L] #Maneja peticiones de creacion de usuarios
