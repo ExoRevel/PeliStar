@@ -18,7 +18,7 @@
 
     //Opciones de preflight (CORS)
     if($_SERVER['REQUEST_METHOD'] === 'OPTIONS'){
-        header('Access-Control-Allow-Methods: POST, OPTIONS, GET, PATCH');
+        header('Access-Control-Allow-Methods: POST, OPTIONS, GET, PATCH, DELETE');
         header('Access-Control-Allow-Headers: Content-Type, Authorization');
         header('Access-Control-Max-Age: 86400');
         $response->sendParams(true, 200);
@@ -225,6 +225,46 @@
             break;
         default: 
             $response->sendParams(false, 405, 'Tipo de petición no permitida');
+            break;
+        case 'DELETE':
+            if($_SERVER['CONTENT_TYPE']!== 'application/json'){
+                $response->sendParams(false, 400, 'Content Type header no Válido');
+            }
+
+            $rawPostData = file_get_contents('php://input');
+
+            if(!$jsonData = json_decode($rawPostData)){
+                $response->sendParams(false, 400, 'Body no es Válido (JSON)');
+            }
+            $MOVIE_ID = $jsonData->MOVIE_ID;
+            try{
+                $movieDB = new MovieDB($database);
+                $existingmovie = $movieDB->obtenerPorId($MOVIE_ID);
+                $rowCount = count($existingmovie);
+
+                if($rowCount ===0){
+                    $response->sendParams(false, 409, 'Esta pelicula no se encuentra registrada');
+                }
+                
+                $rowCount = $movieDB->eliminarMovieYrelaciones($MOVIE_ID);
+
+                if($rowCount === 0){
+                    $response->sendParams(false, 404, 'Hubo un error al eliminar la pelicula seleccionada');
+                }
+
+                $returnData = array();
+                $returnData['rows_returned'] = $rowCount;
+
+                $response->sendParams(true, 201, 'La pelicula fue eliminada correctamente', $returnData);
+            }
+
+            catch(MoviesException $ex){
+                $response->sendParams(false, 400, $ex->getMessage());
+            }
+            catch(PDOException $ex){
+                error_log("Database query error - {$ex}", 0);
+                $response->sendParams(false, 500, 'Error al insertar la pelicula');
+            }
             break;
     
     }

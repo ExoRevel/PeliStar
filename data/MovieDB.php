@@ -123,5 +123,71 @@
             $rowCount = $query->rowCount();
             return $rowCount;
         }
+
+        function eliminarRelacionesFv_movie($MOVIE_ID)
+        {
+            $query = $this->database->prepare('DELETE FROM FAV_MOVIES WHERE MOVIE_ID = ?');
+            $query->bindParam(1, $MOVIE_ID, PDO::PARAM_STR);
+            $query ->execute();
+            $rowCount = $query->rowCount();
+            return $rowCount;
+        }
+
+        function eliminarRelacionesMovie_generos($MOVIE_ID)
+        {
+            $query = $this->database->prepare('DELETE FROM movie_generos WHERE MOVIE_ID = ?');
+            $query->bindParam(1, $MOVIE_ID, PDO::PARAM_STR);
+            $query ->execute();
+            $rowCount = $query->rowCount();
+            return $rowCount;
+        }
+
+        function eliminarRelacionesMovie_actors($MOVIE_ID)
+        {
+            $query = $this->database->prepare('DELETE FROM MOVIES_ACTORS WHERE MOVIE_ID = ?');
+            $query->bindParam(1, $MOVIE_ID, PDO::PARAM_STR);
+            $query ->execute();
+            $rowCount = $query->rowCount();
+            return $rowCount;
+        }
+
+        function eliminarRelacionesMovie_directors($MOVIE_ID)
+        {
+            $query = $this->database->prepare('DELETE FROM MOVIES_DIRECTORS WHERE MOVIE_ID = ?');
+            $query->bindParam(1, $MOVIE_ID, PDO::PARAM_STR);
+            $query ->execute();
+            $rowCount = $query->rowCount();
+            return $rowCount;
+        }
+
+        function eliminarRelacionesMovie_images($MOVIE_ID)
+        {
+            $query = $this->database->prepare('DELETE FROM images WHERE MOVIE_ID = ?');
+            $query->bindParam(1, $MOVIE_ID, PDO::PARAM_STR);
+            $query ->execute();
+            $rowCount = $query->rowCount();
+            return $rowCount;
+        }
+
+        function eliminarMovie($MOVIE_ID)
+        {
+            $query = $this->database->prepare('DELETE FROM  MOVIES WHERE MOVIE_ID = ?');
+            $query->bindParam(1, $MOVIE_ID, PDO::PARAM_STR);
+            $query ->execute();
+            $rowCount = $query->rowCount();
+            return $rowCount;
+        }
+
+        public function eliminarMovieYrelaciones($MOVIE_ID)
+        {
+            $rowCount = 0;
+            $rowCount = $rowCount +  $this->eliminarRelacionesFv_movie($MOVIE_ID);
+            $rowCount = $rowCount +  $this->eliminarRelacionesMovie_generos($MOVIE_ID);
+            $rowCount = $rowCount +  $this->eliminarRelacionesMovie_actors($MOVIE_ID);
+            $rowCount = $rowCount +  $this->eliminarRelacionesMovie_directors($MOVIE_ID);
+            $rowCount = $rowCount +  $this->eliminarRelacionesMovie_images($MOVIE_ID);
+            $rowCount = $rowCount +  $this->eliminarMovie($MOVIE_ID);
+            return $rowCount;
+        }
     
     }
