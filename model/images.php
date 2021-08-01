@@ -178,7 +178,7 @@
             $image['IMG_FILENAME'] = $this->getFileName();
             $image['IMG_MIMETYPE'] = $this->getMimeType();
             $image['MOVIE_ID'] = $this->getMovieId();
-
+            $image['IMG_URL'] = $this->getURL();
             return $image;
         }
     }
