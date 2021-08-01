@@ -50,7 +50,7 @@ RewriteRule ^movies$ controller/movies.php [L] #Maneja peticiones de creacion de
 RewriteRule ^movies/([0-9]+)$ controller/movies.php?MOVIE_ID=$1 [L] #Maneja peticiones MOVIE_ID
 #RewriteRule ^movies/$ controller/movies.php [L]
 RewriteRule ^movies/update$ controller/movies.php [L]
-RewriteRule ^movies/delete$ controller/movies.php [L]
+RewriteRule ^movies/delete/([0-9]+)$ controller/movies.php?MOVIE_ID=$1 [L]
 
 #Fav_Movies (Peliculas favoritas por usuario)
 RewriteRule ^fav_movies$ controller/fav_movies.php [L] 

@@ -227,17 +227,8 @@
             $response->sendParams(false, 405, 'Tipo de petición no permitida');
             break;
         case 'DELETE':
-            if($_SERVER['CONTENT_TYPE']!== 'application/json'){
-                $response->sendParams(false, 400, 'Content Type header no Válido');
-            }
-
-            $rawPostData = file_get_contents('php://input');
-
-            if(!$jsonData = json_decode($rawPostData)){
-                $response->sendParams(false, 400, 'Body no es Válido (JSON)');
-            }
-            $MOVIE_ID = $jsonData->MOVIE_ID;
             try{
+                $MOVIE_ID = $_GET['MOVIE_ID'];
                 $movieDB = new MovieDB($database);
                 $existingmovie = $movieDB->obtenerPorId($MOVIE_ID);
                 $rowCount = count($existingmovie);
