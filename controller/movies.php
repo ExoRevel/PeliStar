@@ -236,11 +236,9 @@
                 if($rowCount ===0){
                     $response->sendParams(false, 409, 'Esta pelicula no se encuentra registrada');
                 }
-                
-                $rowCount = $movieDB->eliminarMovieYrelaciones($MOVIE_ID);
-
-                if($rowCount === 0){
-                    $response->sendParams(false, 404, 'Hubo un error al eliminar la pelicula seleccionada');
+                foreach(glob('../images/movies/'.$MOVIE_ID.'/*') as $archivo)
+                {
+                    unlink($archivo);
                 }
 
                 $returnData = array();
@@ -254,8 +252,8 @@
             }
             catch(PDOException $ex){
                 error_log("Database query error - {$ex}", 0);
-                $response->sendParams(false, 500, 'Error al insertar la pelicula');
+                $response->sendParams(false, 500, 'Error al eliminar la pelicula');
             }
-            break;
+        break;
     
     }
