@@ -9,6 +9,7 @@
         private $USE_PASSWORD;
         private $USE_ACTIVE;
         private $USE_LOGAT;
+        private $USE_ROL;
 
         public function __construct($USE_ID, $USE_FULLNAME, $USE_USERNAME, $USE_PASSWORD, $USE_ACTIVE, $USE_LOGAT){
             $this->setId($USE_ID);
@@ -17,6 +18,18 @@
             $this->setPassword($USE_PASSWORD);
             $this->setActive($USE_ACTIVE);
             $this->setLogat($USE_LOGAT);
+            $this->setRol('client');
+        }
+
+        public function constructAdmin($USE_ID, $USE_FULLNAME, $USE_USERNAME, $USE_PASSWORD, $USE_ACTIVE, $USE_LOGAT){
+            $this->setId($USE_ID);
+            $this->setFullname($USE_FULLNAME);
+            $this->setUsername($USE_USERNAME);
+            $this->setPassword($USE_PASSWORD);
+            $this->setActive($USE_ACTIVE);
+            $this->setLogat($USE_LOGAT);
+            $this->setRol('admin');
+            return $this;
         }
 
         public function getId(){
@@ -43,12 +56,24 @@
             return $this->USE_LOGAT;
         }
 
+        public function getRol(){
+            return $this->USE_ROL;
+        }
+
         public function setId($USE_ID){
             if(($USE_ID!==null) && (!is_numeric($USE_ID) || $USE_ID<=0 || $USE_ID > 9223372036854775807)){
                 throw new UserException('Error en USE_ID');
             }
 
             $this->USE_ID = $USE_ID;
+        }
+
+        public function setRol($USE_ROL){
+            if($USE_ROL!== null && (strlen($USE_ROL) <= 0 || strlen($USE_ROL) > 6)){
+                throw new UserException('Error en el username del usuario'); //Mensaje debe cambiar
+            }
+
+            $this->USE_ROL = $USE_ROL;
         }
 
         public function setFullname($USE_FULLNAME){           
@@ -99,7 +124,8 @@
             $user['USE_PASSWORD'] = $this->getPassword();
             $user['USE_ACTIVE'] = $this->getActive();
             $user['USE_LOGAT'] = $this->getLogat();
-
+            $user['USE_ROL'] = $this->getRol();
             return $user;
         }
+        
     }

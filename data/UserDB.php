@@ -40,15 +40,19 @@
 
 
         public function obtenerPorUsername($USE_USERNAME){
-            $query = $this->database->prepare('SELECT USE_ID, USE_FULLNAME, USE_USERNAME, USE_PASSWORD, USE_ACTIVE, USE_LOGAT FROM USERS WHERE USE_USERNAME = ?');
+            $query = $this->database->prepare('SELECT * FROM USERS WHERE USE_USERNAME = ?');
             $query->bindParam(1, $USE_USERNAME, PDO::PARAM_STR);
             $query->execute();
 
             $userArray = array();
             
             while($row = $query->fetch(PDO::FETCH_ASSOC)){
-               $user = new User($row['USE_ID'], $row['USE_FULLNAME'], $row['USE_USERNAME'], $row['USE_PASSWORD'], $row['USE_ACTIVE'], $row['USE_LOGAT']);          
-
+                $user = new User($row['USE_ID'], $row['USE_FULLNAME'], $row['USE_USERNAME'], $row['USE_PASSWORD'], $row['USE_ACTIVE'], $row['USE_LOGAT']);
+                if($row['USE_ROL']=='client'){
+                    $user = new User($row['USE_ID'], $row['USE_FULLNAME'], $row['USE_USERNAME'], $row['USE_PASSWORD'], $row['USE_ACTIVE'], $row['USE_LOGAT']);    
+                }else {
+                    $user = $user->constructAdmin($row['USE_ID'], $row['USE_FULLNAME'], $row['USE_USERNAME'], $row['USE_PASSWORD'], $row['USE_ACTIVE'], $row['USE_LOGAT']);  
+                }      
                $userArray[] = $user->returnUserAsArray();
             } 
             
@@ -79,14 +83,15 @@
             $FULLNAME = $user->getFullname();
             $USERNAME = $user->getUsername();
             $PASSWORD = $user->getPassword();
-            $query = $this->database->prepare('INSERT INTO USERS(USE_FULLNAME, USE_USERNAME, USE_PASSWORD) VALUES (?, ?, ?)');
+            $ROL = $user->getRol();
+            $query = $this->database->prepare('INSERT INTO USERS(USE_FULLNAME, USE_USERNAME, USE_PASSWORD, USE_ROL) VALUES (?, ?, ?,?)');
             $query->bindParam(1, $FULLNAME, PDO::PARAM_STR);
             $query->bindParam(2, $USERNAME, PDO::PARAM_STR);
-            $query->bindParam(3, $PASSWORD, PDO::PARAM_STR);          
+            $query->bindParam(3, $PASSWORD, PDO::PARAM_STR);         
+            $query->bindParam(4, $ROL, PDO::PARAM_STR);     
             $query->execute();
-
             $rowCount = $query->rowCount();
-
             return $rowCount;
-        }       
+        }
+        
     }
