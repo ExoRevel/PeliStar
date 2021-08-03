@@ -109,6 +109,12 @@
         case 'DELETE':
             try{
                 $fav_moviesDB = new Fav_movieDB($database);
+                $fav_movies = new Fav_Movies($_GET['MOVIE_ID'],$_GET['USE_ID']);
+                $rowCount = $fav_moviesDB->obtenerFav_movie($fav_movies);
+                $rowCount = count($rowCount);
+                if($rowCount === 0){
+                    $response->sendParams(false, 400, 'ERROR! ESTA PELICULA NO SE ENCUENTRA EN SU LISTA DE FAVORITOS');
+                }
                 $rowCount = $fav_moviesDB->eliminar($_GET['USE_ID'],$_GET['MOVIE_ID']);
             
                 if($rowCount === 0){
