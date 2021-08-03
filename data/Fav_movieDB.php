@@ -11,9 +11,11 @@
         }
 
         public function insertar($fav_movies){
+            $USE_ID = $fav_movies->getUseID();
+            $MOVIE_ID = $fav_movies->getMovieId();
             $query = $this->database->prepare('INSERT INTO FAV_MOVIES(MOVIE_ID, USE_ID) VALUES (?, ?)');
-            $query->bindParam(1, $fav_movies->getMovieId(), PDO::PARAM_STR);  
-            $query->bindParam(2, $fav_movies->getUseID(), PDO::PARAM_STR);      
+            $query->bindParam(1, $MOVIE_ID, PDO::PARAM_STR);  
+            $query->bindParam(2, $USE_ID, PDO::PARAM_STR);      
             $query->execute();
 
             $rowCount = $query->rowCount();
@@ -41,9 +43,11 @@
         }
 
         public function obtenerFav_movie($fav_movies){
+            $USE_ID = $fav_movies->getUseID();
+            $MOVIE_ID = $fav_movies->getMovieId();
             $query = $this->database->prepare('SELECT * FROM fav_movies WHERE USE_ID = ? AND MOVIE_ID = ?');
-            $query->bindParam(1, $fav_movies->getMovieId(), PDO::PARAM_STR);  
-            $query->bindParam(2, $fav_movies->getUseID(), PDO::PARAM_STR);     
+            $query->bindParam(1, $USE_ID, PDO::PARAM_STR);  
+            $query->bindParam(2, $MOVIE_ID, PDO::PARAM_STR);     
             $query ->execute();
             $fav_moviesArray = array();
 

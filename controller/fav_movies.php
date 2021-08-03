@@ -58,6 +58,7 @@
                 $fav_movieDB = new Fav_movieDB($database);
                 $fav_Movie = new Fav_movies($MOVIE_ID, $USE_ID);
                 $rowCount = $fav_movieDB->obtenerFav_movie($fav_Movie);
+                $rowCount = count($rowCount);
                 if($rowCount !==0){
                     $response->sendParams(false, 409, 'ESTA PELICULA YA SE ENCUENTRA EN SU LISTA DE FAVORITOS');
                 }
@@ -69,9 +70,6 @@
                 }
 
                 $returnData = array();
-                $returnData['rows_returned'] = $rowCount;
-                $returnData['fav_movies'] = $lastfav_movies;
-
                 $response->sendParams(true, 201, 'Pelicula agregada correctamente', $returnData);
 
             }
