@@ -160,33 +160,44 @@
                 $rowCount = count($existingUser);
     
                 if($rowCount === 0){
-                    $response->sendParams(false, 409, 'Usuario NO se encuentra registrado'); //409: Conflicto
+                    $response->sendParams(false, 409, 'VUELVA A INICIAR SESION'); //409: Conflicto
                 }
 
                 if($USE_FULLNAME!=null)
                 {
                     $rowCount = $userDB->actualizarFullNamePorId($USE_ID, $USE_FULLNAME);
-                }
-                if($rowCount === 0){
-                    $response->sendParams(false, 404, 'ERROR! Ingrese un nombre diferente al registrado, o deje la casilla en blanco');
-                }
-
-                if($USE_USERNAME!=null)
-                {
-                    $rowCount = $userDB->actualizarUserNamePorId($USE_ID, $USE_USERNAME);
-                }
-                if($rowCount === 0){
-                    $response->sendParams(false, 404, 'ERROR! Ingrese un USERNAME diferente al registrado, o deje la casilla en blanco');
+                    if($rowCount === 0){
+                        $response->sendParams(false, 404, 'ERROR! Ingrese un nombre diferente al registrado, o deje la casilla en blanco');
+                    }
+                    else
+                    {
+                        $response->sendParams(true, 201, 'Nombre modificado correctamente');
+                    }
                 }
 
                 if($USE_PASSWORD!=null)
                 {
                     $USE_PASSWORD = password_hash($USE_PASSWORD, PASSWORD_DEFAULT);
                     $rowCount = $userDB->actualizarPasswordPorId($USE_ID, $USE_PASSWORD);
+                    if($rowCount === 0){
+                        $response->sendParams(false, 404, 'ERROR! Ingrese una contraseña diferente a la registrada, o deje la casilla en blanco');
+                    }
+                    else
+                    {
+                        $response->sendParams(true, 201, 'Contraseña modificada correctamente');
+                    }
                 }
 
-                if($rowCount === 0){
-                    $response->sendParams(false, 404, 'ERROR! Ingrese una contraseña diferente a la registrada, o deje la casilla en blanco');
+                if($USE_USERNAME!=null)
+                {
+                    $rowCount = $userDB->actualizarUserNamePorId($USE_ID, $USE_USERNAME);
+                    if($rowCount === 0){
+                        $response->sendParams(false, 404, 'ERROR! Ingrese un USERNAME diferente al registrado, o deje la casilla en blanco');
+                    }
+                    else
+                    {
+                        $response->sendParams(true, 201, 'Username modificado correctamente, necesitará volver a iniciar sesión');
+                    }
                 }
     
                 if(!($jsonData->USE_FULLNAME) && !($jsonData->USE_USERNAME) && !($jsonData->USE_PASSWORD)){
