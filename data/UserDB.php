@@ -93,5 +93,44 @@
             $rowCount = $query->rowCount();
             return $rowCount;
         }
+        public function actualizarFullNamePorId($USE_ID,$FULLNAME)
+        {
+            $query = $this->database->prepare('UPDATE USERS SET  USE_FULLNAME = ? WHERE USE_ID = ?');
+            $query->bindParam(1, $FULLNAME, PDO::PARAM_STR);
+            $query->bindParam(2, $USE_ID, PDO::PARAM_STR);
+            $query ->execute();
+            $rowCount = $query->rowCount();
+            return $rowCount;
+        }
+
+        public function actualizarUserNamePorId($USE_ID,$USERNAME)
+        {
+            $query = $this->database->prepare('UPDATE USERS SET  USE_USERNAME = ? WHERE USE_ID = ?');
+            $query->bindParam(1, $USERNAME, PDO::PARAM_STR);
+            $query->bindParam(2, $USE_ID, PDO::PARAM_STR);
+            $query ->execute();
+            $rowCount = $query->rowCount();
+            return $rowCount;
+        }
+
+        public function actualizarPasswordPorId($USE_ID,$PASSWORD)
+        {
+            $query = $this->database->prepare('UPDATE USERS SET  USE_PASSWORD = ? WHERE USE_ID = ?');
+            $query->bindParam(1, $PASSWORD, PDO::PARAM_STR);
+            $query->bindParam(2, $USE_ID, PDO::PARAM_STR);
+            $query ->execute();
+            $rowCount = $query->rowCount();
+            return $rowCount;
+        }
+
+        /*public function update($user){
+            $rowCount = 0;
+            $FULLNAME = $user->getFullname();
+            $USERNAME = $user->getUsername();
+            $ID = $user->getId();
+            $rowCount = $rowCount + $this->actualizarFullNamePorId($ID,$FULLNAME);
+            $rowCount = $rowCount + $this->actualizarUserNamePorId($ID,$USERNAME);
+            return $rowCount;
+        }*/
         
     }

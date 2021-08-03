@@ -70,7 +70,7 @@
 
         public function setRol($USE_ROL){
             if($USE_ROL!== null && (strlen($USE_ROL) <= 0 || strlen($USE_ROL) > 6)){
-                throw new UserException('Error en el username del usuario'); //Mensaje debe cambiar
+                throw new UserException('Error en el rol del usuario'); //Mensaje debe cambiar
             }
 
             $this->USE_ROL = $USE_ROL;
@@ -88,7 +88,6 @@
             if($USE_USERNAME!== null && (strlen($USE_USERNAME) <= 0 || strlen($USE_USERNAME) > 255)){
                 throw new UserException('Error en el username del usuario'); //Mensaje debe cambiar
             }
-
             $this->USE_USERNAME = $USE_USERNAME;
         }
 

@@ -23,11 +23,13 @@ RewriteRule ^movies/([0-9]+)/images/([0-9]+)$ controller/images.php?MOVIE_ID=$1&
 RewriteRule ^movies/([0-9]+)/images$ controller/images.php?MOVIE_ID=$1 [L] #Maneja peticiones de creacion de imagenes
 #RewriteRule ^movies/([0-9]+)/images/listar$ controller/movie_imagenes.php?M_ID=$1
 RewriteRule ^movies/([0-9]+)/images/listar$ controller/images.php?M_ID=$1
+RewriteRule ^movie/([0-9]+)/images$ controller/images.php?MOV_ID=$1
 
 #Usuarios (Users)
 RewriteRule ^users$ controller/users.php [L] #Maneja peticiones de creacion de usuarios
 RewriteRule ^users/([A-Z,0-9,a-z]+)$ controller/users.php?USE_USERNAME=$1 [L] 
 #RewriteRule ^users/$ controller/users.php [L] #Maneja peticiones de creacion de usuarios
+RewriteRule ^users/update$ controller/users.php [L] 
 
 #Actores (Actors)
 RewriteRule ^actors$ controller/actors.php [L] #Maneja peticiones de creacion de Actores

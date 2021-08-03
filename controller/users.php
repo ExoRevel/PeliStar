@@ -3,7 +3,7 @@
     require_once('../config/database.php');   
     require_once('../data/UserDB.php');
     require_once('../util/response.php');
-
+    require_once('../util/auth.php'); 
     //Respuesta que se enviará al cliente    
     $response = new Response();
 
@@ -18,7 +18,7 @@
     header('Access-Control-Allow-Origin: *');
     //Opciones de preflight (CORS)
     if($_SERVER['REQUEST_METHOD'] === 'OPTIONS'){
-        header('Access-Control-Allow-Methods: POST, OPTIONS, GET');
+        header('Access-Control-Allow-Methods: POST, OPTIONS, GET, PATCH');
         header('Access-Control-Allow-Origin: *');
         header('Access-Control-Max-Age: 86400');
         header('Access-Control-Allow-Headers: Content-Type, Authorization');
@@ -134,6 +134,79 @@
                     error_log("Database query error - {$ex}", 0);
                     $response->sendParams(false, 500);
                 }
+            }
+            break;
+        case 'PATCH':
+            //Authorization
+            $user = checkAuthStatusAndReturnUser($database);    
+            if($_SERVER['CONTENT_TYPE'] !== 'application/json'){
+                $response->sendParams(false, 400, 'Content type header no válido');
+            }
+    
+            $rawPostData = file_get_contents('php://input');
+    
+            if(!$jsonData = json_decode($rawPostData)){ //Si no se pudo decodificar el body a un objeto JavaScript
+                $response->sendParams(false, 400, 'Body no es válido (JSON)');
+            }
+
+    
+            $USE_FULLNAME = trim($jsonData->USE_FULLNAME);
+            $USE_USERNAME = trim($jsonData->USE_USERNAME);
+            $USE_PASSWORD = $jsonData->USE_PASSWORD;
+            $USE_ID = $jsonData->USE_ID;
+            try{
+                $userDB = new UserDB($database);
+                $existingUser = $userDB->obtenerPorId($USE_ID);
+                $rowCount = count($existingUser);
+    
+                if($rowCount === 0){
+                    $response->sendParams(false, 409, 'Usuario NO se encuentra registrado'); //409: Conflicto
+                }
+
+                if($USE_FULLNAME!=null)
+                {
+                    $rowCount = $userDB->actualizarFullNamePorId($USE_ID, $USE_FULLNAME);
+                }
+                if($rowCount === 0){
+                    $response->sendParams(false, 404, 'ERROR! Ingrese un nombre diferente al registrado, o deje la casilla en blanco');
+                }
+
+                if($USE_USERNAME!=null)
+                {
+                    $rowCount = $userDB->actualizarUserNamePorId($USE_ID, $USE_USERNAME);
+                }
+                if($rowCount === 0){
+                    $response->sendParams(false, 404, 'ERROR! Ingrese un USERNAME diferente al registrado, o deje la casilla en blanco');
+                }
+
+                if($USE_PASSWORD!=null)
+                {
+                    $USE_PASSWORD = password_hash($USE_PASSWORD, PASSWORD_DEFAULT);
+                    $rowCount = $userDB->actualizarPasswordPorId($USE_ID, $USE_PASSWORD);
+                }
+
+                if($rowCount === 0){
+                    $response->sendParams(false, 404, 'ERROR! Ingrese una contraseña diferente a la registrada, o deje la casilla en blanco');
+                }
+    
+                if(!($jsonData->USE_FULLNAME) && !($jsonData->USE_USERNAME) && !($jsonData->USE_PASSWORD)){
+                    $messages = array();
+        
+                    (!($jsonData->USE_FULLNAME) ? $messages[] = 'Nombre no ingresado ': false);
+                    (!($jsonData->USE_USERNAME) ? $messages[] = 'Username no ingresado ': false);
+                    (!($jsonData->USE_PASSWORD) ? $messages[] = 'Contraseña no ingresada ': false);
+                    $response->sendParams(false, 400, $messages);
+                }
+
+                $returnData = array();
+                $response->sendParams(true, 201, 'User MODIFICADO correctamente', $returnData); //201->Recurso creado
+            }
+            catch(UserException $ex){
+                $response->sendParams(false, 400, $ex->getMessage());
+            }
+            catch(PDOException $ex){
+                error_log("Database query error - {$ex}", 0);
+                $response->sendParams(false, 500, 'Error al intentar crear la cuenta de usuario');
             }
             break;
         default: 

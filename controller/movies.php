@@ -53,9 +53,6 @@
                     $response->sendParams(false, 409, 'Esta pelicula no se encuentra registrada');
                 }
                 
-                $movie = new Movies($MOVIE_ID, $MOVIE_TITLE, $MOVIE_DATE, $MOVIE_TIME , $MOVIE_SINOPSIS , $MOVIE_CALIFICATION);
-
-                
                 if($MOVIE_TITLE!=null)
                 {
                     $rowCount = $movieDB->actualizarTituloPorId($MOVIE_TITLE, $MOVIE_ID);

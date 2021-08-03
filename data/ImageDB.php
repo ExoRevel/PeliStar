@@ -128,4 +128,19 @@
 
             return $rowCount;
         }
+
+        public function listarTop1PorMovieId($MOVIE_ID){
+            $query = $this->database->prepare('SELECT * FROM IMAGES WHERE  MOVIE_ID=? LIMIT 1');
+            $query->bindParam(1, $MOVIE_ID, PDO::PARAM_INT);           
+            $query->execute();
+
+            $imageArray = array();
+
+            while($row = $query->fetch(PDO::FETCH_ASSOC)){
+               $image = new Images($row['IMG_ID'], $row['IMG_TITLE'], $row['IMG_FILENAME'], $row['IMG_MIMETYPE'],$row['MOVIE_ID']);          
+
+               $imageArray[] = $image->returnImageAsArray2();
+            } 
+            return $imageArray;
+        }
     }
