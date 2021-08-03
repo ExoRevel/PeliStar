@@ -100,7 +100,7 @@
                     $rowCount = count($data);
         
                     if($rowCount === 0){
-                        $response->sendParams(false, 404, 'Hubo un error al recuperar el user');
+                        $response->sendParams(false, 404, 'USERNAME INCORRECTO');
                     }
                     $returnData = array();
                     $returnData['users'] = $data;
