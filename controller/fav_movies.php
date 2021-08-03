@@ -18,7 +18,7 @@
     //header('Access-Control-Allow-Origin: *');
     //Opciones de preflight (CORS)
     if($_SERVER['REQUEST_METHOD'] === 'OPTIONS'){
-        header('Access-Control-Allow-Methods: POST, OPTIONS, GET');
+        header('Access-Control-Allow-Methods: POST, OPTIONS, GET, DELETE');
         header('Access-Control-Allow-Origin: *');
         header('Access-Control-Max-Age: 86400');
         header('Access-Control-Allow-Headers: Content-Type, Authorization');

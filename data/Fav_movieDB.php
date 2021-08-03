@@ -24,20 +24,24 @@
         }
 
         public function obtenerPorUSERNAME($USE_USERNAME){
-            $query = $this->database->prepare('SELECT U.USE_ID, FM.MOVIE_ID, M.MOVIE_TITLE, M.MOVIE_DATE, M.MOVIE_TIME, M.MOVIE_SINOPSIS, 
+            /*$query = $this->database->prepare('SELECT U.USE_ID, FM.MOVIE_ID, M.MOVIE_TITLE, M.MOVIE_DATE, M.MOVIE_TIME, M.MOVIE_SINOPSIS, 
             M.MOVIE_CALIFICATION, G.GENERO_ID, G.GENERO_NAME FROM USERS U INNER JOIN  FAV_MOVIES FM ON FM.USE_ID = U.USE_ID 
             INNER JOIN MOVIES M ON M.MOVIE_ID = FM.MOVIE_ID INNER JOIN MOVIE_GENEROS MG ON MG.MOVIE_ID = M.MOVIE_ID 
-            INNER JOIN GENEROS G ON G.GENERO_ID = MG.GENERO_ID WHERE U.USE_USERNAME = ? ');
+            INNER JOIN GENEROS G ON G.GENERO_ID = MG.GENERO_ID WHERE U.USE_USERNAME = ? ');*/
+
+            $query = $this->database->prepare('SELECT M.MOVIE_ID,M.MOVIE_TITLE,M.MOVIE_DATE, M.MOVIE_TIME, M.MOVIE_SINOPSIS, M.MOVIE_CALIFICATION FROM FAV_MOVIES F INNER JOIN USERS U ON U.USE_ID = F.USE_ID 
+            INNER JOIN MOVIES M ON M.MOVIE_ID = F.MOVIE_ID WHERE U.USE_USERNAME= ? ');
             
             $query ->bindParam(1, $USE_USERNAME, PDO:: PARAM_STR);
             $query ->execute();
             $fav_moviesArray = array();
 
             while ($row = $query->fetch(PDO::FETCH_ASSOC)) {
-                $fav_movies = new Fav_Movies($row['MOVIE_ID'], $row['USE_ID']);
+                //$fav_movies = new Fav_Movies($row['MOVIE_ID'], $row['USE_ID']);
                 $movies = new Movies($row['MOVIE_ID'],$row['MOVIE_TITLE'],$row['MOVIE_DATE'],$row['MOVIE_TIME'],$row['MOVIE_SINOPSIS'],$row['MOVIE_CALIFICATION']);
-                $genero= new Generos($row['GENERO_ID'], $row['GENERO_NAME']);
-                $fav_moviesArray[] = $fav_movies->returnFav_MoviesAsArray() + $movies->returnMoviesAsArray() + $genero->returnGenerosAsArray();
+                //$genero= new Generos($row['GENERO_ID'], $row['GENERO_NAME']);
+                //$fav_moviesArray[] = $fav_movies->returnFav_MoviesAsArray() + $movies->returnMoviesAsArray() + $genero->returnGenerosAsArray();
+                $fav_moviesArray[] = $movies->returnMoviesAsArray();
             }
             return $fav_moviesArray;
         }
