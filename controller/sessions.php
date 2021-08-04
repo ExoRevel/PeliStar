@@ -46,19 +46,19 @@
             $response->sendParams(false, 400, 'El campo SES_ID no puede estar en blanco y debe ser numérico');
         }
 
-        if(!isset($_SERVER['HTTP_AUTHORIZATION']) || strlen($_SERVER['HTTP_AUTHORIZATION']) < 1 ){
+        /*if(!isset($_SERVER['HTTP_AUTHORIZATION']) || strlen($_SERVER['HTTP_AUTHORIZATION']) < 1 ){
             $response->sendParams(false, 401, 'El access token debe estar presente y no debe estar en blanco');
         }
 
-        $SES_ACCTOK = $_SERVER['HTTP_AUTHORIZATION'];
+        $SES_ACCTOK = $_SERVER['HTTP_AUTHORIZATION'];*/
 
         if($_SERVER['REQUEST_METHOD'] === 'DELETE'){
             try{
                 $sessionDB = new SessionDB($database);
-                $rowCount = $sessionDB->eliminarPorId($SES_ID, $SES_ACCTOK);
+                $rowCount = $sessionDB->eliminarPorId($SES_ID);
             
                 if($rowCount === 0){
-                    $response->sendParams(false, 400, 'No se pudo cerrar sesión usando el access token provisto');
+                    $response->sendParams(false, 400, 'No se pudo cerrar sesión');
                 }
 
                 $returnData = array();
@@ -218,8 +218,8 @@
             $SES_ACCTOK = base64_encode(bin2hex(openssl_random_pseudo_bytes(24)).time()); //Genera bytes aleatorios - Se convierte a hexadecimal - Se pasa a caracteres -Time para garantizar unicidad
             $SES_REFTOK = base64_encode(bin2hex(openssl_random_pseudo_bytes(24)).time()); //Genera bytes aleatorios - Se convierte a hexadecimal - Se pasa a caracteres -Time para garantizar unicidad
 
-            $SES_ACCTOKEXP = date('d/m/Y H:i', time() + 3600); //20 mins
-            $SES_REFTOKEXP = date('d/m/Y H:i', time() + 1209600); //14 dias
+            $SES_ACCTOKEXP = date('d/m/Y H:i', time() + 7200);
+            $SES_REFTOKEXP = date('d/m/Y H:i', time() + 1209600); 
         }
         catch(UserException $ex){
             $response->sendParams(false, 400, $ex->getMessage());

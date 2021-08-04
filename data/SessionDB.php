@@ -111,10 +111,9 @@
             return $returnData;
         }  
 
-        public function eliminarPorId($SES_ID, $SES_ACCTOK){
-            $query = $this->database->prepare('DELETE FROM SESSIONS WHERE SES_ID = ? AND SES_ACCTOK = ?');
+        public function eliminarPorId($SES_ID){
+            $query = $this->database->prepare('DELETE FROM SESSIONS WHERE SES_ID = ?');
             $query->bindParam(1, $SES_ID, PDO::PARAM_INT);
-            $query->bindParam(2, $SES_ACCTOK, PDO::PARAM_STR);
             $query->execute();
             
             $rowCount = $query->rowCount();
