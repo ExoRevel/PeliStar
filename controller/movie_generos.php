@@ -86,10 +86,10 @@
             break;
 
             case 'GET':
-                if(isset($_GET['MOVIE_TITLE']) &&  isset($_GET['MOVIE_DATE'])) {
+                if(isset($_GET['MOVIE_ID'])) {
                     try {
                         $movie_Generos = new Movie_generoDB($database);
-                        $data = $movie_Generos->obtenerPorTitleAndDate($_GET['MOVIE_TITLE'],$_GET['MOVIE_DATE']);
+                        $data = $movie_Generos->obtenerPorMovieId($_GET['MOVIE_ID']);
                         $rowCount = count($data);
                     
                         if($rowCount === 0){

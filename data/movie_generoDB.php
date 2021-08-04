@@ -39,13 +39,12 @@
             return $MovieGeneroArray;
         }
 
-         public function obtenerPorTitleAndDate($MOVIE_TITLE, $MOVIE_DATE){
+         public function obtenerPorMovieId($MOVIE_ID){
             $query = $this->database->prepare('SELECT  G.GENERO_ID, G.GENERO_NAME 
             FROM MOVIE_GENEROS MG INNER JOIN MOVIES M ON M.MOVIE_ID = MG.MOVIE_ID INNER JOIN GENEROS G ON G.GENERO_ID = MG.GENERO_ID 
-            WHERE M.MOVIE_TITLE = ?  AND M.MOVIE_DATE = ?');
+            WHERE M.MOVIE_ID = ?');
             
-            $query ->bindParam(1, $MOVIE_TITLE, PDO:: PARAM_STR);
-            $query ->bindParam(2, $MOVIE_DATE, PDO:: PARAM_STR);
+            $query ->bindParam(1, $MOVIE_ID, PDO:: PARAM_STR);
             $query ->execute();
             $generoArray = array();
 

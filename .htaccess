@@ -64,21 +64,21 @@ RewriteRule ^fav_movies/delete/([0-9]+)/([0-9]+)$ controller/fav_movies.php?USE_
 
 #Movies_Actors (Peliculas favoritas por usuario)
 RewriteRule ^movie_actors$ controller/movie_actors.php [L] #Maneja peticiones de creacion de Actores
-RewriteRule ^movie_actors/titulo/([A-Z,0-9,a-z]+)/fecha/([0-9,-]+)$ controller/movie_actors.php?MOVIE_TITLE=$1&MOVIE_DATE=$2 [L] #RUTA PARA EL GET
+RewriteRule ^movie_actors/movie/([0-9,-]+)$ controller/movie_actors.php?MOVIE_ID=$1 [L] #RUTA PARA EL GET
 #RewriteRule ^movie_actors/$ controller/movie_actors.php [L]
 RewriteRule ^movie_actors/delete/([0-9]+)/([0-9]+)$ controller/movie_actors.php?ACTOR_ID=$1&MOVIE_ID=$2 [L] #Maneja peticiones ACTOR_ID #RUTA PARA EL DELETE
-RewriteRule ^movie_actors/update$ controller/movie_actors.php?ACTOR_ID=$1&MOVIE_ID=$2 [L] #Maneja peticiones ACTOR_ID #RUTA PARA EL DELETE
+#RewriteRule ^movie_actors/update$ controller/movie_actors.php?ACTOR_ID=$1&MOVIE_ID=$2 [L] #Maneja peticiones ACTOR_ID #RUTA PARA EL DELETE
 
 #Movies_Directors (Peliculas favoritas por usuario)
 RewriteRule ^movie_directors$ controller/movie_directors.php [L] #Maneja peticiones de creacion de Movies_Directors
-RewriteRule ^movie_directors/titulo/([A-Z,0-9,a-z]+)/fecha/([0-9,-]+)$ controller/movie_directors.php?MOVIE_TITLE=$1&MOVIE_DATE=$2 [L] #RUTA PARA EL GET
+RewriteRule ^movie_directors/movie/([0-9,-]+)$ controller/movie_directors.php?MOVIE_ID=$1 [L] #RUTA PARA EL GET
 RewriteRule ^movie_directors/([0-9]+)$ controller/movie_directors.php?DIRECTOR_ID=$1 [L] #Maneja peticiones Movies_Directors
 #RewriteRule ^movie_directors/$ controller/movie_directors.php [L]
 RewriteRule ^movie_directors/delete/([0-9]+)/([0-9]+)$ controller/movie_directors.php?DIRECTOR_ID=$1&MOVIE_ID=$2 [L] #Maneja peticiones MOVIE_ID
 
 #Movies_Generos (Peliculas favoritas por usuario)
 RewriteRule ^movie_generos$ controller/movie_generos.php [L] 
-RewriteRule ^movie_generos/titulo/([A-Z,0-9,a-z]+)/fecha/([0-9,-]+)$ controller/movie_generos.php?MOVIE_TITLE=$1&MOVIE_DATE=$2 [L] #RUTA PARA EL GET
+RewriteRule ^movie_generos/movie/([0-9,-]+)$ controller/movie_generos.php?MOVIE_ID=$1 [L] #RUTA PARA EL GET
 RewriteRule ^movie_generos/([0-9]+)$ controller/movie_generos.php?GENERO_ID=$1 [L] 
 #RewriteRule ^movie_generos/$ controller/movie_generos.php [L]
 RewriteRule ^movie_generos/delete/([0-9]+)/([0-9]+)$ controller/movie_generos.php?GENERO_ID=$1&MOVIE_ID=$2 [L] 

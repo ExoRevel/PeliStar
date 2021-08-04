@@ -37,13 +37,13 @@
             return $MovieDirectorArray;
         }
         
-         public function obtenerPorTitleAndDate($MOVIE_TITLE, $MOVIE_DATE){
+         public function obtenerPorMovieId($MOVIE_ID){
             $query = $this->database->prepare('SELECT D.DIRECTOR_ID, D.DIRECTOR_NAME, D.DIRECTOR_BIRTHDAY
-            FROM MOVIES_DIRECTORS MD INNER JOIN MOVIES M ON M.MOVIE_ID = MD.DIRECTOR_ID INNER JOIN DIRECTORS D ON D.DIRECTOR_ID = MD.DIRECTOR_ID
-            WHERE M.MOVIE_TITLE = ? AND M.MOVIE_DATE = ?');
+            FROM MOVIES_DIRECTORS MD INNER JOIN MOVIES M ON M.MOVIE_ID = MD.MOVIE_ID INNER JOIN DIRECTORS D ON D.DIRECTOR_ID = MD.DIRECTOR_ID
+            WHERE M.MOVIE_ID = ?');
             
-            $query ->bindParam(1, $MOVIE_TITLE, PDO:: PARAM_STR);
-            $query ->bindParam(2, $MOVIE_DATE, PDO:: PARAM_STR);
+            $query ->bindParam(1, $MOVIE_ID, PDO:: PARAM_STR);
+
             $query ->execute();
             $directorArray = array();
 

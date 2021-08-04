@@ -37,13 +37,12 @@
             return $actorsArray;
         }
 
-        public function obtenerPorTitleAndDate($MOVIE_TITLE, $MOVIE_DATE){
-            $query = $this->database->prepare('SELECT A.ACTOR_ID, A.ACTOR_FULLNAME, A.ACTOR_BIRTHDAY 
+        public function obtenerPorMovieId($MOVIE_ID){
+            $query = $this->database->prepare('SELECT A.ACTOR_ID, A.ACTOR_FULLNAME, DATE_FORMAT(A.ACTOR_BIRTHDAY , "%d/%m/%Y") AS ACTOR_BIRTHDAY
             FROM MOVIES_ACTORS MA INNER JOIN MOVIES M ON M.MOVIE_ID = MA.MOVIE_ID INNER JOIN ACTORS A ON A.ACTOR_ID = MA.ACTOR_ID
-            WHERE M.MOVIE_TITLE = ?  AND M.MOVIE_DATE = ?');
+            WHERE M.MOVIE_ID = ?');
             
-            $query ->bindParam(1, $MOVIE_TITLE, PDO:: PARAM_STR);
-            $query ->bindParam(2, $MOVIE_DATE, PDO:: PARAM_STR);
+            $query ->bindParam(1, $MOVIE_ID, PDO:: PARAM_STR);
             $query ->execute();
             $actorsArray = array();
 
