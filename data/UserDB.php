@@ -48,11 +48,9 @@
             
             while($row = $query->fetch(PDO::FETCH_ASSOC)){
                 $user = new User($row['USE_ID'], $row['USE_FULLNAME'], $row['USE_USERNAME'], $row['USE_PASSWORD'], $row['USE_ACTIVE'], $row['USE_LOGAT']);
-                if($row['USE_ROL']=='client'){
-                    $user = new User($row['USE_ID'], $row['USE_FULLNAME'], $row['USE_USERNAME'], $row['USE_PASSWORD'], $row['USE_ACTIVE'], $row['USE_LOGAT']);    
-                }else {
+                if($row['USE_ROL']!=='client'){
                     $user = $user->constructAdmin($row['USE_ID'], $row['USE_FULLNAME'], $row['USE_USERNAME'], $row['USE_PASSWORD'], $row['USE_ACTIVE'], $row['USE_LOGAT']);  
-                }      
+                }  
                $userArray[] = $user->returnUserAsArray();
             } 
             

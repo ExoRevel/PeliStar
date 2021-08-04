@@ -51,7 +51,7 @@
             $USE_FULLNAME = trim($jsonData->USE_FULLNAME);
             $USE_USERNAME = trim($jsonData->USE_USERNAME);
             $USE_PASSWORD = $jsonData->USE_PASSWORD;
-    
+            $USE_ROL = $jsonData->USE_ROL;
             try{
                 $userDB = new UserDB($database);
                 $existingUser = $userDB->obtenerPorUsername($USE_USERNAME);
@@ -62,8 +62,14 @@
                 }
     
                 $USE_PASSWORD = password_hash($USE_PASSWORD, PASSWORD_DEFAULT);
-    
                 $user = new User(null, $USE_FULLNAME, $USE_USERNAME, $USE_PASSWORD , null, null);
+                if(!$USE_ROL){
+                    $user = new User(null, $USE_FULLNAME, $USE_USERNAME, $USE_PASSWORD , null, null);
+                }
+                else {
+                    $user->constructAdmin(null,$USE_FULLNAME, $USE_USERNAME, $USE_PASSWORD , null, null);
+                }
+                
                 $rowCount = $userDB->insertar($user);
     
                 if($rowCount === 0){
