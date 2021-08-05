@@ -38,7 +38,7 @@
         }
         
          public function obtenerPorMovieId($MOVIE_ID){
-            $query = $this->database->prepare('SELECT D.DIRECTOR_ID, D.DIRECTOR_NAME, D.DIRECTOR_BIRTHDAY
+            $query = $this->database->prepare('SELECT D.DIRECTOR_ID, D.DIRECTOR_NAME, DATE_FORMAT(D.DIRECTOR_BIRTHDAY , "%d/%m/%Y") AS DIRECTOR_BIRTHDAY
             FROM MOVIES_DIRECTORS MD INNER JOIN MOVIES M ON M.MOVIE_ID = MD.MOVIE_ID INNER JOIN DIRECTORS D ON D.DIRECTOR_ID = MD.DIRECTOR_ID
             WHERE M.MOVIE_ID = ?');
             
