@@ -14,71 +14,61 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f 
 
 #Autenticacion (Sessions)
-RewriteRule ^sessions/([0-9]+)$ controller/sessions.php?SES_ID=$1 [L] #Maneja peticiones GET SES_ID
-RewriteRule ^sessions$ controller/sessions.php [L] #Maneja peticiones de inicio de sesion
+RewriteRule ^sessions/([0-9]+)/user/([0-9]+)$ controller/sessions.php?SES_ID=$1&USE_ID=$2 [L] 
+RewriteRule ^sessions$ controller/sessions.php [L] 
+RewriteRule ^sessions/([0-9]+)$ controller/sessions.php?SES_ID=$1 [L] 
 
 #Imagenes (Images)
-RewriteRule ^movies/([0-9]+)/images/([0-9]+)/attributes$ controller/images.php?MOVIE_ID=$1&IMG_ID=$2&IMG_ATTR=true [L] #Maneja peticiones de images y muestra atributos de la imagen
-RewriteRule ^movies/([0-9]+)/images/([0-9]+)$ controller/images.php?MOVIE_ID=$1&IMG_ID=$2 [L] #Maneja peticiones de images propiamente dichas
-RewriteRule ^movies/([0-9]+)/images$ controller/images.php?MOVIE_ID=$1 [L] #Maneja peticiones de creacion de imagenes
-#RewriteRule ^movies/([0-9]+)/images/listar$ controller/movie_imagenes.php?M_ID=$1
+RewriteRule ^movies/([0-9]+)/images/([0-9]+)/attributes$ controller/images.php?MOVIE_ID=$1&IMG_ID=$2&IMG_ATTR=true [L]
+RewriteRule ^movies/([0-9]+)/images/([0-9]+)$ controller/images.php?MOVIE_ID=$1&IMG_ID=$2 [L] 
+RewriteRule ^movies/([0-9]+)/images$ controller/images.php?MOVIE_ID=$1 [L] 
 RewriteRule ^movies/([0-9]+)/images/listar$ controller/images.php?M_ID=$1
 RewriteRule ^movie/([0-9]+)/images$ controller/images.php?MOV_ID=$1
 
 #Usuarios (Users)
-RewriteRule ^users$ controller/users.php [L] #Maneja peticiones de creacion de usuarios
+RewriteRule ^users$ controller/users.php [L] 
 RewriteRule ^users/([A-Z,0-9,a-z]+)$ controller/users.php?USE_USERNAME=$1 [L] 
-#RewriteRule ^users/$ controller/users.php [L] #Maneja peticiones de creacion de usuarios
 RewriteRule ^users/update$ controller/users.php [L] 
 
 #Actores (Actors)
-RewriteRule ^actors$ controller/actors.php [L] #Maneja peticiones de creacion de Actores
-RewriteRule ^actors/([0-9]+)$ controller/actors.php?ACTOR_ID=$1 [L] #Maneja peticiones ACTOR_ID
-#RewriteRule ^actors/$ controller/actors.php [L] 
+RewriteRule ^actors$ controller/actors.php [L] 
+RewriteRule ^actors/([0-9]+)$ controller/actors.php?ACTOR_ID=$1 [L] 
 RewriteRule ^actors/update$ controller/actors.php [L] 
 
 #Directors (Directors)
 RewriteRule ^directors$ controller/directors.php [L] 
 RewriteRule ^directors/([0-9]+)$ controller/directors.php?DIRECTOR_ID=$1 [L] 
-#RewriteRule ^directors/$ controller/directors.php [L] 
 RewriteRule ^directors/update$ controller/directors.php [L]
 
 #Generos (Generos)
-RewriteRule ^generos$ controller/generos.php [L] #Maneja peticiones de creacion de Actores
-RewriteRule ^generos/([0-9]+)$ controller/generos.php?GENERO_ID=$1 [L] #Maneja peticiones GENERO_ID
-#RewriteRule ^generos/$ controller/generos.php [L] 
+RewriteRule ^generos$ controller/generos.php [L] 
+RewriteRule ^generos/([0-9]+)$ controller/generos.php?GENERO_ID=$1 [L] 
 RewriteRule ^generos/update$ controller/generos.php [L] 
 
 #Movies (Peliculas)
-RewriteRule ^movies$ controller/movies.php [L] #Maneja peticiones de creacion de Actores
-RewriteRule ^movies/([0-9]+)$ controller/movies.php?MOVIE_ID=$1 [L] #Maneja peticiones MOVIE_ID
-#RewriteRule ^movies/$ controller/movies.php [L]
+RewriteRule ^movies$ controller/movies.php [L] 
+RewriteRule ^movies/([0-9]+)$ controller/movies.php?MOVIE_ID=$1 [L] 
 RewriteRule ^movies/update$ controller/movies.php [L]
 RewriteRule ^movies/delete/([0-9]+)$ controller/movies.php?MOVIE_ID=$1 [L]
 
 #Fav_Movies (Peliculas favoritas por usuario)
 RewriteRule ^fav_movies$ controller/fav_movies.php [L] 
 RewriteRule ^fav_movies/([A-Z,0-9,a-z]+)$ controller/fav_movies.php?USE_USERNAME=$1 [L] 
-#RewriteRule ^fav_movies/$ controller/fav_movies.php [L]
 RewriteRule ^fav_movies/delete/([0-9]+)/([0-9]+)$ controller/fav_movies.php?USE_ID=$1&MOVIE_ID=$2 [L] 
 
 #Movies_Actors (Peliculas favoritas por usuario)
-RewriteRule ^movie_actors$ controller/movie_actors.php [L] #Maneja peticiones de creacion de Actores
-RewriteRule ^movie_actors/movie/([0-9,-]+)$ controller/movie_actors.php?MOVIE_ID=$1 [L] #RUTA PARA EL GET
-#RewriteRule ^movie_actors/$ controller/movie_actors.php [L]
-RewriteRule ^movie_actors/delete/([0-9]+)/([0-9]+)$ controller/movie_actors.php?ACTOR_ID=$1&MOVIE_ID=$2 [L] #Maneja peticiones ACTOR_ID #RUTA PARA EL DELETE
-#RewriteRule ^movie_actors/update$ controller/movie_actors.php?ACTOR_ID=$1&MOVIE_ID=$2 [L] #Maneja peticiones ACTOR_ID #RUTA PARA EL DELETE
+RewriteRule ^movie_actors$ controller/movie_actors.php [L] 
+RewriteRule ^movie_actors/movie/([0-9,-]+)$ controller/movie_actors.php?MOVIE_ID=$1 [L] 
+RewriteRule ^movie_actors/delete/([0-9]+)/([0-9]+)$ controller/movie_actors.php?ACTOR_ID=$1&MOVIE_ID=$2 [L] 
 
 #Movies_Directors (Peliculas favoritas por usuario)
-RewriteRule ^movie_directors$ controller/movie_directors.php [L] #Maneja peticiones de creacion de Movies_Directors
-RewriteRule ^movie_directors/movie/([0-9,-]+)$ controller/movie_directors.php?MOVIE_ID=$1 [L] #RUTA PARA EL GET
-RewriteRule ^movie_directors/([0-9]+)$ controller/movie_directors.php?DIRECTOR_ID=$1 [L] #Maneja peticiones Movies_Directors
-#RewriteRule ^movie_directors/$ controller/movie_directors.php [L]
-RewriteRule ^movie_directors/delete/([0-9]+)/([0-9]+)$ controller/movie_directors.php?DIRECTOR_ID=$1&MOVIE_ID=$2 [L] #Maneja peticiones MOVIE_ID
+RewriteRule ^movie_directors$ controller/movie_directors.php [L] 
+RewriteRule ^movie_directors/movie/([0-9,-]+)$ controller/movie_directors.php?MOVIE_ID=$1 [L] 
+RewriteRule ^movie_directors/([0-9]+)$ controller/movie_directors.php?DIRECTOR_ID=$1 [L] 
+RewriteRule ^movie_directors/delete/([0-9]+)/([0-9]+)$ controller/movie_directors.php?DIRECTOR_ID=$1&MOVIE_ID=$2 [L] 
 
 #Movies_Generos (Peliculas favoritas por usuario)
 RewriteRule ^movie_generos$ controller/movie_generos.php [L] 
-RewriteRule ^movie_generos/movie/([0-9,-]+)$ controller/movie_generos.php?MOVIE_ID=$1 [L] #RUTA PARA EL GET
+RewriteRule ^movie_generos/movie/([0-9,-]+)$ controller/movie_generos.php?MOVIE_ID=$1 [L] 
 RewriteRule ^movie_generos/([0-9]+)$ controller/movie_generos.php?GENERO_ID=$1 [L] 
-#RewriteRule ^movie_generos/$ controller/movie_generos.php [L]
 RewriteRule ^movie_generos/delete/([0-9]+)/([0-9]+)$ controller/movie_generos.php?GENERO_ID=$1&MOVIE_ID=$2 [L] 
