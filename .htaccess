@@ -68,10 +68,12 @@ RewriteRule ^movie_actors/actor/([0-9]+)/movie/([0-9]+)$ controller/movie_actors
 RewriteRule ^movie_directors$ controller/movie_directors.php [L] 
 RewriteRule ^movie_directors/movie/([0-9,-]+)$ controller/movie_directors.php?MOVIE_ID=$1 [L] 
 RewriteRule ^movie_directors/([0-9]+)$ controller/movie_directors.php?DIRECTOR_ID=$1 [L] 
+RewriteRule ^movie_directors/director/([0-9]+)/movie/([0-9]+)$ controller/movie_directors.php?DIRECTOR_ID=$1&MOVIE_ID=$2 [L] 
 RewriteRule ^movie_directors/delete/([0-9]+)/([0-9]+)$ controller/movie_directors.php?DIRECTOR_ID=$1&MOVIE_ID=$2 [L] 
 
 #Movies_Generos (Peliculas favoritas por usuario)
 RewriteRule ^movie_generos$ controller/movie_generos.php [L] 
 RewriteRule ^movie_generos/movie/([0-9,-]+)$ controller/movie_generos.php?MOVIE_ID=$1 [L] 
 RewriteRule ^movie_generos/([0-9]+)$ controller/movie_generos.php?GENERO_ID=$1 [L] 
+RewriteRule ^movie_generos/genero/([0-9]+)/movie/([0-9]+)$ controller/movie_generos.php?GENERO_ID=$1&MOVIE_ID=$2 [L] 
 RewriteRule ^movie_generos/delete/([0-9]+)/([0-9]+)$ controller/movie_generos.php?GENERO_ID=$1&MOVIE_ID=$2 [L] 
